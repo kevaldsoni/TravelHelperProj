@@ -51,7 +51,7 @@ public class TravelHelperController {
 				+ "<h3>********** Hello second page </h3></div><br><br>";
 		model.addAttribute("username", name);
 		model.addAttribute("message",message);
-		return "logout";
+		return "welcome";
 	
 	}
 }

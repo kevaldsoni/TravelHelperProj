@@ -11,5 +11,7 @@
 <body>
 <h3>Home Page</h3>
 	<b>Welcome to kevals try to get proj running</b>
+	
+	<a href="<c:url value="j_spring_security_logout" />" >Logout</a>
 </body>
 </html>

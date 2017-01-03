@@ -25,20 +25,23 @@ public class LoginController {
 	public ModelAndView checkLogin(){
 		System.out.println("In TravelHelperController :: method checkLogin");
 		log.info("In TravelHelperController :: method checkLogin");
-		//List<UserProfile> profile = userProfileService.listProfile();
-		//System.out.println("Size : "+profile.size());
-		return new ModelAndView("loginin", "message", "in home");
+		List<UserProfile> profile = userProfileService.listProfile();
+		System.out.println("Size : "+profile.size());
+		return new ModelAndView("logout", "message", "in home");
 	}
+	
 	
 	@RequestMapping("/login")
 	public String login(ModelMap model) {
-		return "login";
+		System.out.println("In /login method");
+		return "logintest";
 	}
 	
 	@RequestMapping("/loginfailed")
 	public String loginerror(ModelMap model) {
+		System.out.println("In /loginfailed method");
 		model.addAttribute("errormessage","true");
-		return "login";
+		return "logintest";
 	}
 	
 	@RequestMapping("/logout")
