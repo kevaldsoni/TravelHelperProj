@@ -1,0 +1,49 @@
+package com.travelhelper.controller;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.travelhelper.model.UserProfile;
+import com.travelhelper.service.UserProfileService;
+
+@Controller
+public class LoginController {
+	
+	private static Logger log=Logger.getLogger(TravelHelperController.class.getName());
+	
+	@Autowired
+	private UserProfileService userProfileService;
+	
+	@RequestMapping("/validateUserLogin")
+	public ModelAndView checkLogin(){
+		System.out.println("In TravelHelperController :: method checkLogin");
+		log.info("In TravelHelperController :: method checkLogin");
+		//List<UserProfile> profile = userProfileService.listProfile();
+		//System.out.println("Size : "+profile.size());
+		return new ModelAndView("loginin", "message", "in home");
+	}
+	
+	@RequestMapping("/loginPage")
+	public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
+			@RequestParam(value = "logout",	required = false) String logout) {
+		
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid Credentials provided.");
+		}
+		if (logout != null) {
+			model.addObject("message", "Logged out from JournalDEV successfully.");
+		}
+		
+		model.setViewName("loginPage");
+		return model;
+		
+	}
+	
+}
