@@ -1,6 +1,7 @@
 package com.travelhelper.controller;
 
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +32,7 @@ public class TravelHelperController {
 		this.userProfileService = userProfileService;
 	}*/
 	
-	@RequestMapping("/welcome")
+	/*@RequestMapping("/welcome")
 	public ModelAndView helloWorld(){
 		System.out.println("In TravelHelperController :: method helloWorld");
 		log.info("In TravelHelperController :: method helloWorld");
@@ -38,15 +40,18 @@ public class TravelHelperController {
 				+ "<h3>********** Hello second page </h3></div><br><br>";
 		return new ModelAndView("welcome", "message", message);
 	
-	}
+	}*/
 	
-	@RequestMapping("/login")
-	public ModelAndView checkLogin(){
-		System.out.println("In TravelHelperController :: method checkLogin");
-		log.info("In TravelHelperController :: method checkLogin");
-		List<UserProfile> profile = userProfileService.listProfile();
-		System.out.println("Size : "+profile.size());
-		return new ModelAndView("login", "message", "in home");
-	}
+	@RequestMapping(value="/welcome")
+	public String helloWorld(ModelMap model,Principal principal){
+		System.out.println("In TravelHelperController :: method helloWorld");
+		String name = principal.getName();
+		System.out.println(name);
+		String message = "<br><div style='text-align:center;'>"
+				+ "<h3>********** Hello second page </h3></div><br><br>";
+		model.addAttribute("username", name);
+		model.addAttribute("message",message);
+		return "logout";
 	
+	}
 }

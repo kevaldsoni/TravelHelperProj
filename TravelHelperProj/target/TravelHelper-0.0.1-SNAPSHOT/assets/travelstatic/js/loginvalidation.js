@@ -23,7 +23,7 @@ $(document).ready(function() {
         },
         fields: {
             
-        	email: {
+        	j_username: {
         		validMessage: 'Email looks great',
                 validators: {
                     notEmpty: {
@@ -39,7 +39,7 @@ $(document).ready(function() {
             },
         	
         	
-        	password: {
+        	j_password: {
                 validators: {
                     notEmpty: {
                         message: 'Password is required and cannot be empty'

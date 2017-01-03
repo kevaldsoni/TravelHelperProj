@@ -50,6 +50,9 @@
 						</form>
 					</div>
 					<div class="col-md-6 col-xs-7 clear-padding user-logged">
+						<a href="/TravelHelper/welcome" class="transition-effect">		
+							Homepage
+						</a>
 						<a href="#" class="transition-effect">
 							<!-- <img src="assets/images/user.jpg" alt="cruise"> -->
 							Hi, Keval

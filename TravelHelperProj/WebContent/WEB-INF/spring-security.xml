@@ -1,0 +1,38 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+ 
+	<!-- 
+	windows-based authentication
+	<http>
+		<intercept-url pattern="/welcome*" access="hasRole('ROLE_USER')"></intercept-url>
+		<http-basic />
+	</http> -->
+	
+	<!-- 
+	default spring login form
+	<http>
+		<intercept-url pattern="/welcome*" access="hasRole('ROLE_USER')"></intercept-url>
+		<form-login/>
+		<logout logout-success-url="/index" />
+	</http> -->
+	
+	<http>
+		<intercept-url pattern="/welcome*" access="hasRole('ROLE_USER')"></intercept-url>
+		<form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/loginfailed"/>
+		<logout logout-success-url="/logout" />
+		<csrf disabled="true"/>
+	</http>
+
+	 <authentication-manager>
+	 	<authentication-provider>
+	 		<user-service>
+	 			<user name="keval@k.com" password="12345678" authorities='ROLE_USER'/>
+	 		</user-service>
+	 	</authentication-provider>
+	 </authentication-manager>
+</beans:beans>

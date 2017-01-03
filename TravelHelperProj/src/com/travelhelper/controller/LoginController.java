@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,21 +30,20 @@ public class LoginController {
 		return new ModelAndView("loginin", "message", "in home");
 	}
 	
-	@RequestMapping("/loginPage")
-	public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
-			@RequestParam(value = "logout",	required = false) String logout) {
-		
-		ModelAndView model = new ModelAndView();
-		if (error != null) {
-			model.addObject("error", "Invalid Credentials provided.");
-		}
-		if (logout != null) {
-			model.addObject("message", "Logged out from JournalDEV successfully.");
-		}
-		
-		model.setViewName("loginPage");
-		return model;
-		
+	@RequestMapping("/login")
+	public String login(ModelMap model) {
+		return "login";
+	}
+	
+	@RequestMapping("/loginfailed")
+	public String loginerror(ModelMap model) {
+		model.addAttribute("errormessage","true");
+		return "login";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(ModelMap model) {
+		return "login";
 	}
 	
 }

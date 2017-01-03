@@ -1,7 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html class="load-full-screen">
-
-<!-- Mirrored from demo-limpidthemes.com/Themeforest/html/cruise-demo/light/car-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2016 22:46:00 GMT -->
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta charset="utf-8">
@@ -76,7 +77,7 @@
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                        <form id="loginform" class="form-horizontal" role="form" method="post" action="validateUserLogin">
+                        <form id="loginform" class="form-horizontal" role="form" method="post" action="validateLogin" >
                            <%
 								String message=(String)request.getAttribute("errormessage");
                            		if(message!=null && message.length()>0){
@@ -90,7 +91,7 @@
    		                   <div style="margin-bottom: 25px" class="form-group">
    		                   <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                               <input id="login-username" type="text" class="form-control" name="email"  placeholder="email" />  
+                               <input id="login-username" type="text" class="form-control" name='j_username'  placeholder="email" />  
         					</div>
         					<div class="messageContainer"></div>
                             </div>
@@ -98,7 +99,7 @@
                             <div style="margin-bottom: 25px" class="form-group">
                             <div class="input-group">
                                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                               	 <input id="login-password" type="password" class="form-control" name="password" placeholder="password"/>
+                               	 <input id="login-password" type="password" class="form-control" name='j_password' placeholder="password"/>
                             </div>
                             
                             </div>

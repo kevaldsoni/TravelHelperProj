@@ -10,15 +10,6 @@
 </head>
 <body>
 <h3>Home Page</h3>
-
-	<p>
-      Hello <b><c:out value="${pageContext.request.remoteUser}"/></b><br>
-      Roles: <b><sec:authentication property="principal.authorities" /></b>
-    </p>
-    
-    <form action="logout" method="post">
-      <input type="submit" value="Logout" />
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
+	<b>Welcome to kevals try to get proj running</b>
 </body>
 </html>
