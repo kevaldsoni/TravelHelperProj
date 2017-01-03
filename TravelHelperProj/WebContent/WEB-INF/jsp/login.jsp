@@ -91,7 +91,7 @@
    		                   <div style="margin-bottom: 25px" class="form-group">
    		                   <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                               <input id="login-username" type="text" class="form-control" name='j_username'  placeholder="email" />  
+                               <input id="login-username" type="text" class="form-control" name='j_username'  placeholder="username" />  
         					</div>
         					<div class="messageContainer"></div>
                             </div>

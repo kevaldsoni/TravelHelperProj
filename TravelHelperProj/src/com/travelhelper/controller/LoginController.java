@@ -34,14 +34,14 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(ModelMap model) {
 		System.out.println("In /login method");
-		return "logintest";
+		return "login";
 	}
 	
 	@RequestMapping("/loginfailed")
 	public String loginerror(ModelMap model) {
 		System.out.println("In /loginfailed method");
 		model.addAttribute("errormessage","true");
-		return "logintest";
+		return "login";
 	}
 	
 	@RequestMapping("/logout")
