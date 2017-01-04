@@ -137,106 +137,151 @@
 		return false;
 	}
 	
-	var distanceCalculationTransit = function(){
-		console.log("Calculating Transit dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
-		var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
-		var destination = new google.maps.LatLng(destLatitude, destLongitude);
-		//var travelModes = ["driving","walking","transit","bicycling"];
-		var service = new google.maps.DistanceMatrixService;
-		service.getDistanceMatrix(
-		  {
-		    origins: [origin],
-		    destinations: [destination],
-		    travelMode: 'TRANSIT',
-		    unitSystem: google.maps.UnitSystem.IMPERIAL,
-		    avoidHighways: false,
-		    avoidTolls: false,
-		  }, callback);
+	var distanceCalculationTransit = function(travelSearchDetailsJson){
+		return new Promise(function(resolve,reject){
+				console.log("Calculating Transit dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
+				var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
+				var destination = new google.maps.LatLng(destLatitude, destLongitude);
+				//var travelModes = ["driving","walking","transit","bicycling"];
+				var service = new google.maps.DistanceMatrixService;
+				service.getDistanceMatrix(
+				  {
+				    origins: [origin],
+				    destinations: [destination],
+				    travelMode: 'TRANSIT',
+				    unitSystem: google.maps.UnitSystem.IMPERIAL,
+				    avoidHighways: false,
+				    avoidTolls: false,
+				  }, callback);
+		
+				function callback(response, status) {
+				  var originList = response.originAddresses;
+		          var destinationList = response.destinationAddresses;
+		          var results = response.rows[0].elements;
+		          //console.log("Transit Distance:"+results[0].distance.text);
+		          //console.log("Transit Time : "+results[0].duration.text);
+		          for(var i in results){
+		        	  travelSearchDetailsJson.travelData.push({
+		        		  	"mode" : "transit",
+			    			"distance" : results[i].distance.text,
+			    			"duration" : results[i].duration.text,
+			    			"capacity" : 20,
+			    		});
+			      }
+		          resolve();
+		          //showTransitDetails(results);
+				}
+		});
 
-		function callback(response, status) {
-		  //console.log(response);
-		  var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          //console.log(originList);
-          //console.log(destinationList);
-          var results = response.rows[0].elements;
-          console.log("Transit Distance:"+results[0].distance.text);
-          console.log("Transit Time : "+results[0].duration.text);
-          showTransitDetails(results);
-		}
 	}
 	
-	var distanceCalculationDriving = function(){
-		console.log("Calculating Driving dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
-		var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
-		var destination = new google.maps.LatLng(destLatitude, destLongitude);
-		var service = new google.maps.DistanceMatrixService;
-		service.getDistanceMatrix(
-		  {
-		    origins: [origin],
-		    destinations: [destination],
-		    travelMode: 'DRIVING',
-		    unitSystem: google.maps.UnitSystem.IMPERIAL,
-		    avoidHighways: false,
-		    avoidTolls: false,
-		  }, callback);
-		function callback(response, status) {
-		  var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          var results = response.rows[0].elements;
-          console.log("Driving Distance:"+results[0].distance.text);
-          console.log("Driving Time : "+results[0].duration.text);
-        }
+	var distanceCalculationDriving = function(travelSearchDetailsJson){
+		return new Promise(function(resolve,reject){
+			console.log("Calculating Driving dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
+			var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
+			var destination = new google.maps.LatLng(destLatitude, destLongitude);
+			var service = new google.maps.DistanceMatrixService;
+			service.getDistanceMatrix(
+			  {
+			    origins: [origin],
+			    destinations: [destination],
+			    travelMode: 'DRIVING',
+			    unitSystem: google.maps.UnitSystem.IMPERIAL,
+			    avoidHighways: false,
+			    avoidTolls: false,
+			  }, callback);
+			function callback(response, status) {
+			  var originList = response.originAddresses;
+	          var destinationList = response.destinationAddresses;
+	          var results = response.rows[0].elements;
+	          //console.log("Driving Distance:"+results[0].distance.text);
+	          //console.log("Driving Time : "+results[0].duration.text);
+	          for(var i in results){
+	        	  travelSearchDetailsJson.travelData.push({
+	        		  	"mode" : "driving",
+		    			"distance" : results[i].distance.text,
+		    			"duration" : results[i].duration.text,
+		    			"capacity" : 4
+		    		});
+		      }
+	          //showDrivingDetails(results);
+	         resolve();
+	        }
+		});
 	}
 	
-	var distanceCalculationWalking = function(){
-		console.log("Calculating Walking dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
-		var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
-		var destination = new google.maps.LatLng(destLatitude, destLongitude);
-		var service = new google.maps.DistanceMatrixService;
-		service.getDistanceMatrix(
-		  {
-		    origins: [origin],
-		    destinations: [destination],
-		    travelMode: 'WALKING',
-		    unitSystem: google.maps.UnitSystem.IMPERIAL,
-		    avoidHighways: false,
-		    avoidTolls: false,
-		  }, callback);
-
-		function callback(response, status) {
-		  
-		  var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          var results = response.rows[0].elements;
-          console.log("Walking Distance:"+results[0].distance.text);
-          console.log("Walking Time : "+results[0].duration.text);
-          showWalkingDetails(results);
-		}
+	var distanceCalculationWalking = function(travelSearchDetailsJson){
+		return new Promise(function(resolve,reject){
+			console.log("Calculating Walking dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
+			var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
+			var destination = new google.maps.LatLng(destLatitude, destLongitude);
+			var service = new google.maps.DistanceMatrixService;
+			service.getDistanceMatrix(
+			  {
+			    origins: [origin],
+			    destinations: [destination],
+			    travelMode: 'WALKING',
+			    unitSystem: google.maps.UnitSystem.IMPERIAL,
+			    avoidHighways: false,
+			    avoidTolls: false,
+			  }, callback);
+	
+			function callback(response, status) {
+			  
+			  var originList = response.originAddresses;
+	          var destinationList = response.destinationAddresses;
+	          var results = response.rows[0].elements;
+	          //console.log("Walking Distance:"+results[0].distance.text);
+	          //console.log("Walking Time : "+results[0].duration.text);
+	          for(var i in results){
+	        	  travelSearchDetailsJson.travelData.push({
+	        		  	"mode" : "walking",
+		    			"distance" : results[i].distance.text,
+		    			"duration" : results[i].duration.text,
+		    			"cost" : 0,
+		    			"capacity" : 100
+		    		});
+		      }
+	          //showWalkingDetails(results);
+	          resolve();
+			}
+		});
 	}
 	
-	var distanceCalculationBicycling = function(){
-		console.log("Calculating Walking dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
-		var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
-		var destination = new google.maps.LatLng(destLatitude, destLongitude);
-		var service = new google.maps.DistanceMatrixService;
-		service.getDistanceMatrix(
-		  {
-		    origins: [origin],
-		    destinations: [destination],
-		    travelMode: 'BICYCLING',
-		    unitSystem: google.maps.UnitSystem.IMPERIAL,
-		    avoidHighways: false,
-		    avoidTolls: false,
-		  }, callback);
-
-		function callback(response, status) {
-		  
-		  var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          var results = response.rows[0].elements;
-          console.log("Bicycling Distance:"+results[0].distance.text);
-          console.log("Bicycling Time : "+results[0].duration.text);
-          showBicyclingDetails(results);
-		}
+	var distanceCalculationBicycling = function(travelSearchDetailsJson){
+		return new Promise(function(resolve,reject){
+			console.log("Calculating Bicycling dist : "+sourceLatitude+" "+sourceLongitude+" & "+destLatitude+" "+destLongitude);
+			var origin = new google.maps.LatLng(sourceLatitude,sourceLongitude);
+			var destination = new google.maps.LatLng(destLatitude, destLongitude);
+			var service = new google.maps.DistanceMatrixService;
+			service.getDistanceMatrix(
+			  {
+			    origins: [origin],
+			    destinations: [destination],
+			    travelMode: 'BICYCLING',
+			    unitSystem: google.maps.UnitSystem.IMPERIAL,
+			    avoidHighways: false,
+			    avoidTolls: false,
+			  }, callback);
+	
+			function callback(response, status) {
+			  
+			  var originList = response.originAddresses;
+	          var destinationList = response.destinationAddresses;
+	          var results = response.rows[0].elements;
+	          //console.log("Bicycling Distance:"+results[0].distance.text);
+	          //console.log("Bicycling Time : "+results[0].duration.text);
+	          for(var i in results){
+	        	  travelSearchDetailsJson.travelData.push({
+	        		  	"mode" : "bicycling",
+		    			"distance" : results[i].distance.text,
+		    			"duration" : results[i].duration.text,
+		    			"cost" : 0,
+		    			"capacity" : 1,
+		    		});
+		      }
+	          //showBicyclingDetails(results);
+	          resolve();
+			}
+		});
 	}

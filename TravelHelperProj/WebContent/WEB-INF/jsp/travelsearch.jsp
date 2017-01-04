@@ -133,9 +133,11 @@
 <section id="travelSearchResults">
 		<div class="row work-row">
 			<div class="container">
+				<!-- <div class="row" id="publicTransitInfomation"></div>
+				<div class="row" id="drivingInfomation"></div>
 				<div class="row" id="walkInfomation"></div>
-				<div class="row" id="bicyclingInfomation"></div>
-				<div class="row" id="publicTransitInfomation"></div>
+				<div class="row" id="bicyclingInfomation"></div> -->
+				<div class="row" id="showDetails"></div>
 				<div class="row" id="lyftDetails"></div>
 				<div class="row" id="uberDetails"></div>
 			</div>

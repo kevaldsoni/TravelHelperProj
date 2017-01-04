@@ -36,12 +36,13 @@ var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude
 	        
 	    },
 	    success : function(result){
-	    	
+	    	console.log(result);
 	    	var products = result.products;
 	    	for(var i in products){
 	    		uberDetailsJson.uberDet.push({
-	    			"display_name" : products[i].display_name,
-	    			"product_id" : products[i].product_id
+	    			"mode" : products[i].display_name,
+	    			"product_id" : products[i].product_id,
+	    			"capacity" : products[i].capacity
 	    		});
 	    		
 	    	}
@@ -51,7 +52,7 @@ var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude
 	    		var displayName = data[i].display_name;
 	    		//console.log(displayName+" "+productId);
 	    		fetchUberTimeEstimate(productId,latitudeStart,longitudeStart);
-	    		//fetchRideEstimate(productId,latitudeStart,longitudeStart,destLatitude,destLongitude);
+	    		fetchRideEstimate(productId,latitudeStart,longitudeStart,destLatitude,destLongitude);
 	    	}
 	    	
 	    },
@@ -94,12 +95,15 @@ var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 	    		var estimate = data[i].estimate;
 	    		//console.log(driveType+" "+estimate);
 	    		for(var i in uberParsedData){
-					if(driveType == uberParsedData[i].display_name){
-						uberParsedData[i].price_estimate = estimate;
+					if(driveType == uberParsedData[i].mode){
+						//uberParsedData[i].price_estimate = estimate;
 						var money = estimate.split("-");
-						uberParsedData[i].max_cost = money[1];
-						uberParsedData[i].min_cost = money[0].charAt(1);
-						uberParsedData[i].avg_cost = (+money[1] + +money[0].charAt(1))/2;
+						var minCost = money[0].substring(1);
+						var maxCost = money[1];
+						//uberParsedData[i].max_cost = maxCost;
+						//uberParsedData[i].min_cost = minCost;
+						
+						uberParsedData[i].cost = (+minCost + +maxCost)/2;
 						//alert(uberParsedData[i].avg_cost);
 					}
 				}
@@ -139,7 +143,7 @@ var fetchUberTimeEstimate = function(productId,latitudeStart,longitudeStart){
 				var driveType = data[i].display_name;
 				estimate = data[i].estimate;
 				for(var i in uberParsedData){
-					if(driveType == uberParsedData[i].display_name){
+					if(driveType == uberParsedData[i].mode){
 						uberParsedData[i].time_estimate = (estimate/60.0);
 					}
 				}
