@@ -56,6 +56,7 @@ var fetchlyftEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 	    		});
 	    	}
 	    	console.log(lyftDetailsJson);
+	    	showLyftDetails(lyftDetailsJson);
 	    },
 	    error: function(response){
 	    	console.log(response);

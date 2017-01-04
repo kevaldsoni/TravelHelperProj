@@ -86,8 +86,12 @@
   							<strong>Authentication Failed</strong>
 							</div>
 							   <%
-								}
+								}else if((String)request.getAttribute("successMessage") != null){
 							   %>
+							   	<div class="alert alert-success">
+  								<strong>${successMessage}</strong>
+								</div>
+							   <% } %>
    		                   <div style="margin-bottom: 25px" class="form-group">
    		                   <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -103,7 +107,7 @@
                             </div>
                             
                             </div>
- 							
+ 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
                                     <div class="col-sm-12 controls">
@@ -132,7 +136,7 @@
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                         </div>  
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form" method="post" action="userLogin">
+                            <form id="signupform" class="form-horizontal" role="form" method="post" action="signupform">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -142,7 +146,7 @@
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" placeholder="Enter First Name">
+                                        <input type="text" class="form-control" name="firstName" placeholder="Enter First Name">
                                     </div>
                                         <div class="signupMessageContainer"></div>
                                 </div>
@@ -150,7 +154,28 @@
                                 <div class="form-group">
                                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name">
+                                        <input type="text" class="form-control" name="lastName" placeholder="Enter Last Name">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Username</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="confirmpassword" class="col-md-3 control-label">Confirm Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password">
                                     </div>
                                 </div>
                                 
@@ -164,56 +189,42 @@
                                 <div class="form-group">
                                     <label for="phone" class="col-md-3 control-label">Phone</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="phone" placeholder="Phone Number">
+                                        <input type="text" class="form-control" name="contactNumber" placeholder="Phone Number">
                                     </div>
                                 </div>
                                 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="dob" class="col-md-3 control-label">Date of Birth</label>
                                     <div class="col-md-9">
                                       <input type="date" class="form-control" name="dob" placeholder="DateOfBirth" maxlength="10">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Password</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="confirmpassword" class="col-md-3 control-label">Confirm Password</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password">
-                                    </div>
-                                </div>
+                                </div> -->
                                 
                                 <div class="form-group">
                                     <label for="address1" class="col-md-3 control-label">Street Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="address1" placeholder="Enter Street Name">
+                                        <input type="text" class="form-control" name="addrStreetName" placeholder="Enter Street Name">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="address2" class="col-md-3 control-label">Apartment Details</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="address2" placeholder="Enter Apartment Details">
+                                        <input type="text" class="form-control" name="addrAptNo" placeholder="Enter Apartment Details">
                                     </div>
                                 </div>    
                                 
                                 <div class="form-group">
                                     <label for="city" class="col-md-3 control-label">City</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="city" placeholder="Enter City">
+                                        <input type="text" class="form-control" name="addrCity" placeholder="Enter City">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="state" class="col-md-3 control-label">State</label>
                                     <div class="col-md-9">
-									<select class="form-control" name="state">
+									<select class="form-control" name="addrState">
 										<option value="AL">Alabama</option>
 										<option value="AK">Alaska</option>
 										<option value="AZ">Arizona</option>
@@ -272,17 +283,12 @@
                                 <div class="form-group">
                                     <label for="zipcode" class="col-md-3 control-label">Zip Code</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="zipcode" placeholder="Enter Zip Code">
+                                        <input type="text" class="form-control" name="addrZip" placeholder="Enter Zip Code">
                                     </div>
                                 </div>
                                 
-                                <!-- <div class="form-group">
-                                    <label for="icode" class="col-md-3 control-label">Invitation Code</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="icode" placeholder="">
-                                    </div>
-                                </div> -->
-								<input type="hidden" name="formtype" value="signup">
+                                
+                                <input type="hidden" name="roleId" value="1">
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
@@ -298,40 +304,6 @@
 		</div>
 	</div>
 	<!-- END: SEARCH SECTION -->
-<!-- START: HOW IT WORK -->
-<section id="how-it-work">
-		<div class="row work-row">
-			<div class="container">
-				<div class="section-title text-center">
-					<h2>HOW IT WORKS?</h2>
-					<h4>SEARCH - SELECT - BOOK</h4>
-					<div class="space"></div>
-					<p>
-						Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br>
-						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-					</p>
-				</div>
-				<div class="work-step">
-					<div class="col-md-4 col-sm-4 first-step text-center">
-						<i class="fa fa-search"></i>
-						<h5>SEARCH CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-					</div>
-					<div class="col-md-4 col-sm-4 second-step text-center">
-						<i class="fa fa-heart-o"></i>
-						<h5>SELECT CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-					</div>
-					<div class="col-md-4 col-sm-4 third-step text-center">
-						<i class="fa fa-shopping-cart"></i>
-						<h5>BOOK CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-</section>
-
 <!-- START: FOOTER -->
 <section id="footer">
 	<footer>

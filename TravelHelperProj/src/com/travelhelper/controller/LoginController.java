@@ -2,6 +2,8 @@ package com.travelhelper.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +48,16 @@ public class LoginController {
 	
 	@RequestMapping("/logout")
 	public String logout(ModelMap model) {
+		return "login";
+	}
+	
+	@RequestMapping("/signupform")
+	public String processSignupForm(ModelMap model,UserProfile profile) {
+		System.out.println("First Name : "+profile.getFirstName());
+		int id = userProfileService.createNewUserProfile(profile);
+		if(id > 0){
+			model.addAttribute("successMessage", "Account Created Successfully !! Login to explore.");
+		}
 		return "login";
 	}
 	

@@ -54,4 +54,11 @@ public class TravelHelperController {
 		return "welcome";
 	
 	}
+	
+	@RequestMapping(value="/travelsearch")
+	public String travelSearch(ModelMap model,Principal principal){
+		System.out.println("In TravelHelperController :: method travelSearch");
+		return "travelsearch";
+	
+	}
 }

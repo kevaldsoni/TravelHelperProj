@@ -42,7 +42,40 @@ public class UserProfile {
 	
 	private String email;
 	
+	private String username;
+	
 	private String password;
+	
+	@Column(name = "role_id")
+	private int roleId;
+	
+	private int active;
+	
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+	
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	
 
 	public int getUserId() {
 		return userId;

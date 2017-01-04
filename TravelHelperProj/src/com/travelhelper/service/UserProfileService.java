@@ -8,6 +8,6 @@ public interface UserProfileService {
 
 	public UserProfile findById(int id);
 	public List<UserProfile> listProfile();
-
+	public int createNewUserProfile(UserProfile profile);
 	
 }

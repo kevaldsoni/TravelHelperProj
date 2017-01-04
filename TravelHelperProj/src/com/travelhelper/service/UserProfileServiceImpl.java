@@ -33,8 +33,15 @@ public class UserProfileServiceImpl implements UserProfileService{
 	public List<UserProfile> listProfile() {
 		// TODO Auto-generated method stub
 		System.out.println("In UserProfileServiceImpl :: listProfile");
-		
 		return this.userProfileDao.listProfile();
+	}
+	
+	@Override
+	@Transactional
+	public int createNewUserProfile(UserProfile profile) {
+		// TODO Auto-generated method stub
+		System.out.println("In UserProfileServiceImpl :: createNewUserProfile");
+		return this.userProfileDao.addNewUserDetailsToAccount(profile);
 	}
 	
 	

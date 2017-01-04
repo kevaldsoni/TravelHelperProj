@@ -27,12 +27,13 @@ $(document).ready(function() {
         		validMessage: 'Email looks great',
                 validators: {
                     notEmpty: {
-                        message: 'The email address is required and cannot be empty'
+                        message: 'Username is required and cannot be empty'
                     },
                     regexp: {
                         enabled: true,
-                        regexp: /\S+@\S+\.\S+/,
-                        message: 'The email address is not valid'
+                        /*regexp: /\S+@\S+\.\S+/,*/
+                        regexp: /^[a-zA-Z0-9\s]+$/,
+                        message: 'Username is not valid'
                     }
                     
                 }

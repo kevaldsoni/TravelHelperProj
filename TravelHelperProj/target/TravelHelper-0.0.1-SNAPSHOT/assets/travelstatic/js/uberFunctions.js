@@ -10,13 +10,15 @@ var longitudeEnd;
 
 var fetchUberDetails = function (latitudeStart,longitudeStart,destLatitude,destLongitude){
 	
-	getAccessToken();
-	//fetchUberProductDetails(latitudeStart,longitudeStart).then(fetchUberEstimatedPrice(latitudeStart,longitudeStart,destLatitude,destLongitude)).then(b);
-	//return uberDetailsJson;
+	//getAccessToken();
+	fetchUberProductDetails(latitudeStart,longitudeStart).then(fetchUberEstimatedPrice(latitudeStart,longitudeStart,destLatitude,destLongitude)).then(b);
+	
+	return uberDetailsJson;
 }
 var b = function(){
 	console.log("in b");
 	console.log(uberDetailsJson);
+	showUberDetail(uberDetailsJson);
 }
 
 var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude,destLongitude){
@@ -49,7 +51,7 @@ var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude
 	    		var displayName = data[i].display_name;
 	    		//console.log(displayName+" "+productId);
 	    		fetchUberTimeEstimate(productId,latitudeStart,longitudeStart);
-	    		fetchRideEstimate(productId,latitudeStart,longitudeStart,destLatitude,destLongitude);
+	    		//fetchRideEstimate(productId,latitudeStart,longitudeStart,destLatitude,destLongitude);
 	    	}
 	    	
 	    },

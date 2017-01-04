@@ -162,6 +162,7 @@
           var results = response.rows[0].elements;
           console.log("Transit Distance:"+results[0].distance.text);
           console.log("Transit Time : "+results[0].duration.text);
+          showTransitDetails(results);
 		}
 	}
 	
@@ -210,6 +211,7 @@
           var results = response.rows[0].elements;
           console.log("Walking Distance:"+results[0].distance.text);
           console.log("Walking Time : "+results[0].duration.text);
+          showWalkingDetails(results);
 		}
 	}
 	
@@ -235,5 +237,6 @@
           var results = response.rows[0].elements;
           console.log("Bicycling Distance:"+results[0].distance.text);
           console.log("Bicycling Time : "+results[0].duration.text);
+          showBicyclingDetails(results);
 		}
 	}
