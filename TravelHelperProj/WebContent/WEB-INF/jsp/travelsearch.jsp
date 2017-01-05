@@ -129,20 +129,13 @@
 		</div>
 	</div>
 	<!-- END: SEARCH SECTION -->
-<!-- START: HOW IT WORK -->
-<section id="travelSearchResults">
+	<section id="travelSearchResults" >
 		<div class="row work-row">
-			<div class="container">
-				<!-- <div class="row" id="publicTransitInfomation"></div>
-				<div class="row" id="drivingInfomation"></div>
-				<div class="row" id="walkInfomation"></div>
-				<div class="row" id="bicyclingInfomation"></div> -->
-				<div class="row" id="showDetails"></div>
-				<div class="row" id="lyftDetails"></div>
-				<div class="row" id="uberDetails"></div>
-			</div>
+			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;">
+			</table>
 		</div>
-</section>
+	</section>
+
 
 <!-- START: FOOTER -->
 <section id="footer">
@@ -184,12 +177,6 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row sm-footer-nav text-center">
-			<p>
-				<a href="#">HOME</a>
-				<a href="#">CARS</a>
-				<a href="#">SERVICE</a>
-				<a href="#">GALLERY</a>
-			</p>
 			<p class="copyright">
 				&copy;	2016 TRAVELHELPER ALL RIGHTS RESERVED
 			</p>

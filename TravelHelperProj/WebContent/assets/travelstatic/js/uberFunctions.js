@@ -8,21 +8,23 @@ var longitudeStart;
 var latitudeEnd;
 var longitudeEnd;
 
-var fetchUberDetails = function (latitudeStart,longitudeStart,destLatitude,destLongitude){
-	
-	//getAccessToken();
-	fetchUberProductDetails(latitudeStart,longitudeStart).then(fetchUberEstimatedPrice(latitudeStart,longitudeStart,destLatitude,destLongitude)).then(b);
-	
-	return uberDetailsJson;
+var fetchUberDetails = function (latitudeStart,longitudeStart,destLatitude,destLongitude,travelSearchDetailsJson){
+		//getAccessToken();
+	fetchUberProductDetails(latitudeStart,longitudeStart).then(fetchUberEstimatedPrice(latitudeStart,longitudeStart,destLatitude,destLongitude)).then(pushFinalUberData);
 }
-var b = function(){
+var pushFinalUberData = function(){
 	console.log("in b");
 	console.log(uberDetailsJson);
-	showUberDetail(uberDetailsJson);
+	var data = uberDetailsJson.uberDet;
+	for(i in data){
+		travelSearchDetailsJson.travelData.push(data[i]);
+	}
+	showUberDetail(travelSearchDetailsJson);
+	
 }
 
-var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude,destLongitude){
-	var defer = $.Deferred();
+var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude,destLongitude,travelSearchDetailsJson){
+	return new Promise(function(resolve,reject){
 	$.ajax({
 		type: "GET",
 		url : "https://api.uber.com/v1.2/products",
@@ -39,36 +41,31 @@ var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude
 	    	console.log(result);
 	    	var products = result.products;
 	    	for(var i in products){
-	    		uberDetailsJson.uberDet.push({
+	    		travelSearchDetailsJson.travelData.push({
 	    			"mode" : products[i].display_name,
 	    			"product_id" : products[i].product_id,
 	    			"capacity" : products[i].capacity
 	    		});
 	    		
 	    	}
-	    	var data = uberDetailsJson.uberDet;
+	    	/*var data = uberDetailsJson.uberDet;
 	    	for(var i in data){
 	    		var productId = data[i].product_id;
 	    		var displayName = data[i].display_name;
-	    		//console.log(displayName+" "+productId);
-	    		fetchUberTimeEstimate(productId,latitudeStart,longitudeStart);
-	    		fetchRideEstimate(productId,latitudeStart,longitudeStart,destLatitude,destLongitude);
-	    	}
-	    	
+	    		//fetchUberTimeEstimate(productId,latitudeStart,longitudeStart);
+	    		//fetchRideEstimate(productId,latitudeStart,longitudeStart,destLatitude,destLongitude);
+	    	}*/
+	    	resolve();
 	    },
 	    error: function(response){
 	    	console.log(response);
 	    }	
 	});
-	setTimeout(function() {
-        defer.resolve(); // When this fires, the code in a().then(/..../); is executed.
-    }, 5000);
-
-    return defer;
+	});
 }
 
-var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,endlongitude){
-	var defer = $.Deferred();
+var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,endlongitude,travelSearchDetailsJson){
+	return new Promise(function(resolve,reject){
 	//console.log(latitudeStart+" "+longitudeStart+" "+endlatitude+" "+endlongitude);
 	var priceurl = "https://api.uber.com/v1.2/estimates/price";
 	var sandBoxUrl = "https://sandbox-api.uber.com/v1/estimates/price";
@@ -88,7 +85,7 @@ var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 		},
 	    success : function(result){
 	    	
-	    	var uberParsedData = uberDetailsJson.uberDet;
+	    	var uberParsedData = travelSearchDetailsJson.travelData;
 	    	var data = result.prices;
 	    	for(var i in data){
 	    		var driveType = data[i].display_name;
@@ -103,57 +100,64 @@ var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 						//uberParsedData[i].max_cost = maxCost;
 						//uberParsedData[i].min_cost = minCost;
 						
-						uberParsedData[i].cost = (+minCost + +maxCost)/2;
+						travelSearchDetailsJson.travelData[i].cost = (+minCost + +maxCost)/2;
 						//alert(uberParsedData[i].avg_cost);
 					}
 				}
 	    	}
-	    
+	    	resolve();
 	    },
 	    error: function(response){
 	    	console.log(response);
 	    	
 	    }	
 	});
-	setTimeout(function() {
-        defer.resolve(); // When this fires, the code in a().then(/..../); is executed.
-    }, 5000);
+	});
 }
 
 
-var fetchUberTimeEstimate = function(productId,latitudeStart,longitudeStart){
-	var estimate = ""
-	$.ajax({
-		type: "GET",
-		url : "https://api.uber.com/v1.2/estimates/time",
-		headers : {
-			Authorization : "Token" + "qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN"
-		},
-		data: {
-			server_token : 'qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN',
-			start_latitude: latitudeStart,
-			start_longitude: longitudeStart,
-			product_id:productId	
-		},
-		success : function(result){
-    	
-			var data = result.times;
-			var uberParsedData = uberDetailsJson.uberDet;
-			for(var i in data){
-				var driveType = data[i].display_name;
-				estimate = data[i].estimate;
-				for(var i in uberParsedData){
-					if(driveType == uberParsedData[i].mode){
-						uberParsedData[i].time_estimate = (estimate/60.0);
+var fetchUberTimeEstimate = function(completeData,latitudeStart,longitudeStart){
+	return new Promise(function(resolve,reject){
+	var count = 0;
+	for(var i in completeData){
+		var productId = completeData[i].product_id;
+		if(productId != undefined){
+			var estimate = ""
+			$.ajax({
+				type: "GET",
+				url : "https://api.uber.com/v1.2/estimates/time",
+				headers : {
+					Authorization : "Token" + "qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN"
+				},
+				data: {
+					server_token : 'qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN',
+					start_latitude: latitudeStart,
+					start_longitude: longitudeStart,
+					product_id:productId	
+				},
+				success : function(result){
+					var data = result.times;
+					var uberParsedData = travelSearchDetailsJson.travelData;
+					for(var i in data){
+						var driveType = data[i].display_name;
+						estimate = data[i].estimate;
+						for(var i in uberParsedData){
+							if(driveType == uberParsedData[i].mode){
+								travelSearchDetailsJson.travelData[i].time_estimate = (estimate/60.0);
+							}
+						}
+						showTravelDetails(travelSearchDetailsJson); 
 					}
-				}
-			}
-			
-		},
-		error: function(response){
-			console.log(response);
-		}	
-	});	
+					
+				},
+				error: function(response){
+					console.log(response);
+				}	
+			});	
+		}
+		}
+		
+	});
 }
 
 var fetchRideEstimate = function(productId,latitudeStart,longitudeStart,destLatitude,destLongitude){
@@ -187,7 +191,7 @@ var fetchRideEstimate = function(productId,latitudeStart,longitudeStart,destLati
 }
 
 var getAccessToken = function(){
-	
+	jQuery.support.cors = true;
 	$.ajax({
 		type: "GET",
 		url : "https://login.uber.com/oauth/v2/authorize",

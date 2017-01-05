@@ -3,10 +3,15 @@
 	 */
 	"use strict";
 	
-	var sourceLatitude = 0;
+	/*var sourceLatitude = 0;
 	var sourceLongitude = 0;
 	var destLatitude = 0;
-	var destLongitude = 0;
+	var destLongitude = 0;*/
+	
+	var sourceLatitude = 33.790811;
+	var sourceLongitude = -118.135536;
+	var destLatitude = 33.930390;
+	var destLongitude = -118.396492;
 	
 	var fetchMetroAllRoutes = function(latitude,longitude){
 		
@@ -162,10 +167,11 @@
 		          //console.log("Transit Time : "+results[0].duration.text);
 		          for(var i in results){
 		        	  travelSearchDetailsJson.travelData.push({
-		        		  	"mode" : "transit",
+		        		  	"mode" : "TRANSIT",
 			    			"distance" : results[i].distance.text,
 			    			"duration" : results[i].duration.text,
 			    			"capacity" : 20,
+			    			"cost" : 0
 			    		});
 			      }
 		          resolve();
@@ -198,10 +204,11 @@
 	          //console.log("Driving Time : "+results[0].duration.text);
 	          for(var i in results){
 	        	  travelSearchDetailsJson.travelData.push({
-	        		  	"mode" : "driving",
+	        		  	"mode" : "DRIVING",
 		    			"distance" : results[i].distance.text,
 		    			"duration" : results[i].duration.text,
-		    			"capacity" : 4
+		    			"capacity" : 4,
+		    			"cost" : 0 
 		    		});
 		      }
 	          //showDrivingDetails(results);
@@ -235,7 +242,7 @@
 	          //console.log("Walking Time : "+results[0].duration.text);
 	          for(var i in results){
 	        	  travelSearchDetailsJson.travelData.push({
-	        		  	"mode" : "walking",
+	        		  	"mode" : "WALKING",
 		    			"distance" : results[i].distance.text,
 		    			"duration" : results[i].duration.text,
 		    			"cost" : 0,
@@ -273,7 +280,7 @@
 	          //console.log("Bicycling Time : "+results[0].duration.text);
 	          for(var i in results){
 	        	  travelSearchDetailsJson.travelData.push({
-	        		  	"mode" : "bicycling",
+	        		  	"mode" : "BICYCLING",
 		    			"distance" : results[i].distance.text,
 		    			"duration" : results[i].duration.text,
 		    			"cost" : 0,

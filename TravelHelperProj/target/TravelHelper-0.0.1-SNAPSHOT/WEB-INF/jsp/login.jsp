@@ -304,40 +304,6 @@
 		</div>
 	</div>
 	<!-- END: SEARCH SECTION -->
-<!-- START: HOW IT WORK -->
-<section id="how-it-work">
-		<div class="row work-row">
-			<div class="container">
-				<div class="section-title text-center">
-					<h2>HOW IT WORKS?</h2>
-					<h4>SEARCH - SELECT - BOOK</h4>
-					<div class="space"></div>
-					<p>
-						Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br>
-						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-					</p>
-				</div>
-				<div class="work-step">
-					<div class="col-md-4 col-sm-4 first-step text-center">
-						<i class="fa fa-search"></i>
-						<h5>SEARCH CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-					</div>
-					<div class="col-md-4 col-sm-4 second-step text-center">
-						<i class="fa fa-heart-o"></i>
-						<h5>SELECT CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-					</div>
-					<div class="col-md-4 col-sm-4 third-step text-center">
-						<i class="fa fa-shopping-cart"></i>
-						<h5>BOOK CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-</section>
-
 <!-- START: FOOTER -->
 <section id="footer">
 	<footer>

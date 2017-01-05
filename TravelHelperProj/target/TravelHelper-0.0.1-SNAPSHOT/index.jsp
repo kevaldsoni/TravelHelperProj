@@ -68,7 +68,7 @@
 	<div class="clearfix"></div>
 	<!-- BEGIN: SEARCH SECTION -->
 	<div class="row">
-		<div class="container">
+		<div class="container" style="height: 500px;">
 			<div class="col-md-8 col-sm-6 text-center">
 				<div>
 					<div class="hotel-tagline text-center">
@@ -81,8 +81,10 @@
 				<div class="room-check">
 					<h4 class="text-center">TAKE A DRIVE</h4>
 					<div class="room-check-body">
-						<form >
-							<label>Pick Up Location</label>
+						<span style="font-size: 32px;">
+							<a href="/TravelHelper/login" style="color: black;" class="transition-effect">LOGIN TO EXPLORE</a>
+						</span>
+							<!-- <label>Pick Up Location</label>
 							<div class="input-group">
 								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
@@ -119,10 +121,10 @@
 									<option>6</option>
 							</select>
 							<div class="text-center">
-								<!-- <input type="submit" name="submit" id="submitAddr" class="submitAddr">Search Results</input> -->
+								<input type="submit" name="submit" id="submitAddr" class="submitAddr">Search Results</input>
 								<button type="submit" id="submitAddr">Search Results</button>
-							</div>
-						</form>
+							</div> -->
+						
 					</div>
 				</div>
 			</div>
@@ -203,12 +205,12 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row sm-footer-nav text-center">
-			<p>
+			<!-- <p>
 				<a href="#">HOME</a>
 				<a href="#">CARS</a>
 				<a href="#">SERVICE</a>
 				<a href="#">GALLERY</a>
-			</p>
+			</p> -->
 			<p class="copyright">
 				&copy;	2016 TRAVELHELPER ALL RIGHTS RESERVED
 			</p>

@@ -18,7 +18,7 @@
 	
 	<c:url var="logoutUrl" value="j_spring_security_logout"/>
 	<form action="${logoutUrl}" method="post">
- 	<input type="submit" value="Log out" />
+ 	<input type="submit" value="Log out" /><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>
   	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 </body>
