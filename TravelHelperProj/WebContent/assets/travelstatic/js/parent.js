@@ -70,24 +70,29 @@ function showDetails(results){
 
 function showTravelDetails(results){
 	results = results.travelData;
-	$('#location tr').empty();
-	var trHTML='<tr style="color:#2F7AF8;"><th>Travel Mode</th><th>Distance</th>'+
-         		'<th>Duration (min)</th>'+
-         		'<th>Time estimate (min)</th>'+
-         		'<th>Cost $</th>'+
-         		'<th>Capacity</th></tr>';
+	$('#travelsearchresults').empty();
+	var trHTML= "";
 	for(var i in results){
-		trHTML += '<tr scope="row" class="info" id='+results[i].mode+' onclick="passSelection("this");">'+ 
+		trHTML += '<tr scope="row" class="info" id='+results[i].mode+' onclick="passSelection(this);">'+ 
 		'<td>'+ results[i].mode+ '</td><td>' + results[i].distance + '</td><td>' + results[i].duration + '</td><td>' + results[i].time_estimate + 
 		'</td><td>'+ results[i].cost + '</td><td>' + results[i].capacity + '</td></tr>';
 	}
-	$('#location').html(trHTML);
+	$('#travelsearchresults').html(trHTML);
 	
+	/*var items = [];
+	$.each(results, function(key,val){
+		
+		items.push("<tr id='"+val.mode+"' onclick='passSelection(this);'>");
+		items.push("<td>"+val.mode+"</td>");
+		items.push("</tr>");
+		
+	});
+	$("<tbody/>",{"class" : "mydata" , html: items.join("")}).appendTo("table");*/
 }
 
-function passSelection(){
-	alert("yes sir");
-	 alert($(this).attr('id')); 
+function passSelection(elem){
+	var id = $(elem).attr("id");
+    alert(id);
 }
 
 function showUberDetail(results){
