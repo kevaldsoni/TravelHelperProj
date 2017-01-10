@@ -9,6 +9,7 @@
 <script type="text/javascript" src="../../travelstatic/js/pushMessaging.js"></script>
 <script type ="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript" src="../../travelstatic/js/customNotify.js"></script>
+<script type="text/javascript" src="../../travelstatic/js/parent.js"></script>
 </head>
 <body>
 <button class="js-push-button">

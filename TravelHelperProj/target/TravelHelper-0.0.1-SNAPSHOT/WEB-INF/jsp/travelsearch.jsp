@@ -129,14 +129,24 @@
 		</div>
 	</div>
 	<!-- END: SEARCH SECTION -->
-	<section id="travelSearchResults" >
+ 	<section id="travelSearchResults" >
 		<div class="row work-row">
 			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;">
-    		
+			<thead>
+			<tr style="color:#2F7AF8;">
+			<th>Travel Mode</th>
+			<th>Distance (miles)</th>
+         	<th>Duration (minutes)</th>
+         	<th>Time estimate (minutes)</th>
+         	<th>Cost $</th>
+         	<th>Capacity</th>
+			</thead>
+			<tbody id="travelsearchresults">
+			
+			</tbody>
 			</table>
 		</div>
-	</section>
-
+	</section> 
 <!-- START: FOOTER -->
 <section id="footer">
 	<footer>

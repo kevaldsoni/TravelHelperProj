@@ -6,10 +6,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.travelhelper.model.GoogleNotification;
 import com.travelhelper.model.UserProfile;
 
 
@@ -79,6 +80,29 @@ public class UserProfileDAOImpl implements UserProfileDAO{
 			session.close();
 		}
 		return id;
+	}
+
+
+	@Override
+	public boolean saveGoogleNotificationId(String id) {
+		// TODO Auto-generated method stub
+		GoogleNotification notification = new GoogleNotification();
+		notification.setUserId(2);
+		notification.setGcmRegId(id);
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		try{
+			tx=session.beginTransaction();
+			session.save(notification);
+			tx.commit();
+		}catch(HibernateException e){
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return true;
 	}
 	
 	

@@ -7,9 +7,9 @@ var isPushEnabled = false;
 
 window.addEventListener('load', function() {  
   var pushButton = document.querySelector('.js-push-button');
-  alert("Push clicked : isPushEnabled - "+isPushEnabled);
+  
   pushButton.addEventListener('click', function() {
-	  alert(isPushEnabled);
+	console.log("Push clicked : isPushEnabled - "+isPushEnabled);
     if (isPushEnabled) {  
       unsubscribe();  
     } else {  
@@ -20,8 +20,9 @@ window.addEventListener('load', function() {
   // Check that service workers are supported, if so, progressively  
   // enhance and add push messaging support, otherwise continue without it.  
   if ('serviceWorker' in navigator) {  
-    navigator.serviceWorker.register('travelhelperserviceworker.js')  
+    navigator.serviceWorker.register('/TravelHelper/assets/travelhelperserviceworker.js')  
     .then(initialiseState);  
+   
   } else {  
     console.warn('Service workers aren\'t supported in this browser.');  
   }  
@@ -30,6 +31,7 @@ window.addEventListener('load', function() {
   
 function initialiseState() {  
   // Are Notifications supported in the service worker?  
+	console.log("Initializing state now");
   if (!('showNotification' in ServiceWorkerRegistration.prototype)) {  
     console.warn('Notifications aren\'t supported.');  
     return;  
@@ -49,7 +51,11 @@ function initialiseState() {
 	  
 	  serviceWorkerRegistration.pushManager.getSubscription()  
       .then(function(subscription) { 
-    	  console.log(subscription);
+    	 
+    	  if(subscription != undefined){ 
+    		  console.log(subscription);
+    		  //saveNotificationEndPoint(subscription.endpoint);
+    	  }
     	  var pushButton = document.querySelector('.js-push-button');  
           pushButton.disabled = false;
           if (!subscription) {  
@@ -69,7 +75,7 @@ function initialiseState() {
 
 function subscribe() {  
 	  var pushButton = document.querySelector('.js-push-button');  
-	  pushButton.disabled = true;
+	  //pushButton.disabled = true;
 	  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {  
 	    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly:true})  
 	      .then(function(subscription) {  
@@ -77,7 +83,11 @@ function subscribe() {
 	        isPushEnabled = true;  
 	        pushButton.textContent = 'Disable Push Messages';  
 	        pushButton.disabled = false;
-	        console.log(subscription);  
+	        if(subscription != undefined){ 
+	    		  console.log(subscription);
+	    		  saveNotificationEndPoint(subscription.endpoint);
+	    	  }
+	        
 	      })  
 	      .catch(function(e) {  
 	        if (Notification.permission === 'denied') {  
@@ -120,3 +130,4 @@ function unsubscribe() {
 	      });  
 	  });  
 	}
+

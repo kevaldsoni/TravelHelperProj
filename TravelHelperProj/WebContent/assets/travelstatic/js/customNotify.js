@@ -2,7 +2,7 @@
  * 
  */
 
-var GCM_REGISTERATION_ID = "fj7vk2Z9ga4:APA91bHS8Vx_Idr3O3NHUPvpS_3B7MXDndRotUalC6UvKE7orafpLFsIWbO7HbW8AVLwD5KJ9QpY1F4Bfxsd4Sm-f3pLR0glNfMkCXhwaO4ZByUDAM-k1MUVXrf9yn223GW3h05V0QKW";
+var GCM_REGISTERATION_ID = "eqWwiw-prf0:APA91bGVfmPC0t3KxuEFjQXH11DxtoK9T7dQQlxD7vRvipAylhTNe2tcFiMIe-hko55hyOgbu1_IwMnuZtJQqviUmKQbRrT6mtSi5CrAonFoCtlZ95sBa9JgWrfQ-bKi80kiENqyCacT";
 
 var sendGCMPush = function (){
 	console.log("GCM Push");
@@ -25,7 +25,7 @@ var sendGCMPush = function (){
 	var inputData = "registration_id="+GCM_REGISTERATION_ID;
 	$.ajax({
    		type 	 : "POST",
-   		url 	 : "https://fcm.googleapis.com/fcm/send",
+   		url 	 : "https://gcm-http.googleapis.com/gcm/send",
    		data	 : inputData,
    		headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization':'key=AIzaSyAAZwbKFn9it2GY9bZWJwwvzYzdVKZiEno'},
    		cache 	 : false,

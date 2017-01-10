@@ -135,9 +135,9 @@
 			<thead>
 			<tr style="color:#2F7AF8;">
 			<th>Travel Mode</th>
-			<th>Distance</th>
-         	<th>Duration (min)</th>
-         	<th>Time estimate (min)</th>
+			<th>Distance (miles)</th>
+         	<th>Duration (minutes)</th>
+         	<th>Time estimate (minutes)</th>
          	<th>Cost $</th>
          	<th>Capacity</th>
 			</thead>

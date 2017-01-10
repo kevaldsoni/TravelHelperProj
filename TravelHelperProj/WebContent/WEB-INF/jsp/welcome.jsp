@@ -12,7 +12,8 @@
 <h3>Home Page</h3>
 	<b>Welcome to kevals try to get proj running</b>
 	<a href="/TravelHelper/travelsearch">Travel Search</a>
-	<a href="/TravelHelper/scheduletravel">Schedule Travel</a>
+	<!-- <a href="/TravelHelper/scheduletravel">Schedule Travel</a> -->
+	<a href="/TravelHelper/assets/pages/firebase/scheduleTravel.jsp">Schedule Travel</a>
 	<a href="/TravelHelper/dashboard">Dash board</a>
 	<a href="<c:url value="j_spring_security_logout" />" >Logout</a>
 	

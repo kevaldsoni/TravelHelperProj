@@ -4,10 +4,13 @@ package com.travelhelper.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,4 +64,23 @@ public class TravelHelperController {
 		return "travelsearch";
 	
 	}
+	
+	@RequestMapping(value="/scheduletravel")
+	public String scheduleTravel(ModelMap model,Principal principal){
+		System.out.println("In TravelHelperController :: method scheduleTravel");
+		return "scheduletravel";
+	
+	}
+	
+	@RequestMapping(value="/saveGcmIdForUser")
+	public String saveGcmId(ModelMap model,HttpServletRequest request){
+		System.out.println("In TravelHelperController :: method saveGcmId");
+		String gcmid = request.getParameter("id");
+		userProfileService.saveGoogleNotificationId(gcmid);
+		model.addAttribute("message","Notification Enabled");
+		return "scheduletravel";
+	
+	}
+	
+	
 }

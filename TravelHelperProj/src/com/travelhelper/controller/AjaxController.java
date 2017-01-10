@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +19,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.travelhelper.model.AjaxResponseBody;
 import com.travelhelper.model.SearchCriteria;
+import com.travelhelper.model.TravelModeSelected;
 import com.travelhelper.model.User;
 import com.travelhelper.model.Views;
+import com.travelhelper.service.TravelService;
 
 @RestController
 public class AjaxController {
 	
-	private static Logger log=Logger.getLogger(AjaxController.class.getName());
+
 	List<User> users;
+
+	
+	@Autowired
+	private TravelService travelService;
 	
 	@JsonView(Views.Public.class)
 	@RequestMapping(value = "/search/api/getSearchResult")
@@ -119,4 +127,29 @@ public class AjaxController {
 		return result;
 
 	}
+	
+	
+	
+	@JsonView(Views.Public.class)
+	@RequestMapping(value = "/saveTravelSelection")
+	public AjaxResponseBody saveTravelOptionSelected(@RequestBody TravelModeSelected travelData) {
+		System.out.println("In Ajax Controller ::"+travelData.getDrive()+" "+travelData.getDistance()+" "+travelData.getDuration());
+		AjaxResponseBody result = new AjaxResponseBody();
+		int id = travelService.saveTravelModeSelected(travelData);
+		if (id > 0) {
+				System.out.println("Travel Data Saved");
+				result.setCode("200");
+				result.setMsg("");
+				result.setResult(users);
+			} else {
+				result.setCode("204");
+				result.setMsg("No user!");
+			}
+
+		//AjaxResponseBody will be converted into json format and send back to client.
+		return result;
+
+	}
+	
+	
 }

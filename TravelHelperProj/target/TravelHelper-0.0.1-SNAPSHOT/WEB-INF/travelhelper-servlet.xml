@@ -9,9 +9,7 @@
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/security
-        http://www.springframework.org/schema/securityspring-security-3.0.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd">
  
 	<context:component-scan base-package="com.travelhelper.controller" />
  
@@ -21,9 +19,19 @@
 	</bean>
 	
 	<bean id="userProfileService" class="com.travelhelper.service.UserProfileServiceImpl"></bean>
+	
+	<bean id="travelService" class="com.travelhelper.service.TravelServiceImpl"></bean>
+	
 	<bean id="userProfileDao" class="com.travelhelper.dao.UserProfileDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	
+	<bean id="travelDao" class="com.travelhelper.dao.TravelServiceDaoImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
+	
+	
+	
 	
 	<!-- Hibernate 4 SessionFactory Bean definition -->
 	<bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -31,6 +39,9 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.travelhelper.model.UserProfile</value>
+				<value>com.travelhelper.model.TravelModeSelected</value>
+				<value>com.travelhelper.model.TravelDrive</value>
+				<value>com.travelhelper.model.GoogleNotification</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -52,7 +63,7 @@
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
 	
-	 <mvc:resources mapping="/assets/**" location="assets/"/> 
+	 <mvc:resources mapping="/assets/**" location="assets/" /> 
 	 <!-- <context:annotation-config/> -->
 	 <mvc:annotation-driven />
 	 

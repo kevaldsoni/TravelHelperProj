@@ -43,6 +43,13 @@ public class UserProfileServiceImpl implements UserProfileService{
 		System.out.println("In UserProfileServiceImpl :: createNewUserProfile");
 		return this.userProfileDao.addNewUserDetailsToAccount(profile);
 	}
+
+	@Override
+	public boolean saveGoogleNotificationId(String id) {
+		// TODO Auto-generated method stub
+		userProfileDao.saveGoogleNotificationId(id);
+		return false;
+	}
 	
 	
 }
