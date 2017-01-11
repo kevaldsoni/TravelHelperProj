@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,6 +70,7 @@ public class TravelHelperController {
 	@RequestMapping(value="/scheduletravel")
 	public String scheduleTravel(ModelMap model,Principal principal){
 		System.out.println("In TravelHelperController :: method scheduleTravel");
+		
 		return "scheduletravel";
 	
 	}
@@ -75,9 +78,18 @@ public class TravelHelperController {
 	@RequestMapping(value="/saveGcmIdForUser")
 	public String saveGcmId(ModelMap model,HttpServletRequest request){
 		System.out.println("In TravelHelperController :: method saveGcmId");
-		String gcmid = request.getParameter("id");
-		userProfileService.saveGoogleNotificationId(gcmid);
-		model.addAttribute("message","Notification Enabled");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    System.out.println("logged in username : "+name);
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+	    System.out.println("User id of logged in user :"+userId);
+	    if(userId > 0 ){
+	    	String gcmid = request.getParameter("id");
+			userProfileService.updatelastUsedGcmId(userId);
+			userProfileService.saveGoogleNotificationId(gcmid);
+			model.addAttribute("message","Notification Enabled");
+	    }
+		
 		return "scheduletravel";
 	
 	}

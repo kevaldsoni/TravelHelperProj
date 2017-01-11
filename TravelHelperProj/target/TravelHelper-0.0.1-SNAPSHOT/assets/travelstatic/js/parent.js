@@ -179,7 +179,6 @@ function passSelection(elem){
 
 function saveNotificationEndPoint(gcmUrl){
 	
-	alert(gcmUrl);
 	var spData = gcmUrl.split("/");
 	var gcmId = spData[5];
 	console.log(gcmId);
@@ -189,7 +188,8 @@ function saveNotificationEndPoint(gcmUrl){
 		data : "id="+gcmId,
 		timeout : 100000,
 		success : function(data) {
-			console.log("SUCCESS: ", data);
+			console.log("SUCCESS: ");
+			$('#scheduleTravelForm').css({"display": "block"});
 			//display(data);
 		},
 		error : function(e) {

@@ -42,6 +42,7 @@ public class UserProfile {
 	
 	private String email;
 	
+	@Column(name = "username")
 	private String username;
 	
 	private String password;

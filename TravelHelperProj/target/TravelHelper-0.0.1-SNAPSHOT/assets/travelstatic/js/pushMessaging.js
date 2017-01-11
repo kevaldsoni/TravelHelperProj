@@ -54,6 +54,7 @@ function initialiseState() {
     	 
     	  if(subscription != undefined){ 
     		  console.log(subscription);
+    		  $('#scheduleTravelForm').css({"display": "block"});
     		  //saveNotificationEndPoint(subscription.endpoint);
     	  }
     	  var pushButton = document.querySelector('.js-push-button');  
@@ -63,7 +64,7 @@ function initialiseState() {
             // to allow the user to enable push  
             return;  
           }
-          pushButton.textContent = 'Disable Push Messages';  
+          pushButton.textContent = 'Disable Notification';  
           isPushEnabled = true;  
     	}).catch(function(err) {  
         console.warn('Error during getSubscription()', err);  
@@ -81,7 +82,7 @@ function subscribe() {
 	      .then(function(subscription) {  
 	        // The subscription was successful  
 	        isPushEnabled = true;  
-	        pushButton.textContent = 'Disable Push Messages';  
+	        pushButton.textContent = 'Disable Notification';  
 	        pushButton.disabled = false;
 	        if(subscription != undefined){ 
 	    		  console.log(subscription);
@@ -96,7 +97,7 @@ function subscribe() {
 	        } else {  
 	          console.error('Unable to subscribe to push.', e);  
 	          pushButton.disabled = false;  
-	          pushButton.textContent = 'Enable Push Messages';  
+	          pushButton.textContent = 'Enable Notification';  
 	        }  
 	      });  
 	  });  
@@ -112,18 +113,20 @@ function unsubscribe() {
 	        if (!pushSubscription) {  
 	          isPushEnabled = false;  
 	          pushButton.disabled = false;  
-	          pushButton.textContent = 'Enable Push Messages';  
+	          pushButton.textContent = 'Enable Notification'; 
+	          $('#scheduleTravelForm').css({"display": "none"});
 	          return;  
 	        }  
 	        var subscriptionId = pushSubscription.subscriptionId;  
 	        pushSubscription.unsubscribe().then(function(successful) {  
 	          pushButton.disabled = false;  
-	          pushButton.textContent = 'Enable Push Messages';  
+	          pushButton.textContent = 'Enable Notification';  
 	          isPushEnabled = false;  
+	          $('#scheduleTravelForm').css({"display": "none"});
 	        }).catch(function(e) {  
 	         console.log('Unsubscription error: ', e);  
 	          pushButton.disabled = false;
-	          pushButton.textContent = 'Enable Push Messages';
+	          pushButton.textContent = 'Enable Notification';
 	        });  
 	      }).catch(function(e) {  
 	        console.error('Error thrown while unsubscribing from push messaging.', e);  

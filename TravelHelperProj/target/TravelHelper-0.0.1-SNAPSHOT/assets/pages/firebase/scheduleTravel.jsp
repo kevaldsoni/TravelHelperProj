@@ -85,10 +85,9 @@
 				<div class="room-check">
 					<h4 class="text-center">TAKE A DRIVE</h4>
 					<div class="room-check-body">
-						<div>
-							<button class="js-push-button btn-primary">Enable Push Messages</button>
-							<button class="btn-primary" onclick="sendGCMPush();">Call NOtify</button>
-							
+						<div id="enablePush">
+							<button class="js-push-button btn-primary btn-md" style="padding:5px;margin-left: 50px;margin-bottom: 20px;">Enable Push Messages</button>
+							<!-- <button class="btn-primary" onclick="sendGCMPush();">Call NOtify</button> -->
 						</div>
 						<form id="scheduleTravelForm" style="display: none;">
 							<label>Pick Up Location</label>
@@ -138,24 +137,6 @@
 		</div>
 	</div>
 	<!-- END: SEARCH SECTION -->
- 	<section id="travelSearchResults" >
-		<div class="row work-row">
-			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;">
-			<thead>
-			<tr style="color:#2F7AF8;">
-			<th>Travel Mode</th>
-			<th>Distance (miles)</th>
-         	<th>Duration (minutes)</th>
-         	<th>Time estimate (minutes)</th>
-         	<th>Cost $</th>
-         	<th>Capacity</th>
-			</thead>
-			<tbody id="travelsearchresults">
-			
-			</tbody>
-			</table>
-		</div>
-	</section> 
 <!-- START: FOOTER -->
 <section id="footer">
 	<footer>

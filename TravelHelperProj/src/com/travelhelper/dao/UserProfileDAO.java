@@ -10,4 +10,6 @@ public interface UserProfileDAO {
 	public List<UserProfile> listProfile();
 	public int addNewUserDetailsToAccount(UserProfile profile);
 	public boolean saveGoogleNotificationId(String id);
+	public boolean updatelastUsedGcmId(int userId);
+	public int fetchUserIdfromUsername(String username);
 }

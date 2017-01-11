@@ -20,6 +20,16 @@ public class GoogleNotification implements Serializable {
 	@Id
 	@Column (name = "GCM_REGISTERATION_ID")
 	private String gcmRegId;
+	
+	private int active;
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
 
 	public int getUserId() {
 		return userId;

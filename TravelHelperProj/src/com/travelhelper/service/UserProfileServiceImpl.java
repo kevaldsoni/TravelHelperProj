@@ -50,6 +50,19 @@ public class UserProfileServiceImpl implements UserProfileService{
 		userProfileDao.saveGoogleNotificationId(id);
 		return false;
 	}
+
+	@Override
+	public boolean updatelastUsedGcmId(int userId) {
+		// TODO Auto-generated method stub
+		userProfileDao.updatelastUsedGcmId(userId);
+		return false;
+	}
+
+	@Override
+	public int fetchUserIdfromUsername(String username) {
+		// TODO Auto-generated method stub
+		return userProfileDao.fetchUserIdfromUsername(username);
+	}
 	
 	
 }

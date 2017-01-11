@@ -1,11 +1,14 @@
 package com.travelhelper.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -89,6 +92,7 @@ public class UserProfileDAOImpl implements UserProfileDAO{
 		GoogleNotification notification = new GoogleNotification();
 		notification.setUserId(2);
 		notification.setGcmRegId(id);
+		notification.setActive(1);
 		Transaction tx = null;
 		Session session = this.sessionFactory.openSession();
 		try{
@@ -103,6 +107,74 @@ public class UserProfileDAOImpl implements UserProfileDAO{
 			session.close();
 		}
 		return true;
+	}
+
+
+	@Override
+	public boolean updatelastUsedGcmId(int userId) {
+		System.out.println("Updating Past GCM ID : updatelastUsedGcmId for userid :"+userId);
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		try{
+			tx=session.beginTransaction();
+			Criteria cr = session.createCriteria(GoogleNotification.class);
+			cr.add(Restrictions.eq("userId", userId));
+			List results = cr.list();
+			if(results!=null && results.size()>0){
+				for (Iterator iterator = results.iterator(); iterator.hasNext();){
+					GoogleNotification pobj = (GoogleNotification) iterator.next();
+					pobj.setActive(0);
+					session.update(pobj);
+				}
+			}else{
+				System.out.println("updateFinalUserRating :: Result not  found");
+			}
+			tx.commit();
+		}catch(HibernateException e){
+			if(tx != null){
+				tx.rollback();
+				e.printStackTrace();
+			}
+		}finally{
+			session.close();
+		}
+		return false;
+	}
+
+
+	@Override
+	public int fetchUserIdfromUsername(String username) {
+		System.out.println("fetchUserIdfromUsername "+username);
+		int userid = 0;
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		try{
+			tx=session.beginTransaction();
+			Criteria cr = session.createCriteria(UserProfile.class);
+			cr.add(Restrictions.eq("username", username));
+			List results = cr.list();
+			if(results!=null && results.size()>0){
+				UserProfile pobj = (UserProfile) results.get(0); 
+				if(pobj != null){
+					userid = pobj.getUserId();
+				}else{
+					System.err.println("Object has no  data");
+				}
+			}else{
+				System.out.println("fetchUserIdfromUsername :: Result not  found");
+			}
+			tx.commit();
+		}catch(HibernateException e){
+			if(tx != null){
+				tx.rollback();
+				e.printStackTrace();
+			}
+		}finally{
+			session.close();
+		}
+		return userid;
+	
+	
 	}
 	
 	

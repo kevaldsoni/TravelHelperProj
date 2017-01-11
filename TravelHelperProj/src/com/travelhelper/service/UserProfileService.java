@@ -10,5 +10,6 @@ public interface UserProfileService {
 	public List<UserProfile> listProfile();
 	public int createNewUserProfile(UserProfile profile);
 	public boolean saveGoogleNotificationId(String id);
-	
+	public boolean updatelastUsedGcmId(int userId);
+	public int fetchUserIdfromUsername(String username);
 }
