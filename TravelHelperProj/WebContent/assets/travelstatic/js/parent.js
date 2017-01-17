@@ -3,15 +3,21 @@
  */
 
 "use strict";
-var sourceLatitude = 33.790811;
+/*var sourceLatitude = 33.790811;
 var sourceLongitude = -118.135536;
 var destLatitude = 33.930390;
 var destLongitude = -118.396492;
+*/
+
+
+
 var travelSearchDetailsJson = { travelData:[]};
 var finalResults=[];
 $(document).ready(function() {
 	
 	$("#submitAddr").bind('click',fetchInput);
+	$("#scheduleTravelSubmit").bind('click',handleScehduledTravel);
+	
 
 });
 
@@ -25,6 +31,107 @@ var fetchInput = function(event){
 	gatherData(travelSearchDetailsJson);
 	return false;
 }
+
+var handleScehduledTravel = function(event){
+	
+	event.preventDefault();
+	console.log("In scheduled travel");
+	var drive = $(".selectpicker").val();
+	console.log(drive);
+	getScheduledTravelTime(drive).then(function(){
+		return fetchScheduleTravelDetails();
+	});
+	
+}
+
+function getScheduledTravelTime(drive){
+		console.log("getScheduledTravelTime func");
+		return new Promise(function(resolve,reject){
+		switch (drive){
+		case 'DRIVING' :  
+						  distanceCalculationDriving(travelSearchDetailsJson);
+						  setTimeout(function(){
+							  console.log("Waiting");
+							  resolve();
+						  },5000);
+						  break;
+		case 'TRANSIT' : distanceCalculationTransit(travelSearchDetailsJson);
+						 setTimeout(function(){
+						  console.log("Waiting");
+						  resolve();
+						 },5000);break;
+		case 'WALKING' : distanceCalculationWalking(travelSearchDetailsJson);
+						 setTimeout(function(){
+							  console.log("Waiting");
+							  resolve();
+						 },5000);break;
+						 
+		case 'BICYCLING' : distanceCalculationBicycling(travelSearchDetailsJson);
+						 setTimeout(function(){
+							  console.log("Waiting");
+							  resolve();
+						 },5000);break;
+						 
+		case 'LYFT' :  fetchlyftEstimatedPrice(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson);
+						setTimeout(function(){
+							  console.log("Waiting");
+							  resolve();
+						 },5000);break;
+		case 'UBER' :  distanceCalculationDriving(travelSearchDetailsJson);
+					  setTimeout(function(){
+						  console.log("Waiting");
+						  resolve();
+					  },5000);
+					  break;
+		}
+		});
+}
+	
+
+var fetchScheduleTravelDetails = function(event){
+	
+	console.log("Fetch fetchScheduleTravelDetails");
+	console.log(sourceLatitude+" "+sourceLongitude+" "+destLatitude+" "+destLongitude);
+	
+	var drive = $(".selectpicker").val();
+	console.log(drive);
+	var date = $("#scheduleDate").val();
+	console.log(date);
+	var time = $("#scheduleTime").val();
+	console.log(time);
+	var notifyBefore = $("#notifyBefore").val();
+	console.log(notifyBefore);
+	
+	var expectedTravelTime;
+	console.log(travelSearchDetailsJson.travelData);
+	var data = travelSearchDetailsJson.travelData[0].duration;
+	if(data != undefined){
+		var isnum = /^[0-9.]+$/.test(data);
+		if(!isnum){
+			if(data.length >1){
+				var durationInfo = data.split(" ");
+				if(durationInfo.length > 2){
+					console.log("duration has hours "+durationInfo);
+					expectedTravelTime = +(durationInfo[0]*60) + +durationInfo[2];
+				}else{
+					console.log("duration has minutes "+durationInfo);
+					expectedTravelTime = durationInfo[0];
+				}
+			}
+		}else{
+			expectedTravelTime = Math.round(data);
+		}
+	}
+
+	var destReachTime = date+" "+time;
+	var dataTobeSent = "userDrive="+drive+"&startLatitude="+sourceLatitude+"&startLongitude="+sourceLongitude+"&endLatitude="+destLatitude+"&endLongitude="+destLongitude+
+	   "&preNotificationTime="+notifyBefore+"&travelDriveSelected="+drive+"&destReachTime="+destReachTime+"&expectedTravelTime="+expectedTravelTime;
+	
+	saveFutureTravelDetails(dataTobeSent);
+	return false;
+}
+
+
 
 function gatherData(travelSearchDetailsJson){
 		
@@ -49,11 +156,6 @@ function gatherData(travelSearchDetailsJson){
 		  },7000);
 		  		
 	  });
-	//getAccessToken();
-	//fetchUberDetails(sourceLatitude,sourceLongitude,destLatitude,destLongitude);
-	//fetchLyftDetails(sourceLatitude,sourceLongitude);
-	//fetchlyftEstimatedPrice(sourceLatitude,sourceLongitude,destLatitude,destLongitude);
-	//fetchLyftTimeEstimate(sourceLatitude,sourceLongitude);
 }
 
 function showDetails(results){
@@ -118,16 +220,7 @@ function showTravelDetails(results,sourceLatitude,sourceLongitude,destLatitude,d
 	}
 	finalResults = results;
 	$('#travelsearchresults').html(trHTML);
-	
-	/*var items = [];
-	$.each(results, function(key,val){
-		
-		items.push("<tr id='"+val.mode+"' onclick='passSelection(this);'>");
-		items.push("<td>"+val.mode+"</td>");
-		items.push("</tr>");
-		
-	});
-	$("<tbody/>",{"class" : "mydata" , html: items.join("")}).appendTo("table");*/
+
 }
 
 function passSelection(elem){
@@ -170,11 +263,34 @@ function passSelection(elem){
     
 }
 
-/*function showUberDetail(results){
-	var json = "<h4>Uber Details</h4><pre>"
-		+ JSON.stringify(results, null, 4) + "</pre>";
-	$('#uberDetails').html(json);
-	}*/
+
+function saveFutureTravelDetails(dataTobeSent){
+	alert(dataTobeSent);
+    $.ajax({
+		type : "POST",
+		contentType : "application/x-www-form-urlencoded",
+		url : "/TravelHelper/saveFutureTravelDetails",
+		data : dataTobeSent,
+		timeout : 100000,
+		success : function(data) {
+			console.log("SUCCESS: ", data);
+			$('#confirmationBox').css({"display": "block"});
+			document.getElementById('scheduleTravelForm').reset();
+			$(window).scrollTop($('#confirmationBox').position().top);
+			travelSearchDetailsJson.travelData = [];
+			//display(data);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+			//display(e);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});
+    
+
+}
 
 
 function saveNotificationEndPoint(gcmUrl){

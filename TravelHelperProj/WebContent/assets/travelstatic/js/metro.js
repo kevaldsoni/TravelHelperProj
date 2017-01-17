@@ -3,11 +3,11 @@
 	 */
 	"use strict";
 	
-	/*var sourceLatitude = 0;
-	var sourceLongitude = 0;
-	var destLatitude = 0;
-	var destLongitude = 0;*/
-	
+/*	var sourceLatitude ;
+	var sourceLongitude ;
+	var destLatitude ;
+	var destLongitude ;
+*/	
 	var sourceLatitude = 33.790811;
 	var sourceLongitude = -118.135536;
 	var destLatitude = 33.930390;

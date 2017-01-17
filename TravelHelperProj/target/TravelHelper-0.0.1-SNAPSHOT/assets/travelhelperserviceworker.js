@@ -9,9 +9,9 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('push', function(event) {
   console.log('Push message received', event);
   
-  var title = 'Yay a message.';  
+  var title = 'Time to start Travel !!';  
   var body = 'Travel Helper has something to say. Kindly check.';  
-  var icon = 'img/kk.png';  
+  var icon = 'travelstatic/img/travelhelperpush.png';  
   var tag = 'simple-push-demo-notification-tag';
 
   event.waitUntil(  

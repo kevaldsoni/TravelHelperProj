@@ -89,6 +89,11 @@
 							<button class="js-push-button btn-primary btn-md" style="padding:5px;margin-left: 50px;margin-bottom: 20px;">Enable Push Messages</button>
 							<!-- <button class="btn-primary" onclick="sendGCMPush();">Call NOtify</button> -->
 						</div>
+						<div id="confirmationBox" style="display: none;">
+							<div class="alert alert-info">
+  								<strong>Travel Schedule Recorded</strong>
+							</div>
+						</div>
 						<form id="scheduleTravelForm" style="display: none;">
 							<label>Pick Up Location</label>
 							<div class="input-group">
@@ -100,35 +105,38 @@
 								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 padding-right">
-								<label>Select Drive</label>
-								<select class="selectpicker" name="travel_type">
-									<option>Personal Car</option>
-									<option>Uber</option>
-									<option>Lyft</option>
-									<option>Public Transit</option>
-								</select>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 padding-left">
-								<label>Travel Mode</label>
-								<select class="selectpicker" name="money_type">
-									<option>Economical</option>
-									<option>Fastest</option>
-
-								</select>
-							</div>
-							<label>Traveller Count</label>
-							<select class="selectpicker" name="travellercount_type">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-									<option>6</option>
+							<label>Select Drive</label>
+							<select class="selectpicker" name="travel_type">
+									<option selected="selected">DRIVING</option>
+									<option>TRANSIT</option>
+									<option>WALKING</option>
+									<option>BICYCLING</option>
+									<option>LYFT</option>
+									<option>UBER</option>
 							</select>
+
+							<label>Select Date</label>
+					        <div class='input-group'>
+					         <input type="date" class="form-control" name="date" id="scheduleDate">
+					        </div>
+				
+
+					        <label>Select Time</label>
+					        <div class='input-group'>
+					         <input type="time" class="form-control" name="time" id="scheduleTime">
+					        </div>
+							
+							<label>Notify Before (minutes)</label>
+							<select class="selectpicker" name="notify_before" id="notifyBefore">
+									<option selected="selected">5</option>
+									<option>10</option>
+									<option>15</option>
+									<option>30</option>
+							</select>
+							
 							<div class="text-center">
 								<!-- <input type="submit" name="submit" id="submitAddr" class="submitAddr">Search Results</input> -->
-								<button type="submit" id="submitAddr">Search Results</button>
+								<button type="submit" id="scheduleTravelSubmit">Search Results</button>
 							</div>
 						</form>
 					</div>
@@ -191,6 +199,7 @@
 </div>
 <!-- END: SITE-WRAPPER -->
 <!-- Load Scripts -->
+
 <script src="/TravelHelper/assets/js/respond.js"></script>
 <script src="/TravelHelper/assets/js/jquery.js"></script>
 <script src="/TravelHelper/assets/plugins/owl.carousel.min.js"></script>
@@ -215,7 +224,6 @@ function initAutocomplete() {
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCin3LHSQnBxk5b1uCGbnzC5dT8uL93JRw&libraries=places&callback=initAutocomplete"
         async defer></script>
-<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/parent.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/metro.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/uberFunctions.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/lyftFunctions.js"></script>    

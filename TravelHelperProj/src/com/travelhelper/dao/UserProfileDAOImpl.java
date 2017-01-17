@@ -1,10 +1,16 @@
 package com.travelhelper.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.travelhelper.model.FutureTravel;
 import com.travelhelper.model.GoogleNotification;
 import com.travelhelper.model.UserProfile;
 
@@ -175,6 +182,83 @@ public class UserProfileDAOImpl implements UserProfileDAO{
 		return userid;
 	
 	
+	}
+
+
+	@Override
+	public List<Integer> fetchUserTobeNotified(Date now) {
+		// TODO Auto-generated method stub
+		Transaction tx = null;
+		List<Integer> ids = new ArrayList<Integer>();
+		Session session = this.sessionFactory.openSession();
+		try{
+			tx=session.beginTransaction();
+			Criteria cr = session.createCriteria(FutureTravel.class);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			//Date fromDate = df.parse("2012-04-09 00:00:00");
+			//Date toDate = df.parse("2012-04-09 23:59:59");
+			Calendar cal = Calendar.getInstance();
+	    	cal.setTime(now);
+	    	cal.add(Calendar.MINUTE, +1);
+			cr.add(Restrictions.between("notificationTime", now, cal.getTime()));
+			/*String hql = "FROM FutureTravel E WHERE E.notificationTime = :date";
+			Query query = session.createQuery(hql);
+			query.setParameter("date", now); */
+			List results = cr.list();
+			if(results!=null && results.size()>0){
+				FutureTravel obj = (FutureTravel)results.get(0);
+				System.out.println(obj.getRecordId());
+				ids.add(obj.getUserId());
+			}else{
+				System.out.println("fetchUserTobeNotified :: Result not  found");
+			}
+			tx.commit();
+		}catch(HibernateException e){
+			if(tx != null){
+				tx.rollback();
+				e.printStackTrace();
+			}
+		}finally{
+			session.close();
+		}
+		
+		return ids;
+	}
+
+
+	@Override
+	public List<String> fetchClientIdForNotification(List<Integer> ids) {
+		Transaction tx = null;
+		List<String> clientIds = new ArrayList<String>();
+		Session session = this.sessionFactory.openSession();
+		try{
+			tx=session.beginTransaction();
+			Criteria cr = session.createCriteria(GoogleNotification.class);
+			for(Integer userid : ids){
+				cr.add(Restrictions.eq("userId", userid));
+				cr.add(Restrictions.eq("active", 1));
+				List results = cr.list();
+				if(results!=null && results.size()>0){
+					GoogleNotification obj = (GoogleNotification)results.get(0);
+					System.out.println(obj.getGcmRegId());
+					clientIds.add(obj.getGcmRegId());
+				}else{
+					System.out.println("fetchClientIdForNotification :: Result not  found");
+				}
+			}
+			
+			
+			tx.commit();
+		}catch(HibernateException e){
+			if(tx != null){
+				tx.rollback();
+				e.printStackTrace();
+			}
+		}finally{
+			session.close();
+		}
+		
+		return clientIds;
 	}
 	
 	

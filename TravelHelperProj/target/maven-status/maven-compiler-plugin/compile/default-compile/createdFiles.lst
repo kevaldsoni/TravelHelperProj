@@ -6,12 +6,14 @@ com\travelhelper\dao\UserProfileDAOImpl.class
 com\travelhelper\model\TravelDrive.class
 com\travelhelper\service\TravelService.class
 com\travelhelper\configuration\SchedulerMain.class
+com\travelhelper\model\FutureTravel.class
 com\travelhelper\model\AjaxResponseBody.class
 com\travelhelper\model\GoogleNotification.class
 com\travelhelper\service\UserProfileServiceImpl.class
 com\travelhelper\controller\LoginController.class
 com\travelhelper\model\TravelModeSelected.class
 com\travelhelper\configuration\HibernateConfiguration.class
+com\travelhelper\configuration\FCMNotification.class
 com\travelhelper\model\SearchCriteria.class
 com\travelhelper\model\Views$Public.class
 com\travelhelper\dao\TravelServiceDao.class

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.travelhelper.model.FutureTravel;
 import com.travelhelper.model.TravelDrive;
 import com.travelhelper.model.TravelModeSelected;
 
@@ -112,6 +113,31 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 		
 		return driveId;
 		
+	}
+
+	@Override
+	public int saveFutureScheduledRequest(FutureTravel fTravel) {
+		// TODO Auto-generated method stub
+		int recordId = 0;
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		try{
+			tx=session.beginTransaction();
+			recordId = (Integer)session.save(fTravel);			
+			if(recordId > 0){
+				System.out.println("Future Travel saved new record :: "+recordId);
+			}else{
+				System.out.println("Travel Preference Save Failed");
+			}
+			tx.commit();
+		}catch(HibernateException e){
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return recordId;
 	}
 
 }

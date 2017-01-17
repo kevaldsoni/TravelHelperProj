@@ -2,6 +2,9 @@ package com.travelhelper.controller;
 
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpRequest;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,20 +36,6 @@ public class TravelHelperController {
 	@Autowired
 	private UserProfileService userProfileService;
 	
-	
-	/*public void setUserProfileService(UserProfileService userProfileService){
-		this.userProfileService = userProfileService;
-	}*/
-	
-	/*@RequestMapping("/welcome")
-	public ModelAndView helloWorld(){
-		System.out.println("In TravelHelperController :: method helloWorld");
-		log.info("In TravelHelperController :: method helloWorld");
-		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>********** Hello second page </h3></div><br><br>";
-		return new ModelAndView("welcome", "message", message);
-	
-	}*/
 	
 	@RequestMapping(value="/welcome")
 	public String helloWorld(ModelMap model,Principal principal){
@@ -94,5 +84,24 @@ public class TravelHelperController {
 	
 	}
 	
+	@RequestMapping(value="/saveFutureTravel")
+	public String saveFutureTravel(ModelMap model,HttpServletRequest request){
+		System.out.println("In TravelHelperController :: method saveFutureTravel");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    System.out.println("logged in username : "+name);
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+	    System.out.println("User id of logged in user :"+userId);
+	    if(userId > 0 ){
+	    	String gcmid = request.getParameter("id");
+			userProfileService.updatelastUsedGcmId(userId);
+			userProfileService.saveGoogleNotificationId(gcmid);
+			model.addAttribute("message","Notification Enabled");
+	    }
+		
+		return "scheduletravel";
+	
+	}
+		
 	
 }

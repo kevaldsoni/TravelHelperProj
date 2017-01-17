@@ -1,6 +1,10 @@
 package com.travelhelper.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.travelhelper.model.AjaxResponseBody;
+import com.travelhelper.model.FutureTravel;
 import com.travelhelper.model.SearchCriteria;
 import com.travelhelper.model.TravelModeSelected;
 import com.travelhelper.model.User;
 import com.travelhelper.model.Views;
 import com.travelhelper.service.TravelService;
+import com.travelhelper.service.UserProfileService;
 
 @RestController
 public class AjaxController {
@@ -33,6 +42,9 @@ public class AjaxController {
 	
 	@Autowired
 	private TravelService travelService;
+	
+	@Autowired
+	private UserProfileService userProfileService;
 	
 	@JsonView(Views.Public.class)
 	@RequestMapping(value = "/search/api/getSearchResult")
@@ -151,5 +163,80 @@ public class AjaxController {
 
 	}
 	
+	@JsonView(Views.Public.class)
+	@RequestMapping (value = "/saveFutureTravelDetails")
+	public AjaxResponseBody saveFutureTravelDetails(HttpServletRequest request) throws ParseException{
+		System.out.println("In Ajax Controller ::saveFutureTravelDetails");
+		AjaxResponseBody result = new AjaxResponseBody();
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+	    System.out.println("Logged in user id : "+userId);
+	    if(userId > 0 ){
+	    	FutureTravel ft  = new FutureTravel();
+	    	ft.setUserId(userId);
+	    	ft.setStartLatitude(request.getParameter("startLatitude"));
+	    	ft.setStartLongitude(request.getParameter("startLongitude"));
+	    	ft.setEndLatitude(request.getParameter("endLatitude"));
+	    	ft.setEndLongitude(request.getParameter("endLongitude"));
+	    	ft.setTravelDriveSelected(request.getParameter("travelDriveSelected"));
+	    	String notifyBefore = (String)request.getParameter("preNotificationTime");
+	    	int preNotifyTime = Integer.parseInt(notifyBefore);
+	    	ft.setPreNotificationTime(preNotifyTime);
+	    	// save travel_id in travelservice.java
+	    	
+	    	// This time needs to be calculated properly reachtime - timetakenfordrive - eta 
+	    	String destReachTime = (String)request.getParameter("destReachTime");
+	    	/*String data [] = destReachTime.split(" ");
+	    	if(data != null && data.length > 0){
+	    		
+	    		String date[] = data[0].split("-");
+	    		System.out.println(date[0]+ " "+date[1]+" "+date[2]);
+	    		String time[] = data[1].split(":");
+	    		System.out.println(time[0]+" "+time[1]);
+	    		
+	    	}*/
+	    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    	Date destinationTime = df.parse(destReachTime);
+	    	ft.setDestinationReachTime(destinationTime);
+	    	
+	    	int travelTimeinMin = Integer.parseInt(request.getParameter("expectedTravelTime"));
+	    	ft.setTraveltimeExpected(travelTimeinMin);
+	    	
+	    	Calendar cal = Calendar.getInstance();
+	    	cal.setTime(destinationTime);
+	    	int totalBackTime = preNotifyTime+travelTimeinMin;
+	    	cal.add(Calendar.MINUTE, -totalBackTime);
+	    	String notifyTime = df.format(cal.getTime());
+	    	ft.setNotificationTime(cal.getTime());
+	    	System.out.println("Time at which notification needs to be sent : "+notifyTime);
+	    	
+	    	int recordId = travelService.saveFutureScheduledRequest(ft);
+				System.out.println("Future Travel Data Saved "+recordId);
+				result.setCode("200");
+				result.setMsg("");
+				result.setResult(users);
+			} else {
+				result.setCode("204");
+				result.setMsg("No user!");
+			}
+		return result;
+	}
+	
+	 @Scheduled(initialDelay=5000 , fixedDelay=60000)
+	 public void checkForNotification() {
+		    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss sss");
+	        // something that should execute periodically
+	    	Date now = new Date();
+	    	System.out.println("in ajax controller Check now "+df.format(now));
+	    	List<Integer> ids = userProfileService.fetchUserTobeNotified(now);
+	    	List<String> cliendIdList = userProfileService.fetchClientIdForNotification(ids);
+	    	for(String clientId : cliendIdList){
+	    		travelService.pushFCMNotification(clientId);
+	    	}
+	    	//String clientDeviceID = "ewZeqppUqEI:APA91bHdpNf15Hp239u1jWLuUcYQb0a9QFd8Ok61FvdJZTk56Hw4d1LNO7r6TXJ2-gNZIrbJNzAGAZ7VYGWNZ-OYnnJAauKjd8ejYh-Epuw8PMk6UKmunvn2YYghrPDPV0jvUdjM57Eq";
+	    	
+	 }
 	
 }

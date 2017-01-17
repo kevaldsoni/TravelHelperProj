@@ -1,5 +1,6 @@
 package com.travelhelper.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,18 @@ public class UserProfileServiceImpl implements UserProfileService{
 	public int fetchUserIdfromUsername(String username) {
 		// TODO Auto-generated method stub
 		return userProfileDao.fetchUserIdfromUsername(username);
+	}
+
+	@Override
+	public List<Integer> fetchUserTobeNotified(Date now) {
+		// TODO Auto-generated method stub
+		return userProfileDao.fetchUserTobeNotified(now);
+	}
+
+	@Override
+	public List<String> fetchClientIdForNotification(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		return userProfileDao.fetchClientIdForNotification(ids);
 	}
 	
 	
