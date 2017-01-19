@@ -16,6 +16,7 @@ D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\Schedule
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\ScheduledTask.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\controller\TravelHelperController.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\model\FutureTravel.java
+D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\LyftAuthentication.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\dao\UserProfileDAO.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\HibernateConfiguration.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\service\TravelServiceImpl.java

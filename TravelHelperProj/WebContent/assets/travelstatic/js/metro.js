@@ -171,7 +171,8 @@
 			    			"distance" : results[i].distance.text,
 			    			"duration" : results[i].duration.text,
 			    			"capacity" : 20,
-			    			"cost" : 0
+			    			"cost" : 0,
+			    			"time_estimate" : 0
 			    		});
 			      }
 		          resolve();
@@ -208,7 +209,8 @@
 		    			"distance" : results[i].distance.text,
 		    			"duration" : results[i].duration.text,
 		    			"capacity" : 4,
-		    			"cost" : 0 
+		    			"cost" : 0,
+		    			"time_estimate" : 0
 		    		});
 		      }
 	          //showDrivingDetails(results);
@@ -246,7 +248,8 @@
 		    			"distance" : results[i].distance.text,
 		    			"duration" : results[i].duration.text,
 		    			"cost" : 0,
-		    			"capacity" : 100
+		    			"capacity" : 100,
+		    			"time_estimate" : 0
 		    		});
 		      }
 	          //showWalkingDetails(results);
@@ -285,6 +288,7 @@
 		    			"duration" : results[i].duration.text,
 		    			"cost" : 0,
 		    			"capacity" : 1,
+		    			"time_estimate" : 0
 		    		});
 		      }
 	          //showBicyclingDetails(results);

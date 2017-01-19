@@ -100,7 +100,7 @@ var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 						//uberParsedData[i].max_cost = maxCost;
 						//uberParsedData[i].min_cost = minCost;
 						
-						travelSearchDetailsJson.travelData[i].cost = (+minCost + +maxCost)/2;
+						travelSearchDetailsJson.travelData[i].cost =Math.round((+minCost + +maxCost)/2);
 						//alert(uberParsedData[i].avg_cost);
 					}
 				}

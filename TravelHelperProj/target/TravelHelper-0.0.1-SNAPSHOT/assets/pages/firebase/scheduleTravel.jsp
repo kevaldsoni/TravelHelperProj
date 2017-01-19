@@ -107,7 +107,7 @@
 							</div>
 							<label>Select Drive</label>
 							<select class="selectpicker" name="travel_type">
-									<option>DRIVING</option>
+									<option selected="selected">DRIVING</option>
 									<option>TRANSIT</option>
 									<option>WALKING</option>
 									<option>BICYCLING</option>
@@ -128,7 +128,7 @@
 							
 							<label>Notify Before (minutes)</label>
 							<select class="selectpicker" name="notify_before" id="notifyBefore">
-									<option>5</option>
+									<option selected="selected">5</option>
 									<option>10</option>
 									<option>15</option>
 									<option>30</option>

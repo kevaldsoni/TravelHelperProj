@@ -24,4 +24,5 @@ com\travelhelper\model\UserProfile.class
 com\travelhelper\model\User.class
 com\travelhelper\controller\TravelHelperController.class
 com\travelhelper\configuration\ScheduledTask.class
+com\travelhelper\configuration\LyftAuthentication.class
 com\travelhelper\model\NotifyPK.class

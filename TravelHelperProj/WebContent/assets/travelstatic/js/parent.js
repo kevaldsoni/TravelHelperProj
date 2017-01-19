@@ -10,7 +10,7 @@ var destLongitude = -118.396492;
 */
 
 
-
+var result=[];
 var travelSearchDetailsJson = { travelData:[]};
 var finalResults=[];
 $(document).ready(function() {
@@ -24,7 +24,7 @@ $(document).ready(function() {
 var fetchInput = function(event){
 	
 	console.log("Fetch input");
-	
+	travelSearchDetailsJson.travelData = [];
 	// Prevent the form from submitting via the browser.
 	event.preventDefault();
 	//$.when(gatherData(travelSearchDetailsJson)).then(showDetails(travelSearchDetailsJson));
@@ -134,7 +134,7 @@ var fetchScheduleTravelDetails = function(event){
 
 
 function gatherData(travelSearchDetailsJson){
-		
+
 	Promise.all([distanceCalculationTransit(travelSearchDetailsJson),
 	             distanceCalculationDriving(travelSearchDetailsJson),
 	             distanceCalculationWalking(travelSearchDetailsJson),
@@ -150,9 +150,11 @@ function gatherData(travelSearchDetailsJson){
 			  fetchUberTimeEstimate(completeData,sourceLatitude,sourceLongitude,travelSearchDetailsJson);
 		  
 	  }).then(function(){
+		  //preProcessResults(travelSearchDetailsJson);
+		  
+	  }).then(function(){
 		  setTimeout(function(){
 			  showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude);
-			  document.getElementById('travelSearchResults').scrollIntoView();
 		  },7000);
 		  		
 	  });
@@ -171,8 +173,13 @@ function showDetails(results){
 }
 
 function preProcessResults(results){
-
+	results = results.travelData;
+	var pplCount = $("#pplcount").val();
+	var travelpref = $("#travelpref").val();
+	console.log(pplCount+" "+travelpref);
 	for(var i in results){
+		
+		if(results[i].capacity >= pplCount){
 		var data = results[i].duration;
 		if(data != undefined){
 			var isnum = /^[0-9.]+$/.test(data);
@@ -199,14 +206,83 @@ function preProcessResults(results){
 				results[i].distance = durationInfo[0];
 			}
 		}
+	  }else{
+		  console.log("Not enough capacity");
+		  results.splice(i,1);
+	  }
+	}// end for
+	
+		if(travelpref == "Ecomonical"){
+			results.sort(function(a, b) {
+			    return parseInt(a.cost, 10) - parseInt(b.cost, 10);
+			});
+		}
+		for(var i in results){
+			console.log(results[i].cost);
+		}
+	
 }
 
-}
 
-
-function showTravelDetails(results,sourceLatitude,sourceLongitude,destLatitude,destLongitude){
-	results = results.travelData;
-	preProcessResults(results);
+function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude){
+	var results = travelSearchDetailsJson.travelData;
+	//preProcessResults(results); 
+	
+	/* func start*/
+	for(var i in results){
+		console.log("Start :"+results[i].cost);
+	}
+	var pplCount = $("#pplcount").val();
+	var travelpref = $("#travelpref").val();
+	console.log(pplCount+" "+travelpref);
+	for(var i in results){
+		
+		if(results[i].capacity >= pplCount){
+		var data = results[i].duration;
+		if(data != undefined){
+			var isnum = /^[0-9.]+$/.test(data);
+			if(!isnum){
+				if(data.length >1){
+					var durationInfo = data.split(" ");
+					if(durationInfo.length > 2){
+						console.log("duration has hours "+durationInfo);
+						results[i].duration = (durationInfo[0]*60)+durationInfo[2];
+					}else{
+						console.log("duration has minutes "+durationInfo);
+						results[i].duration = durationInfo[0];
+					}
+				}
+			}
+		}else{
+			console.log("Need to populate data");	
+		}
+		var distanceDuration = results[i].distance;
+		if(distanceDuration != undefined){
+			var isnum = /^[0-9.]+$/.test(distanceDuration);
+			if(!isnum){
+				var durationInfo = distanceDuration.split(" ");
+				results[i].distance = durationInfo[0];
+			}
+		}
+	  }else{
+		  console.log("Not enough capacity");
+		  results.splice(i,1);
+	  }
+	}// end for
+	
+	
+	
+	//results.sort( predicatBy("cost") );
+	//alert(travelpref);
+	//Usage
+	if(travelpref == "Economical"){
+		results.sort( predicatBy("cost") );
+	}
+	for(i in results){
+		console.log(results[i].cost);
+	}
+	/* func end */
+	
 	$('#travelsearchresults').empty();
 	var trHTML= "";
 	for(var i in results){
@@ -217,10 +293,24 @@ function showTravelDetails(results,sourceLatitude,sourceLongitude,destLatitude,d
 		trHTML += '<tr scope="row" class="info" id='+results[i].mode+' onclick="passSelection(this);">'+ 
 		'<td>'+ results[i].mode+ '</td><td>' + results[i].distance + '</td><td>' + results[i].duration + '</td><td>' + results[i].time_estimate + 
 		'</td><td>'+ results[i].cost + '</td><td>' + results[i].capacity + '</td></tr>';
+		
 	}
 	finalResults = results;
 	$('#travelsearchresults').html(trHTML);
+	//document.getElementById('traveloptions').reset();
+	$(window).scrollTop($('#traveldatasection').position().top);
 
+}
+
+function predicatBy(prop){
+	   return function(a,b){
+	      if( a[prop] > b[prop]){
+	          return 1;
+	      }else if( a[prop] < b[prop] ){
+	          return -1;
+	      }
+	      return 0;
+	   }
 }
 
 function passSelection(elem){

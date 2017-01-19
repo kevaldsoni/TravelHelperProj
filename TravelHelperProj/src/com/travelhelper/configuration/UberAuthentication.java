@@ -18,7 +18,7 @@ public class UberAuthentication {
 		String uberLoginUrl = "";
 		try {
 			uberLoginUrl = "https://login.uber.com/oauth/v2/authorize?" + "client_id="
-					+ UberAuthentication.UBER_APP_CLIENT_ID + "response_type=code";
+					+ UberAuthentication.UBER_APP_CLIENT_ID + "&response_type=code&redirect_uri="+UberAuthentication.REDIRECT_URI;
 			System.out.println("Login URL fron uberLoginUrl ::"+uberLoginUrl);
 		} catch (Exception e) {
 			e.printStackTrace();

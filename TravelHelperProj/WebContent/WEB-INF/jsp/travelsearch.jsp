@@ -81,7 +81,7 @@
 				<div class="room-check">
 					<h4 class="text-center">TAKE A DRIVE</h4>
 					<div class="room-check-body">
-						<form >
+						<form id="traveloptions">
 							<label>Pick Up Location</label>
 							<div class="input-group">
 								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
@@ -92,25 +92,16 @@
 								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 padding-right">
-								<label>Select Drive</label>
-								<select class="selectpicker" name="travel_type">
-									<option>Personal Car</option>
-									<option>Uber</option>
-									<option>Lyft</option>
-									<option>Public Transit</option>
-								</select>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 padding-left">
+							
 								<label>Travel Mode</label>
-								<select class="selectpicker" name="money_type">
+								<select class="selectpicker" name="money_type" id="travelpref">
 									<option>Economical</option>
 									<option>Fastest</option>
 
 								</select>
-							</div>
+							
 							<label>Traveller Count</label>
-							<select class="selectpicker" name="travellercount_type">
+							<select class="selectpicker" id="pplcount" name="travellercount_type">
 									<option>1</option>
 									<option>2</option>
 									<option>3</option>
@@ -129,7 +120,7 @@
 		</div>
 	</div>
 	<!-- END: SEARCH SECTION -->
- 	<section id="travelSearchResults" >
+ 	<section id="traveldatasection" >
 		<div class="row work-row">
 			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;">
 			<thead>
