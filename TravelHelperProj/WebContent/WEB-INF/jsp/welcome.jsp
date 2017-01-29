@@ -64,7 +64,10 @@ h1 {
 	<a href="/TravelHelper/assets/pages/firebase/scheduleTravel.jsp">Schedule Travel</a>
 	<a href="/TravelHelper/dashboard">Dash board</a>
 	<a href="<c:url value="j_spring_security_logout" />" >Logout</a>
-	
+	<%
+	String token = request.getParameter("code");
+	%>
+	Code : <%=token%>
 	<c:url var="logoutUrl" value="j_spring_security_logout"/>
 	<form action="${logoutUrl}" method="post">
  	<input type="submit" value="Log out" /><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>
@@ -143,16 +146,7 @@ h1 {
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <br class="">
-            <br class="">
-            <p class="pull-right"><a href="http://www.bootply.com" class="">Template from Bootply</a> &nbsp;
-                ©Copyright 2013 ACME<sup class="">TM</sup> Brand.</p>
-            <br class="">
-            <br class="">
-        </div>
-    </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 </div>
 
 </body>

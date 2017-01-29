@@ -6,6 +6,18 @@ self.addEventListener('install', function(event) {
 self.addEventListener('activate', function(event) {
   console.log('Activated', event);
 });
+
+self.addEventListener('notificationclick', function(event) {
+	  console.log('[Service Worker] Notification click Received.');
+
+	  event.notification.close();
+
+	  event.waitUntil(
+	    clients.openWindow('https://developers.google.com/web/')
+	  );
+});
+
+
 self.addEventListener('push', function(event) {
   console.log('Push message received', event);
   
