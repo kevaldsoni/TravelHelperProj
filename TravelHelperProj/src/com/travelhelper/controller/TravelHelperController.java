@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.hibernate.engine.transaction.jta.platform.internal.SynchronizationRegistryBasedSynchronizationStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.travelhelper.model.UserProfile;
+import com.travelhelper.service.TravelService;
 import com.travelhelper.service.UserProfileService;
 
 
@@ -35,6 +37,9 @@ public class TravelHelperController {
 	
 	@Autowired
 	private UserProfileService userProfileService;
+	
+	@Autowired
+	private TravelService travelService;
 	
 	
 	@RequestMapping(value="/welcome")
@@ -100,6 +105,19 @@ public class TravelHelperController {
 	    }
 		
 		return "scheduletravel";
+	
+	}
+	
+	@RequestMapping(value="/uberoauth")
+	public String uberAuthenticationRedirect(ModelMap model,HttpServletRequest request){
+	
+	    	String code = request.getParameter("code");
+			System.out.println("authorization code ::"+code);
+			String token = request.getParameter("token");
+			if(token== null || token.length() <=0){
+				travelService.getUberAuthentiationToken(code);
+			}
+		return "welcome";
 	
 	}
 		

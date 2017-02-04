@@ -122,7 +122,7 @@
 	<!-- END: SEARCH SECTION -->
  	<section id="traveldatasection" >
 		<div class="row work-row">
-			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;">
+			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;visibility: hidden;">
 			<thead>
 			<tr style="color:#2F7AF8;">
 			<th>Travel Mode</th>

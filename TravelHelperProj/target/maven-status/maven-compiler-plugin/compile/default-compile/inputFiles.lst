@@ -12,8 +12,7 @@ D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\model\TravelDrive.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\model\UserProfile.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\FCMNotification.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\model\NotifyPK.java
-D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\SchedulerMain.java
-D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\ScheduledTask.java
+D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\Constants.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\controller\TravelHelperController.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\model\FutureTravel.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\LyftAuthentication.java

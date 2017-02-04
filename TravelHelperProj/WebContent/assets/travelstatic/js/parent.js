@@ -28,6 +28,7 @@ var fetchInput = function(event){
 	// Prevent the form from submitting via the browser.
 	event.preventDefault();
 	//$.when(gatherData(travelSearchDetailsJson)).then(showDetails(travelSearchDetailsJson));
+	$('#location').css({"visibility": "visible"});
 	gatherData(travelSearchDetailsJson);
 	return false;
 }
@@ -146,16 +147,17 @@ function gatherData(travelSearchDetailsJson){
 	             fetchUberEstimatedPrice(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson)
 	            
 	  ]).then(function(){
+	      var completeData = travelSearchDetailsJson.travelData;
+	      fetchRideEstimate(completeData,sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson);
+	  
+	  }).then(function(){
 		      var completeData = travelSearchDetailsJson.travelData;
 			  fetchUberTimeEstimate(completeData,sourceLatitude,sourceLongitude,travelSearchDetailsJson);
 		  
 	  }).then(function(){
-		  //preProcessResults(travelSearchDetailsJson);
-		  
-	  }).then(function(){
 		  setTimeout(function(){
 			  showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude);
-		  },7000);
+		  },15000);
 		  		
 	  });
 }
@@ -229,9 +231,9 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 	//preProcessResults(results); 
 	
 	/* func start*/
-	for(var i in results){
+	/*for(var i in results){
 		console.log("Start :"+results[i].cost);
-	}
+	}*/
 	var pplCount = $("#pplcount").val();
 	var travelpref = $("#travelpref").val();
 	console.log(pplCount+" "+travelpref);
@@ -277,10 +279,13 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 	//Usage
 	if(travelpref == "Economical"){
 		results.sort( predicatBy("cost") );
+	}else{
+		results.sort( predicatBy("duration") );
+		
 	}
-	for(i in results){
+	/*for(i in results){
 		console.log(results[i].cost);
-	}
+	}*/
 	/* func end */
 	
 	$('#travelsearchresults').empty();

@@ -65,16 +65,16 @@ h1 {
 	<a href="/TravelHelper/dashboard">Dash board</a>
 	<a href="<c:url value="j_spring_security_logout" />" >Logout</a>
 	<%
-	String token = request.getParameter("code");
+	String access_token = request.getParameter("access_token");
 	%>
-	Code : <%=token%>
+	Code : <%=access_token%>
 	<c:url var="logoutUrl" value="j_spring_security_logout"/>
 	<form action="${logoutUrl}" method="post">
  	<input type="submit" value="Log out" /><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>
   	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 	
-	<div class="container-full">
+<!-- 	<div class="container-full">
     <div class="row">
         <div class="col-lg-12 text-center v-center">
              <h1 class="">Travel Helper</h1>
@@ -91,7 +91,7 @@ h1 {
             </form>
         </div>
     </div>
-    <!-- /row -->
+    /row
     <div class="row">
         <div class="col-lg-12 text-center v-center" style="font-size:39pt;"> <a href="#" class=""><i class="icon-google-plus"></i></a>  <a href="#" class=""><i class="icon-facebook"></i></a> 
             <a href="#" class=""><i class="icon-twitter"></i>
@@ -104,7 +104,7 @@ h1 {
     <br class="">
     <br class="">
     <br class="">
-</div>
+</div> -->
 <!-- /container full -->
 <div class="container">
     <hr class="">

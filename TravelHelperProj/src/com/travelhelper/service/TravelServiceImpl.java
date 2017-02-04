@@ -88,4 +88,9 @@ public class TravelServiceImpl implements TravelService{
 		fTravel.setTravelDriveId(driveID);
 		return travelDao.saveFutureScheduledRequest(fTravel);
 	}
+
+	@Override
+	public String getUberAuthentiationToken(String code) {
+		return travelDao.retrieveUberAuthenticationToken(code);
+	}
 }

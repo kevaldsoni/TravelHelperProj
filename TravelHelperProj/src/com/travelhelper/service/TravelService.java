@@ -10,5 +10,7 @@ public interface TravelService {
 	public void pushFCMNotification(String clientDeviceID);
 	
 	public int saveFutureScheduledRequest(FutureTravel fTravel);
+	
+	public String getUberAuthentiationToken(String code); 
 
 }

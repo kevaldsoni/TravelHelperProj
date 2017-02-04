@@ -1,5 +1,14 @@
 package com.travelhelper.dao;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -11,6 +20,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -19,6 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.travelhelper.model.FutureTravel;
 import com.travelhelper.model.TravelDrive;
 import com.travelhelper.model.TravelModeSelected;
+
+
+import com.travelhelper.configuration.Constants;
 
 @Repository
 @EnableTransactionManagement
@@ -138,6 +152,62 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 			session.close();
 		}
 		return recordId;
+	}
+
+	@Override
+	public String retrieveUberAuthenticationToken(String code) {
+		String accessToken =null;
+		System.out.println("!! Get Access token input param:: "+code);
+		
+			URL tokenEndpointUrl;
+			try {
+				tokenEndpointUrl = new URL(getUberTokenEndpointGraphUrl(code));
+				System.out.println(tokenEndpointUrl);
+			
+			HttpURLConnection urlconn = null;
+			urlconn = (HttpURLConnection) tokenEndpointUrl.openConnection();
+			urlconn.setInstanceFollowRedirects(true);
+			urlconn.setRequestMethod("POST");
+			urlconn.setDoOutput(true);
+			urlconn.connect();
+			int respCode = urlconn.getResponseCode();
+			String errMsg = urlconn.getResponseMessage();
+			System.out.println(respCode+" "+errMsg);
+			
+			  String lStream = "";
+			  BufferedReader inp = new BufferedReader(new InputStreamReader(
+			     urlconn.getInputStream()));
+			   while ((lStream = inp.readLine()) != null) {
+				   accessToken = accessToken + lStream;
+			   }
+			   inp.close();
+			   urlconn.disconnect();
+			 	{
+			 		System.out.println("Response :: "+accessToken);
+			 	}
+			   
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("Invalid code received " + e);
+			}
+		return accessToken;
+
+	}
+	
+	public static String getUberTokenEndpointGraphUrl(String code) {
+		String tokenEndPoint = "";
+		try {
+			tokenEndPoint = "https://login.uber.com/oauth/v2/token?"
+					+"client_id=" + Constants.UBER_CLIENT_ID +
+					"&client_secret=" + Constants.UBER_CLIENT_SECRET +
+					"&grant_type="+ Constants.GRANT_TYPE+
+					"&redirect_uri="+URLEncoder.encode("http://localhost:8080/TravelHelper/uberoauth", "UTF-8")+
+					"&code=" +code+
+					"&scope=profile";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tokenEndPoint;
 	}
 
 }
