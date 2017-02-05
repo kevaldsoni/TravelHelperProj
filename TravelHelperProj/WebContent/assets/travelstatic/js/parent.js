@@ -332,6 +332,7 @@ function passSelection(elem){
 		if(drive == finalResults[i].mode){
 			search["distance"] = finalResults[i].distance;
 			search["duration"] = finalResults[i].duration;
+			search["cost"] = finalResults[i].cost;
 			break;
 		} 
 	}

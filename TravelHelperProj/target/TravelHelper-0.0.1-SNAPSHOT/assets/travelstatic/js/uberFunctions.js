@@ -188,7 +188,8 @@ var fetchRideEstimate = function(completeData,latitudeStart,longitudeStart,destL
 						console.log(result.trip.duration_estimate);
 						var uberParsedData = travelSearchDetailsJson.travelData;
 						for(var i in uberParsedData){
-							if(uberParsedData[i].mode.toLowerCase().indexOf("uber") >= 0){
+							var mode = uberParsedData[i].mode.toLowerCase();
+							if(mode.indexOf("uber") >= 0 || mode.indexOf("pool") >= 0 || mode.indexOf("wav") >= 0){
 								travelSearchDetailsJson.travelData[i].distance = result.trip.distance_estimate;
 								travelSearchDetailsJson.travelData[i].duration = Math.round(+result.trip.duration_estimate / +60);
 							}

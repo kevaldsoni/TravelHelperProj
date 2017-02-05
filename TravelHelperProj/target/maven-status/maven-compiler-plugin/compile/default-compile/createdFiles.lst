@@ -12,6 +12,7 @@ com\travelhelper\service\UserProfileServiceImpl.class
 com\travelhelper\controller\LoginController.class
 com\travelhelper\model\TravelModeSelected.class
 com\travelhelper\configuration\Constants.class
+com\travelhelper\controller\TravelHelperController$1.class
 com\travelhelper\configuration\HibernateConfiguration.class
 com\travelhelper\configuration\FCMNotification.class
 com\travelhelper\model\SearchCriteria.class

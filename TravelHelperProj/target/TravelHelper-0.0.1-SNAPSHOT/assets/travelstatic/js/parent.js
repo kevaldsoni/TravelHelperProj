@@ -155,12 +155,9 @@ function gatherData(travelSearchDetailsJson){
 			  fetchUberTimeEstimate(completeData,sourceLatitude,sourceLongitude,travelSearchDetailsJson);
 		  
 	  }).then(function(){
-		  //preProcessResults(travelSearchDetailsJson);
-		  
-	  }).then(function(){
 		  setTimeout(function(){
 			  showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude);
-		  },7000);
+		  },15000);
 		  		
 	  });
 }
@@ -282,6 +279,9 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 	//Usage
 	if(travelpref == "Economical"){
 		results.sort( predicatBy("cost") );
+	}else{
+		results.sort( predicatBy("duration") );
+		
 	}
 	/*for(i in results){
 		console.log(results[i].cost);
@@ -332,6 +332,7 @@ function passSelection(elem){
 		if(drive == finalResults[i].mode){
 			search["distance"] = finalResults[i].distance;
 			search["duration"] = finalResults[i].duration;
+			search["cost"] = finalResults[i].cost;
 			break;
 		} 
 	}

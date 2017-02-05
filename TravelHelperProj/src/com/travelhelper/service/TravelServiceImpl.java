@@ -6,6 +6,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +94,25 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public String getUberAuthentiationToken(String code) {
 		return travelDao.retrieveUberAuthenticationToken(code);
+	}
+
+	@Override
+	public List<TravelModeSelected> getPastTravelHistory(int userId) {
+		return travelDao.getPastTravelHistory(userId);
+	}
+
+	@Override
+	public List<FutureTravel> getPastFutureScheduleHistory(int userId) {
+		return travelDao.getPastFutureScheduleHistory(userId);
+	}
+
+	@Override
+	public Map<String, Long> fetchScheduledTravelSummaryBasedonDrive(int userId) {
+		return travelDao.fetchScheduledTravelSummaryBasedonDrive(userId);
+	}
+
+	@Override
+	public Map<String, Long> fetchTravelHistorySummaryBasedonDrive(int userId) {
+		return travelDao.fetchTravelHistorySummaryBasedonDrive(userId);
 	}
 }

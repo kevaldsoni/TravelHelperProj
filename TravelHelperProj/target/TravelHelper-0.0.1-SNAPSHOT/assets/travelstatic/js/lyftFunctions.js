@@ -65,7 +65,7 @@ var fetchlyftEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 	    		travelSearchDetailsJson.travelData.push({
 	        		  	"mode" : estimatePrice[i].display_name,
 		    			"distance" : estimatePrice[i].estimated_distance_miles,
-		    			"duration" : (estimatePrice[i].estimated_duration_seconds)/60,
+		    			"duration" : Math.round((estimatePrice[i].estimated_duration_seconds)/60),
 		    			"cost" : Math.round((+(estimatePrice[i].estimated_cost_cents_max)+ +(estimatePrice[i].estimated_cost_cents_min))/200),
 		    			"capacity" : capacity
 		    	});

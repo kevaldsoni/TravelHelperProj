@@ -54,7 +54,15 @@ public class TravelModeSelected {
 	
 	@Column (name = " user_selected_drive")
 	private String userDrive;
+	
+	private int cost;
 		
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
 	public String getUserDrive() {
 		return userDrive;
 	}

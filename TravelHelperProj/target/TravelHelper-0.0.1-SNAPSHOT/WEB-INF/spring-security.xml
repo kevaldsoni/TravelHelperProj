@@ -25,7 +25,7 @@
 		<intercept-url pattern="/welcome*" access="hasRole('ROLE_USER')"></intercept-url>
 		<form-login login-processing-url="/j_spring_security_check" login-page="/login" default-target-url="/welcome" authentication-failure-url="/loginfailed" 
 		 always-use-default-target="true" username-parameter="j_username" password-parameter="j_password"/>
-		<logout logout-success-url="/welcome" logout-url="/j_spring_security_logout"/>
+		<logout logout-success-url="/welcome" logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID"/>
 		<csrf disabled="true"/>
 	</http>
 
