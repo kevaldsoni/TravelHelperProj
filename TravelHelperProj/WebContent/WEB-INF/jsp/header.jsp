@@ -7,7 +7,7 @@
 	<meta name="author" content="LimpidThemes">
 	
 	<title>Travel Helper Application</title>
-	<link rel="shortcut icon" href="assets/travelstatic/favicon/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/TravelHelper/assets/travelstatic/favicon/favicon.ico" type="image/x-icon">
     <!-- STYLES -->
 	<link href="/TravelHelper/assets/css/animate.min.css" rel="stylesheet">
 	<link href="/TravelHelper/assets/css/bootstrap-select.min.css" rel="stylesheet">

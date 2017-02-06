@@ -12,6 +12,6 @@
 UberAuthentication connection = new UberAuthentication();
 %>
 <a id="btn-fblogin" href="<%=connection.getUberOAuthUrl()%>" class="btn btn-primary">Login with uber</a>
-<sec:authentication property="name">
+
 </body>
 </html>

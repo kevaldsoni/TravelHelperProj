@@ -361,7 +361,7 @@ function passSelection(elem){
 
 
 function saveFutureTravelDetails(dataTobeSent){
-	alert(dataTobeSent);
+	//alert(dataTobeSent);
     $.ajax({
 		type : "POST",
 		contentType : "application/x-www-form-urlencoded",

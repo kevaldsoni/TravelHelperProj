@@ -136,7 +136,7 @@
 							
 							<div class="text-center">
 								<!-- <input type="submit" name="submit" id="submitAddr" class="submitAddr">Search Results</input> -->
-								<button type="submit" id="scheduleTravelSubmit">Search Results</button>
+								<button type="submit" id="scheduleTravelSubmit">Schedule</button>
 							</div>
 						</form>
 					</div>
