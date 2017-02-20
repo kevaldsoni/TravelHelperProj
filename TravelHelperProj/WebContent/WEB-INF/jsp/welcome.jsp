@@ -4,14 +4,25 @@
 <!-- Mirrored from demo-limpidthemes.com/Themeforest/html/cruise-demo/light/car-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2016 22:46:00 GMT -->
 <head>
 	
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="bootstrapheader.jsp"></jsp:include>
 
 </head>
 <body class="load-full-screen">
 
 <!-- BEGIN: SITE-WRAPPER -->
 <div class="site-wrapper">
-
+	<b>Welcome to kevals try to get proj running</b>
+	<sec:authentication property="name"></sec:authentication>
+	<a href="<c:url value="j_spring_security_logout" />" >Logout</a>
+	<%
+		String access_token = request.getParameter("access_token");
+	%>
+	Code : <%=access_token%>
+	<c:url var="logoutUrl" value="j_spring_security_logout"/>
+	<form action="${logoutUrl}" method="post">
+ 	<input type="submit" value="Log out" /><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>
+  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	</form>
 	<!-- BEGIN: SEARCH SECTION -->
 <div class="container" style="padding-top:40px;padding-bottom: 40px;">
     <div class="row">

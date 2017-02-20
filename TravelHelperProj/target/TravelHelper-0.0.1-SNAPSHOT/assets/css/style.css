@@ -5918,7 +5918,8 @@ h5 {
 }
 .sm-footer-nav {
 	background: #0A3152;
-	padding: 30px 0px;
+	padding: 10px 0px;
+	padding-bottom:25px;
 	position: relative;
 }
 .sm-footer-nav a {

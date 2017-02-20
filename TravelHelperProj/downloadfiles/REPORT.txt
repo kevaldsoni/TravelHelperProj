@@ -1,0 +1,19 @@
+ABSTRACT
+
+Software Engineering is an extremely dynamic field which can be used to solve many real-world problems. Software engineering principles and design patterns provide abstract ways and approaches to be implemented while developing new software or resolving core engineering problem. Travel Helper is a web application built on Model-View-Controller (MVC) architecture.
+
+Travel Helper is a web application developed using Spring MVC framework which provides information for deciding best option to travel from source to destination. Application uses REST API to fetch data from Google, Uber and Lyft API. The heterogeneous data is processed to make it structured for data processing and comparison. The processed data helps users to decide on best option for user to travel. Another feature of the application allows user to save the future travel and notify user best time to start the travel using Push Notification. Dashboard allows user to reflect upon travel history.
+
+Model-View-Controller (MVC) is an architectural pattern which facilitates independent development and maintenance of view , model and controller. 
+Spring framework is used for application development. A framework is an outline, structure, built using design pattern and facilitates development of enterprise applications. Spring framework provides modules like Dependency Injection, Inversion of Control which helps in development of modules with high cohesion and loose coupling. Spring MVC module is used in development of web applications. Other major framework functionality intergrated in 
+
+REST API are lightweight http protocol based web service used to exchanging data between applications. 
+
+Database operation is performed using Object Relational Mapping technology (ORM) along with Sping Transaction Manager.
+
+Spring security module is implemented to handle user profiling and session management.
+
+In this document, Object oriented analysis and design methodology and software design patterns are discussed which are used for development of travel helper web application.
+
+
+

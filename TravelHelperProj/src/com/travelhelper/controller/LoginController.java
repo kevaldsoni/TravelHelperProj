@@ -43,7 +43,7 @@ public class LoginController {
 	public String loginerror(ModelMap model) {
 		System.out.println("In /loginfailed method");
 		model.addAttribute("errormessage","true");
-		return "login2";
+		return "login";
 	}
 	
 	@RequestMapping("/logout")

@@ -17,7 +17,7 @@ $(document).ready(function() {
 	
 	$("#submitAddr").bind('click',fetchInput);
 	$("#scheduleTravelSubmit").bind('click',handleScehduledTravel);
-	
+	$("#downloadTravelHistory").bind('click',downloadTravelHistory);
 
 });
 
@@ -270,6 +270,11 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 		  console.log("Not enough capacity");
 		  results.splice(i,1);
 	  }
+		
+		if(results[i].mode == 'DRIVING'){
+			results[i].cost =Math.round( +(results[i].distance) * 0.54 );
+		}
+		
 	}// end for
 	
 	
@@ -306,6 +311,30 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 	$(window).scrollTop($('#traveldatasection').position().top);
 
 }
+
+function downloadTravelHistory(){
+	alert("Downloading file");
+
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "/TravelHelper/handleTravelHistoryDownload",
+		dataType : 'json',
+		timeout : 100000,
+		success : function(data) {
+			alert("SUCCESS: ", data);
+			
+		},
+		error : function(e) {
+			alertg("ERROR: ", e);
+			//display(e);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});
+
+	}
 
 function predicatBy(prop){
 	   return function(a,b){
@@ -361,7 +390,7 @@ function passSelection(elem){
 
 
 function saveFutureTravelDetails(dataTobeSent){
-	alert(dataTobeSent);
+	//alert(dataTobeSent);
     $.ajax({
 		type : "POST",
 		contentType : "application/x-www-form-urlencoded",

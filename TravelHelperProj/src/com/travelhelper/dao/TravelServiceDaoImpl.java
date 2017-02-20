@@ -9,6 +9,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -231,7 +233,7 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 				
 				for (Iterator iterator = results.iterator(); iterator.hasNext();){
 					TravelModeSelected pobj = (TravelModeSelected) iterator.next(); 
-					System.out.println(pobj.getTravelRequestId());
+					//System.out.println(pobj.getTravelRequestId());
 				}
 				
 			}else{
@@ -323,6 +325,55 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 		}
 		return results;
 	}
+	
+	@Override
+	public Map<String, Long> fetchDateRangeScheduledTravelSummaryBasedonDrive(int userId, Date startDate,
+			Date endDate) {
+
+		System.out.println("TravelServiceDaoImpl : fetchDateRangeScheduledTravelSummaryBasedonDrive ");
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		Map<String,Long> results = new HashMap<String,Long>();
+		try{
+			//SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			//String std = dt.format(startDate);
+			//Date startdateFormat = dt.parse(std);
+			//String edd = dt.format(endDate);
+			//Date enddateFormat = dt.parse(edd);
+			
+			tx=session.beginTransaction();
+			ProjectionList projectionList = Projections.projectionList()
+			        .add(Projections.groupProperty("travelDriveSelected"))
+			        .add(Projections.rowCount());
+			Criteria criteria = session.createCriteria(FutureTravel.class);
+			criteria.setProjection(projectionList);
+			criteria.add(Restrictions.eq("userId", userId));
+			criteria.add(Restrictions.between("requestSavetime", startDate, endDate));
+			List res = criteria.list();
+			
+			System.out.println("Result Size DateRange: "+res.size());
+			
+			if(res!=null && res.size()>0){
+				
+				for (Iterator iterator = res.iterator(); iterator.hasNext();){
+					Object[] row = (Object[]) iterator.next();
+					results.put((String)row[0],(Long)row[1]);
+				}
+				
+			}else{
+				System.out.println("fetchDateRangeScheduledTravelSummaryBasedonDrive :: No result found");
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally{
+			session.close();
+		}
+		return results;
+	}
 
 	@Override
 	public Map<String, Long> fetchTravelHistorySummaryBasedonDrive(int userId) {
@@ -365,5 +416,125 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 		return results;
 	
 	}
+	
+	
+	@Override
+	public Map<String, Long> fetchDateRangeTravelHistorySummaryBasedonDrive(int userId, Date startDate, Date endDate) {
+		System.out.println("TravelServiceDaoImpl : fetchDateRangeTravelHistorySummaryBasedonDrive ");
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		Map<String,Long> results = new HashMap<String,Long>();
+		try{
+			
+			tx=session.beginTransaction();
+			ProjectionList projectionList = Projections.projectionList()
+			        .add(Projections.groupProperty("userDrive"))
+			        .add(Projections.rowCount());
+			Criteria criteria = session.createCriteria(TravelModeSelected.class);
+			criteria.setProjection(projectionList);
+			criteria.add(Restrictions.eq("userId", userId));
+			criteria.add(Restrictions.between("requestTimeStamp", startDate, endDate));
+			List res = criteria.list();
+			
+			System.out.println("Result Size DateRange: "+res.size());
+			
+			if(res!=null && res.size()>0){
+				
+				for (Iterator iterator = res.iterator(); iterator.hasNext();){
+					Object[] row = (Object[]) iterator.next();
+					results.put((String)row[0],(Long)row[1]);
+				}
+				
+			}else{
+				System.out.println("fetchDateRangeTravelHistorySummaryBasedonDrive :: No result found");
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally{
+			session.close();
+		}
+		return results;
+	}
+	
+	
+
+	@Override
+	public List<FutureTravel> getDateRangePastFutureScheduleHistory(int userId,Date startDate, Date endDate) {
+
+
+		System.out.println("TravelServiceDaoImpl : getDateRangePastFutureScheduleHistory");
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		List<FutureTravel> results = new ArrayList<FutureTravel>();
+		try{
+			tx=session.beginTransaction();
+			Criteria cr = session.createCriteria(FutureTravel.class);
+			cr.add(Restrictions.eq("userId", userId));
+			cr.add(Restrictions.between("requestSavetime", startDate, endDate));
+			results = cr.list();
+			System.out.println("Result Size : "+results.size());
+			if(results!=null && results.size()>0){
+				
+				for (Iterator iterator = results.iterator(); iterator.hasNext();){
+					FutureTravel pobj = (FutureTravel) iterator.next(); 
+				}
+				
+			}else{
+				System.out.println("getPastFutureScheduleHistory :: No result found");
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return results;
+	}
+	
+	@Override
+	public List<TravelModeSelected> getDateRangePastTravelHistory(int userId, Date startDate, Date endDate) {
+
+		System.out.println("TravelServiceDaoImpl : getDateRangePastTravelHistory");
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		List<TravelModeSelected> results = new ArrayList<TravelModeSelected>();
+		try{
+			tx=session.beginTransaction();
+			Criteria cr = session.createCriteria(TravelModeSelected.class);
+			cr.add(Restrictions.eq("userId", userId));
+			cr.add(Restrictions.between("requestTimeStamp", startDate, endDate));
+			results = cr.list();
+			System.out.println("Result Size : "+results.size());
+			if(results!=null && results.size()>0){
+				
+				for (Iterator iterator = results.iterator(); iterator.hasNext();){
+					TravelModeSelected pobj = (TravelModeSelected) iterator.next(); 
+				}
+				
+			}else{
+				System.out.println("getPastTravelHistory :: No result found");
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return results;
+	
+	}
+
+	
+
 
 }

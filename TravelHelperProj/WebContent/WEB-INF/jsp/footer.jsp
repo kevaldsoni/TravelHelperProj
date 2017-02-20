@@ -72,10 +72,10 @@ function initAutocomplete() {
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCin3LHSQnBxk5b1uCGbnzC5dT8uL93JRw&libraries=places&callback=initAutocomplete"
         async defer></script>
-<script type="/TravelHelper/text/javascript" src="assets/travelstatic/js/parent.js"></script>
-<script type="/TravelHelper/text/javascript" src="assets/travelstatic/js/metro.js"></script>
-<script type="/TravelHelper/text/javascript" src="assets/travelstatic/js/uberFunctions.js"></script>
-<script type="/TravelHelper/text/javascript" src="assets/travelstatic/js/lyftFunctions.js"></script>    
+<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/parent.js"></script>
+<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/metro.js"></script>
+<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/uberFunctions.js"></script>
+<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/lyftFunctions.js"></script>    
 <script type="text/javascript">  
 			
 			jQuery(function($){

@@ -3,6 +3,7 @@ package com.travelhelper.controller;
 
 import java.security.Principal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.hibernate.engine.transaction.jta.platform.internal.SynchronizationRegistryBasedSynchronizationStrategy;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.travelhelper.model.AjaxResponseBody;
 import com.travelhelper.model.FutureTravel;
 import com.travelhelper.model.TravelModeSelected;
 import com.travelhelper.model.UserProfile;
@@ -147,6 +150,8 @@ public class TravelHelperController {
 	
 	}
 	
+	
+	
 	@RequestMapping(value="/travelhistory")
 	public ModelAndView dashboardTravelHistory(ModelMap model,Principal principal){
 		Map<String, Object> displayData = new HashMap<String, Object>();
@@ -164,7 +169,7 @@ public class TravelHelperController {
 	    	summaryMap = travelService.fetchTravelHistorySummaryBasedonDrive(userId);
 	    	finalsortedsummaryMap = sortByValue(summaryMap);
 	    }
-		
+		travelService.generateTravelHistroyPdf(list,userId,name);
 		displayData.put("scheduleData", list);
 		displayData.put("scheduleDataDriveSummary", finalsortedsummaryMap);
 		return new ModelAndView("showTravelHistory",displayData);
@@ -187,10 +192,102 @@ public class TravelHelperController {
 	    	summaryMap = travelService.fetchScheduledTravelSummaryBasedonDrive(userId);
 	    	finalsortedsummaryMap = sortByValue(summaryMap);
 	    }
+	    travelService.generateScheduleHistroyPdf(list, userId, name);
 	    displayData.put("scheduleData", list);
 	    displayData.put("scheduleDataDriveSummary", finalsortedsummaryMap);
 		return new ModelAndView("showScheduleHistory",displayData);
 	
+	}
+	
+	@RequestMapping(value = "/handleTravelHistoryDownload")
+	public String travelHistoryDownload(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    System.out.println("logged in username : "+name);
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+	    if(userId > 0 ){
+	    	travelService.fetchTravelHistoryDownload(request,response,userId);
+	    }
+		
+		return "showTravelHistory";
+	}
+	
+	@RequestMapping(value = "/handleScheduleHistoryDownload")
+	public String scheduleHistoryDownload(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    System.out.println("logged in username : "+name);
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+	    if(userId > 0 ){
+	    	travelService.fetchScheduleHistoryDownload(request,response,userId);
+	    }
+		
+		return "showScheduleHistory";
+	}
+	
+	
+	@RequestMapping(value="/filterschedulehistory")
+	public ModelAndView filterschedulehistory(ModelMap model,Principal principal,HttpServletRequest request){
+		System.out.println("In TravelHelperController :: method filterschedulehistory");
+		Map<String, Object> displayData = new HashMap<String, Object>();
+		List<FutureTravel> list = new ArrayList<FutureTravel>();
+		Map<String,Long> summaryMap = new HashMap<String,Long>();
+		Map<String, Long> finalsortedsummaryMap = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    System.out.println("logged in username : "+name);
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+		String daterange = request.getParameter("daterange");
+		String [] filterdates = daterange.split("-");
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
+	    Date startDate;
+	    Date endDate;
+	    try {
+	    	System.out.println(filterdates[0].trim()+" "+filterdates[1].trim());
+	        startDate = df.parse(filterdates[0].trim());
+	        endDate = df.parse(filterdates[1].trim());
+	        list = travelService.getDateRangePastFutureScheduleHistory(userId,startDate,endDate);
+	    	summaryMap = travelService.fetchDateRangeScheduledTravelSummaryBasedonDrive(userId, startDate, endDate);
+	    	finalsortedsummaryMap = sortByValue(summaryMap);
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+		travelService.generateScheduleHistroyPdf(list, userId, name);
+	    displayData.put("scheduleData", list);
+	    displayData.put("scheduleDataDriveSummary", finalsortedsummaryMap);
+		return new ModelAndView("showScheduleHistory",displayData);
+	}
+	
+	@RequestMapping(value="/filtertravelhistory")
+	public ModelAndView filtertravelhistory(ModelMap model,Principal principal,HttpServletRequest request){
+		System.out.println("In TravelHelperController :: method filtertravelhistory");
+		Map<String, Object> displayData = new HashMap<String, Object>();
+		List<TravelModeSelected> list = new ArrayList<TravelModeSelected>();
+		Map<String,Long> summaryMap = new HashMap<String,Long>();
+		Map<String, Long> finalsortedsummaryMap = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    System.out.println("logged in username : "+name);
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+		String daterange = request.getParameter("daterange");
+		String [] filterdates = daterange.split("-");
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
+	    Date startDate;
+	    Date endDate;
+	    try {
+	    	System.out.println(filterdates[0].trim()+" "+filterdates[1].trim());
+	        startDate = df.parse(filterdates[0].trim());
+	        endDate = df.parse(filterdates[1].trim());
+	        list = travelService.getDateRangePastTravelHistory(userId, startDate, endDate);
+	    	summaryMap = travelService.fetchDateRangeTravelHistorySummaryBasedonDrive(userId, startDate, endDate);
+	    	finalsortedsummaryMap = sortByValue(summaryMap);
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	    travelService.generateTravelHistroyPdf(list,userId,name);
+	    displayData.put("scheduleData", list);
+	    displayData.put("scheduleDataDriveSummary", finalsortedsummaryMap);
+	    return new ModelAndView("showTravelHistory",displayData);
 	}
 	
 	
