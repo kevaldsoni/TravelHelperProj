@@ -27,44 +27,13 @@
 	<link href="assets/css/light.css" rel="stylesheet" media="screen">
 	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
-
+	
 </head>
 <body class="load-full-screen">
 
 <!-- BEGIN: SITE-WRAPPER -->
 <div class="site-wrapper">
-	<div class="row header-top">
-		<div class="container clear-padding">
-			<div class="navbar-contact">
-				<div class="col-md-7 col-sm-6 clear-padding">
-					<a href="#" class="transition-effect"><i class="fa fa-phone"></i> (+1)123-456-7890</a>
-					<a href="#" class="transition-effect"><i class="fa fa-envelope-o"></i> support@travelhelper.com</a>
-				</div>
-				<div class="col-md-5 col-sm-6 clear-padding search-box">
-					<div class="col-md-6 col-xs-5 clear-padding">
-						<form >
-							<div class="input-group">
-								<input type="text" name="search" class="form-control" required placeholder="Search">
-								<span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6 col-xs-7 clear-padding user-logged">
-						<a href="/TravelHelper/welcome" class="transition-effect">		
-							Homepage
-						</a>
-						<a href="#" class="transition-effect">
-							<!-- <img src="assets/images/user.jpg" alt="cruise"> -->
-							Hi, Keval
-						</a>
-						<a href="#" class="transition-effect">
-							<i class="fa fa-sign-out"></i>Sign Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div class="clearfix"></div>
 	<!-- BEGIN: SEARCH SECTION -->
 	<div class="row">
@@ -84,47 +53,6 @@
 						<span style="font-size: 32px;">
 							<a href="/TravelHelper/login" style="color: black;" class="transition-effect">LOGIN TO EXPLORE</a>
 						</span>
-							<!-- <label>Pick Up Location</label>
-							<div class="input-group">
-								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
-								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
-							</div>
-							<label>Drop Location</label>
-							<div class="input-group">
-								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
-								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 padding-right">
-								<label>Select Drive</label>
-								<select class="selectpicker" name="travel_type">
-									<option>Personal Car</option>
-									<option>Uber</option>
-									<option>Lyft</option>
-									<option>Public Transit</option>
-								</select>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 padding-left">
-								<label>Travel Mode</label>
-								<select class="selectpicker" name="money_type">
-									<option>Economical</option>
-									<option>Fastest</option>
-
-								</select>
-							</div>
-							<label>Traveller Count</label>
-							<select class="selectpicker" name="travellercount_type">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-									<option>6</option>
-							</select>
-							<div class="text-center">
-								<input type="submit" name="submit" id="submitAddr" class="submitAddr">Search Results</input>
-								<button type="submit" id="submitAddr">Search Results</button>
-							</div> -->
-						
 					</div>
 				</div>
 			</div>
@@ -137,28 +65,27 @@
 			<div class="container">
 				<div class="section-title text-center">
 					<h2>HOW IT WORKS?</h2>
-					<h4>SEARCH - SELECT - BOOK</h4>
+					<h4>SEARCH - DECIDE - SAVE</h4>
 					<div class="space"></div>
 					<p>
-						Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br>
-						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+						Travel Helper allows users to search for different ways to travel and decide preferred option from the various travel modes available. 
 					</p>
 				</div>
 				<div class="work-step">
 					<div class="col-md-4 col-sm-4 first-step text-center">
 						<i class="fa fa-search"></i>
-						<h5>SEARCH CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<h5>SEARCH DRIVE</h5>
+						<p>Go to travel search page and provide travel location to fetch travel options.</p>
 					</div>
 					<div class="col-md-4 col-sm-4 second-step text-center">
 						<i class="fa fa-heart-o"></i>
-						<h5>SELECT CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<h5>DECIDE DRIVE</h5>
+						<p>Travel Helper provides a unified view of available travel modes to decide best option for travelling.</p>
 					</div>
 					<div class="col-md-4 col-sm-4 third-step text-center">
 						<i class="fa fa-shopping-cart"></i>
-						<h5>BOOK CAR</h5>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<h5>SAVE PREFERENCE</h5>
+						<p>Save travel mode that will be used for future analytics.</p>
 					</div>
 				</div>
 			</div>
@@ -168,38 +95,29 @@
 <!-- START: FOOTER -->
 <section id="footer">
 	<footer>
-		<div class="row sm-footer">
+		<div class="row sm-footer" style="padding: 30px;">
 			<div class="container clear-padding">
-				<div class="col-md-3 col-sm-6 footer-about-box">
+				<div class="col-md-4 col-sm-4 footer-about-box">
 					<h4>TRAVEL HELPER</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-					<a href="#">READ MORE</a>
+					<p>Travel Application can be for deciding on best travel mode and scheduling travel.</p>
 				</div>
-				<div class="col-md-3 col-sm-6 contact-box">
+				<div class="col-md-4 col-sm-4 contact-box">
 					<h4>CONTACT US</h4>
 					<p><i class="fa fa-home"></i> Long Beach CA</p>
 					<p><i class="fa fa-envelope-o"></i> email@travelhelper.com</p>
 					<p><i class="fa fa-phone"></i> +1 123-456-7890</p>
+				</div>
+				<div class="clearfix visible-sm-block"></div>
+				
+				<div class="col-md-4 col-sm-4 footer-subscribe">
+					<h4>Social Presence</h4>
+					<p>Don't miss any update.</p>
 					<p class="social-media">
 						<a href="#"><i class="fa fa-facebook"></i></a>
 						<a href="#"><i class="fa fa-twitter"></i></a>
 						<a href="#"><i class="fa fa-google-plus"></i></a>
 						<a href="#"><i class="fa fa-instagram"></i></a>
 					</p>
-				</div>
-				<div class="clearfix visible-sm-block"></div>
-				
-				<div class="col-md-3 col-sm-6 footer-subscribe">
-					<h4>SUBSCRIBE</h4>
-					<p>Don't miss any update. Subscribe to get new offers.</p>
-					<form >
-						<div class="col-md-10 col-sm-10 col-xs-9 clear-padding">
-							<input type="email" required class="form-control" placeholder="Enter Your Email">
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-3 clear-padding">
-							<button type="submit"><i class="fa fa-paper-plane"></i></button>
-						</div>
-					</form>	
 				</div>
 			</div>
 		</div>
@@ -247,8 +165,8 @@ function initAutocomplete() {
     destcomplete.addListener('place_changed', fetchDestGeoCodes);
  }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCin3LHSQnBxk5b1uCGbnzC5dT8uL93JRw&libraries=places&callback=initAutocomplete"
-        async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCin3LHSQnBxk5b1uCGbnzC5dT8uL93JRw&libraries=places&callback=initAutocomplete"
+        async defer></script> -->
 <script type="text/javascript" src="assets/travelstatic/js/parent.js"></script>
 <script type="text/javascript" src="assets/travelstatic/js/metro.js"></script>
 <script type="text/javascript" src="assets/travelstatic/js/uberFunctions.js"></script>

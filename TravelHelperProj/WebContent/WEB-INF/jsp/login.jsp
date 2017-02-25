@@ -23,45 +23,25 @@
 	<!-- LIGHT -->
 	<link rel="stylesheet" type="text/css" href="assets/css/color/blue.css" id="select-style">
 	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/> 
 	<link href="assets/css/light.css" rel="stylesheet" media="screen">
 	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
-
+	
 </head>
 <body class="load-full-screen">
 
 <!-- BEGIN: SITE-WRAPPER -->
 <div class="site-wrapper">
-	<div class="row header-top">
-		<div class="container clear-padding">
-			<div class="navbar-contact">
-				<div class="col-md-7 col-sm-6 clear-padding">
-					<a href="#" class="transition-effect"><i class="fa fa-phone"></i> (+1)123-456-7890</a>
-					<a href="#" class="transition-effect"><i class="fa fa-envelope-o"></i> support@travelhelper.com</a>
-				</div>
-				<div class="col-md-5 col-sm-6 clear-padding search-box">
-					<div class="col-md-6 col-xs-5 clear-padding">
-						<form >
-							<div class="input-group">
-								<input type="text" name="search" class="form-control" required placeholder="Search">
-								<span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-							</div>
-						</form>
+	
+		<div class="row">
+			<div class="hotel-tagline text-center" style="margin-top: 1%;">
+						<h3>Welcome To</h3>
+						<h1>Travel Helper</h1>
 					</div>
-					<div class="col-md-6 col-xs-7 clear-padding user-logged">
-						<a href="#" class="transition-effect">
-							<!-- <img src="assets/images/user.jpg" alt="cruise"> -->
-							Hi, Keval
-						</a>
-						<a href="#" class="transition-effect">
-							<i class="fa fa-sign-out"></i>Sign Out
-						</a>
-					</div>
-				</div>
-			</div>
 		</div>
-	</div>
+ 
+
 	<div class="clearfix"></div>
 	<!-- BEGIN: SEARCH SECTION -->
 	<div class="row">
@@ -69,8 +49,8 @@
 			<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="margin-top: 10px;">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Sign In</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+                        <div class="panel-title" >Sign In</div>
+                        <!-- <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div> -->
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
@@ -91,7 +71,9 @@
 							   	<div class="alert alert-success">
   								<strong>${successMessage}</strong>
 								</div>
-							   <% } %>
+							   <% 
+							   message = null;
+								} %>
    		                   <div style="margin-bottom: 25px" class="form-group">
    		                   <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -133,7 +115,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <div class="panel-title">Sign Up</div>
-                            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                            <div class="panel-title" style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                         </div>  
                         <div class="panel-body" >
                             <form id="signupform" class="form-horizontal" role="form" method="post" action="signupform">
@@ -305,60 +287,7 @@
 	</div>
 	<!-- END: SEARCH SECTION -->
 <!-- START: FOOTER -->
-<section id="footer">
-	<footer>
-		<div class="row sm-footer">
-			<div class="container clear-padding">
-				<div class="col-md-3 col-sm-6 footer-about-box">
-					<h4>TRAVEL HELPER</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-					<a href="#">READ MORE</a>
-				</div>
-				<div class="col-md-3 col-sm-6 contact-box">
-					<h4>CONTACT US</h4>
-					<p><i class="fa fa-home"></i> Long Beach CA</p>
-					<p><i class="fa fa-envelope-o"></i> email@travelhelper.com</p>
-					<p><i class="fa fa-phone"></i> +1 123-456-7890</p>
-					<p class="social-media">
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-google-plus"></i></a>
-						<a href="#"><i class="fa fa-instagram"></i></a>
-					</p>
-				</div>
-				<div class="clearfix visible-sm-block"></div>
-				
-				<div class="col-md-3 col-sm-6 footer-subscribe">
-					<h4>SUBSCRIBE</h4>
-					<p>Don't miss any update. Subscribe to get new offers.</p>
-					<form >
-						<div class="col-md-10 col-sm-10 col-xs-9 clear-padding">
-							<input type="email" required class="form-control" placeholder="Enter Your Email">
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-3 clear-padding">
-							<button type="submit"><i class="fa fa-paper-plane"></i></button>
-						</div>
-					</form>	
-				</div>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-		<div class="row sm-footer-nav text-center">
-			<p>
-				<a href="#">HOME</a>
-				<a href="#">CARS</a>
-				<a href="#">SERVICE</a>
-				<a href="#">GALLERY</a>
-			</p>
-			<p class="copyright">
-				&copy;	2016 TRAVELHELPER ALL RIGHTS RESERVED
-			</p>
-			<div class="go-up">
-				<a href="#"><i class="fa fa-arrow-up"></i></a>
-			</div>
-		</div>
-	</footer>
-</section>
+<jsp:include page="footer.jsp"></jsp:include>
 <!-- END: FOOTER -->
 
 </div>
@@ -373,7 +302,6 @@
 <script src="assets/plugins/wow.min.js"></script>
 <script type="text/javascript" src="assets/plugins/supersized.3.1.3.min.js"></script>
 <script src="assets/js/js.js"></script>
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/loginvalidation.js"></script>
 </body>

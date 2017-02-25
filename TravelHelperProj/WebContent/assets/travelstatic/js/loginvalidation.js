@@ -7,11 +7,6 @@ $(document).ready(function() {
     	live: 'enabled',
     	err: {
             container: function($field, validator) {
-                // Look at the markup
-                //  <div class="col-xs-4">
-                //      <field>
-                //  </div>
-                //  <div class="col-xs-5 messageContainer"></div>
                 return $field.parent().next('.messageContainer');
             }
         },
@@ -54,7 +49,7 @@ $(document).ready(function() {
                     regexp: {
                         enabled: true,
                         regexp: /^[a-zA-Z0-9\s]+$/,
-                        message: 'Password must conform to password policy'
+                        message: 'Special characters not allowed'
                     }
                 }
             }
@@ -68,12 +63,7 @@ $(document).ready(function() {
     	live: 'enabled',
     	err: {
             container: function($field, validator) {
-                // Look at the markup
-                //  <div class="col-xs-4">
-                //      <field>
-                //  </div>
-                //  <div class="col-xs-5 messageContainer"></div>
-                return $field.parent().next('.signupMessageContainer');
+            	return $field.parent().next('.signupMessageContainer');
             }
         },
        
@@ -99,7 +89,7 @@ $(document).ready(function() {
                 }
             },
         	
-            firstname: {
+            firstName: {
         		
                 validators: {
                     notEmpty: {
@@ -114,7 +104,7 @@ $(document).ready(function() {
                 }
             },
         	
-            lastname: {
+            lastName: {
         		
                 validators: {
                     notEmpty: {
@@ -129,22 +119,8 @@ $(document).ready(function() {
                 }
             },
             
-           email: {
-        		
-                validators: {
-                    notEmpty: {
-                        message: 'The Email is required and cannot be empty'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /\S+@\S+\.\S+/,
-                        message: 'The Email is not valid'
-                    }
-                    
-                }
-            },
-            
-phone: {
+           
+            contactNumber: {
         		
                 validators: {
                     notEmpty: {
@@ -159,7 +135,7 @@ phone: {
                 }
             },
             
-            address1: {
+            addrStreetName: {
         		
                 validators: {
                     notEmpty: {
@@ -168,13 +144,13 @@ phone: {
                     regexp: {
                         enabled: true,
                         regexp: /^[A-Za-z0-9'\.\-\s\,]+$/,
-                        message: 'do not use special characters'
+                        message: 'Special characters allowed are . , - '
                     }
                     
                 }
             },
             
-            address2: {
+            addrAptNo: {
         		
                 validators: {
                     notEmpty: {
@@ -183,13 +159,13 @@ phone: {
                     regexp: {
                         enabled: true,
                         regexp: /^[A-Za-z0-9'\.\-\s\,]+$/,
-                        message: 'do not use special characters'
+                        message: 'Special characters allowed are . , - '
                     }
                     
                 }
             },
             
-city: {
+            addrCity: {
         		
                 validators: {
                     notEmpty: {
@@ -198,13 +174,13 @@ city: {
                     regexp: {
                         enabled: true,
                         regexp: /^[A-z\s]+$/,
-                        message: 'do not use special characters'
+                        message: 'Enter valid city name'
                     }
                     
                 }
             },
             
-zipcode: {
+            addrZip: {
         		
                 validators: {
                     notEmpty: {
@@ -218,7 +194,22 @@ zipcode: {
                     
                 }
             },
-            passwd: {
+            
+            username: {
+        		
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    regexp: {
+                        enabled: true,
+                        regexp: /^[A-Za-z0-9]+$/,
+                        message: 'Special characters not allowed'
+                    }
+                    
+                }
+            },
+            password: {
                 validators: {
                     notEmpty: {
                         message: 'The password is required and cannot be empty'
@@ -242,19 +233,9 @@ zipcode: {
                 	notEmpty: {
                         message: 'The confirm password is required and cannot be empty'
                     },
-                    stringLength: {
-                        enabled: true,
-                        min: 8,
-                        max: 40,
-                        message: 'The password must be more than 8 and less than 40 characters long'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /^[a-zA-Z0-9\s]+$/,
-                        message: 'The password can only consist of Alphabets and Numbers'
-                    },
+                    
                     identical:{
-                    	field: 'passwd',
+                    	field: 'password',
                         message: 'The password and its confirm are not the same'
                     }
                 }
@@ -262,94 +243,7 @@ zipcode: {
         }
     })
     
-    $('#newBarterForm').bootstrapValidator({
-       // container: '#messages',
-    	framework : 'bootstrap',
-    	live: 'enabled',
-    	err: {
-            container: function($field, validator) {
-                // Look at the markup
-                //  <div class="col-xs-4">
-                //      <field>
-                //  </div>
-                //  <div class="col-xs-5 messageContainer"></div>
-                return $field.parent().next('.newBarterMessageContainer');
-            }
-        },
-       
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            
-        	title: {
-        		
-                validators: {
-                    notEmpty: {
-                        message: 'Title is required and cannot be empty'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /^[A-Za-z0-9'\.\-\s\,]+$/,
-                        message: 'Enter valid characters in Title'
-                    }
-                    
-                }
-            },
-        	
-        	
-            myOffer: {
-        		
-                validators: {
-                    notEmpty: {
-                        message: 'Your Barter Offer detail is required and cannot be empty'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /^[A-Za-z0-9'\.\-\s\,]+$/,
-                        message: 'Enter valid characters in your description'
-                    }
-                    
-                }
-            },
-            
-            askOffer: {
-        		
-                validators: {
-                    notEmpty: {
-                        message: 'Expected Barter Offer detail is required and cannot be empty'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /^[A-Za-z0-9'\.\-\s\,]+$/,
-                        message: 'Enter valid characters in your description'
-                    }
-                    
-                }
-            },
-            
-            contactDetail: {
-        		
-                validators: {
-                    notEmpty: {
-                        message: 'The phone number is required and cannot be empty'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/,
-                        message: 'The phone number entered is not valid'
-                    }
-                    
-                }
-            },
-            
-           
-            
-        }
-    })
-    
+
 
 });
 

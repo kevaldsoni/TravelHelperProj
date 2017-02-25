@@ -20,6 +20,28 @@
 	<link href="/TravelHelper/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/TravelHelper/assets/css/light.css" rel="stylesheet" media="screen">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	
+	.navbar-inverse .navbar-nav > li > a {
+  		color: #fff;
+	}
+	.navbar-inverse .navbar-text {
+  		color: #9d9d9d;
+	}
+	.navbar-inverse .navbar-brand {
+  		color: #fff;
+	}
+	.navbar-inverse .navbar-nav > li > a:hover,
+	.navbar-inverse .navbar-nav > li > a:focus {
+  		color: #9d9d9d;
+  		background-color: transparent;
+	}
+	
+	.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
+		background-color: inherit;
+	}
+			
+	</style>
 </head>
 <nav class="navbar navbar-inverse" style="background-color: #2F7AF8;border: none;">
   <div class="container-fluid">
@@ -29,23 +51,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#" style="color:white;">Travel Helper</a>
+      <a class="navbar-brand" href="#"><span style="color: #483D8B;">Travel Helper</span></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Travel Search</a></li>
+        <li><a href="#">Schedule Travel</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboard<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
+            <li><a href="#">Travel Search Dashboard</a></li>
+            <li><a href="#">Schedule History Dashboard</a></li>
           </ul>
         </li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>

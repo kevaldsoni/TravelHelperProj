@@ -56,7 +56,7 @@ public class LoginController {
 		System.out.println("First Name : "+profile.getFirstName());
 		int id = userProfileService.createNewUserProfile(profile);
 		if(id > 0){
-			model.addAttribute("successMessage", "Account Created Successfully !! Login to explore.");
+			model.addAttribute("successMessage", "Account Created Successfully. Login to search travel drive.");
 		}
 		return "login";
 	}
