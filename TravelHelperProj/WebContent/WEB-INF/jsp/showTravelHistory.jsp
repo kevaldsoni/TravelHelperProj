@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="bootstrapheader.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <body>
 <div class="container">
@@ -18,9 +18,9 @@
 </div>
 
 <div class="row">
-<table id="scheduleDataDriveSummary" class="col-md-12 table-bordered table-hover table-condensed table-striped table-responsive" style="margin-top:5px;margin-left:15px;">
+<table id="scheduleDataDriveSummary" class="col-md-7 table-bordered table-hover table-condensed table-striped table-responsive" style="margin-top:5px;margin-left:15px;">
 			<thead>
-			<tr style="color:#2F7AF8;">
+			<tr style="background-color:#2F7AF8;color: #fff;">
 			<th>Drive</th>
 			<th>Count</th>
 			</thead>
@@ -47,7 +47,7 @@
 </form>
 </div>
 </div> -->
-<div class="row" style="margin-top: 5px;">
+<div class="row" style="margin-top:25px;">
 <div class="col-md-3 col-sm-3 col-xs-8">
 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Click for Detailed Schedule History</button>
 </div>
@@ -66,19 +66,20 @@
 </form>
 </div>
 </div>
+</section>
 <div class="row" style="margin-top: 5px;">
-<table id="scheduleHistory" class="col-md-12 table-hover table-condensed table-striped table-responsive collapse" style="margin-top: 5px;">
+<table id="scheduleHistory" class="col-md-12 table-hover table-condensed table-striped table-responsive collapse" style="margin-top: 5px;width: 100%">
 			<thead>
-			<tr style="color:#2F7AF8;">
-			<th>Record ID</th>
-			<th>Record Timestamp</th>
+			<tr style="background-color:#2F7AF8;color: #fff;">
+			<th>ID</th>
+			<th>Request Timestamp</th>
 			<th>Drive Selected</th>
          	<th>Mode Selected</th>
-         	<th>Distance</th>
-         	<th>Duration</th>
-         	<th>Cost</th>
-         	<th>Start Location</th>
-         	<th>Destination Location</th>
+         	<th>Distance (miles)</th>
+         	<th>Duration (seconds)</th>
+         	<th>Cost (dollars)</th>
+         	<!-- <th>Start Location</th>
+         	<th>Destination Location</th> -->
 			</thead>
 			<tbody id="travelsearchresults">
 				<c:forEach var="i" items="${scheduleData}">
@@ -86,18 +87,18 @@
 					<td><c:out value="${i.travelRequestId}"></c:out></td>
 					<td><c:out value="${i.requestTimeStamp}"></c:out></td>
 					<td><c:out value="${i.userDrive}"></c:out></td>
-					<td><c:out value="${i.travelMode}"></c:out></td>
+					<td><c:out value="${i.modeName}"></c:out></td>
 					<td><c:out value="${i.distance}"></c:out></td>
 					<td><c:out value="${i.duration}"></c:out></td>
 					<td><c:out value="${i.cost}"></c:out></td>
-					<td><c:out value="${i.sourceLatitude}"></c:out>,<c:out value="${i.sourceLongitude}"></c:out></td>
-					<td><c:out value="${i.destLatitude}"></c:out>,<c:out value="${i.destLongitude}"></c:out></td>
+					<%-- <td><c:out value="${i.sourceLatitude}"></c:out>,<c:out value="${i.sourceLongitude}"></c:out></td>
+					<td><c:out value="${i.destLatitude}"></c:out>,<c:out value="${i.destLongitude}"></c:out></td> --%>
 					</tr>
 				</c:forEach>
 			</tbody>
 </table>
 </div>
-</section>
+
 </div>
 <jsp:include page="dashboardfooter.jsp"></jsp:include>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

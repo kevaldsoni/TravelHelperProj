@@ -16,6 +16,7 @@ com\travelhelper\controller\TravelHelperController$1.class
 com\travelhelper\configuration\HibernateConfiguration.class
 com\travelhelper\configuration\FCMNotification.class
 com\travelhelper\model\SearchCriteria.class
+com\travelhelper\model\TravelMode.class
 com\travelhelper\model\Views$Public.class
 com\travelhelper\dao\TravelServiceDao.class
 com\travelhelper\configuration\UberAuthentication.class

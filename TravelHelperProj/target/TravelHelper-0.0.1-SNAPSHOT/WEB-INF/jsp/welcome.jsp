@@ -12,13 +12,9 @@
 
 <!-- BEGIN: SITE-WRAPPER -->
 <div class="site-wrapper">
-	<b>Welcome to kevals try to get proj running</b>
-	<sec:authentication property="name"></sec:authentication>
-
 	
-	
-	<!-- BEGIN: SEARCH SECTION -->
-<div class="container" style="padding-top:40px;padding-bottom: 40px;">
+<!-- BEGIN: SEARCH SECTION -->
+<div class="container" style="padding-top:40px;padding-bottom: 43px;">
     <div class="row">
         <div class="col-md-4">
             <div class="panel panel-default">

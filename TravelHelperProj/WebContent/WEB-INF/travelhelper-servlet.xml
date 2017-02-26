@@ -45,6 +45,7 @@
 				<value>com.travelhelper.model.UserProfile</value>
 				<value>com.travelhelper.model.TravelModeSelected</value>
 				<value>com.travelhelper.model.TravelDrive</value>
+				<value>com.travelhelper.model.TravelMode</value>
 				<value>com.travelhelper.model.GoogleNotification</value>
 				<value>com.travelhelper.model.FutureTravel</value>
 			</list>

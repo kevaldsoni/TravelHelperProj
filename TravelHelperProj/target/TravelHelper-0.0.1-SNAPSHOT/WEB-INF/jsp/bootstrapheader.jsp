@@ -53,18 +53,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#"><span style="color: #483D8B;">Travel Helper</span></a>
+      <a class="navbar-brand" href="#"><span style="color:#fff;">Travel Helper</span></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Travel Search</a></li>
-        <li><a href="#">Schedule Travel</a></li>
+        <li class="active"><a href="/TravelHelper/welcome">Home</a></li>
+        <li><a href="/TravelHelper/travelsearch">Travel Search</a></li>
+        <li><a href="/TravelHelper/assets/pages/firebase/scheduleTravel.jsp">Schedule Travel</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboard<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="/TravelHelper/dashboard">Dashboard<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Travel Search Dashboard</a></li>
-            <li><a href="#">Schedule History Dashboard</a></li>
+            <li><a href="/TravelHelper/travelhistory">Travel Search Dashboard</a></li>
+            <li><a href="/TravelHelper/schedulehistory">Schedule History Dashboard</a></li>
           </ul>
         </li>
       </ul>

@@ -36,9 +36,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.travelhelper.model.FutureTravel;
 import com.travelhelper.model.TravelDrive;
+import com.travelhelper.model.TravelMode;
 import com.travelhelper.model.TravelModeSelected;
-
-
+import com.travelhelper.service.TravelService;
 import com.travelhelper.configuration.Constants;
 
 @Repository
@@ -71,7 +71,7 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 		System.out.println("distance :"+travelPref.getDistance());
 		System.out.println("Drive id :"+travelPref.getDrive());
 		
-		travelPref.setTravelMode(1);
+		travelPref.setTravelMode(travelPref.getTravelMode());
 		System.out.println("Mode id :"+travelPref.getTravelMode());
 		
 		travelPref.setTravelStatus("STARTED");
@@ -134,6 +134,40 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 		
 		return driveId;
 		
+	}
+	
+	@Override
+	public int fetchModeIdFromName(String modeName) {
+		System.out.println("Mode name : "+modeName);
+		int modeId=0;
+		Transaction tx = null;
+		Session session = this.sessionFactory.openSession();
+		try{
+			tx=session.beginTransaction();
+			Criteria cr = session.createCriteria(TravelMode.class);
+			cr.add(Restrictions.eq("modeName", modeName));
+			List results = cr.list();
+			
+			if(results!=null && results.size()>0){
+				
+				for (Iterator iterator = results.iterator(); iterator.hasNext();){
+					TravelMode pobj = (TravelMode) iterator.next(); 
+					modeId= pobj.getModeId();
+				}
+			}else{
+				System.out.println("fetchModeIdFromName :: No result found");
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return modeId;
 	}
 
 	@Override
@@ -533,6 +567,8 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 		return results;
 	
 	}
+
+	
 
 	
 

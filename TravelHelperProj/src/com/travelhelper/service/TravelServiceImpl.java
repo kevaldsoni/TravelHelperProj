@@ -50,7 +50,9 @@ public class TravelServiceImpl implements TravelService{
 	@Transactional
 	public int saveTravelModeSelected(TravelModeSelected travelData) {
 		int travelDriveId = travelDao.fetchDriveIdFromName(travelData.getUserDrive());
+		int modeId = travelDao.fetchModeIdFromName(travelData.getModeName());
 		travelData.setDrive(travelDriveId);
+		travelData.setTravelMode(modeId);
 		return travelDao.saveUserTravelSelection(travelData);
 	}
 
@@ -223,12 +225,12 @@ public class TravelServiceImpl implements TravelService{
 			cell33.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell33);
 			
-			PdfPCell cell55 = new PdfPCell(new Paragraph("Distance"));
+			PdfPCell cell55 = new PdfPCell(new Paragraph("Distance (miles)"));
 			cell55.setBackgroundColor(new BaseColor(Color.lightGray));
 			cell55.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell55);
 			
-			PdfPCell cell66 = new PdfPCell(new Paragraph("Duration"));
+			PdfPCell cell66 = new PdfPCell(new Paragraph("Duration (seconds)"));
 			cell66.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell66.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell66);
@@ -332,7 +334,7 @@ public class TravelServiceImpl implements TravelService{
 			cell66.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell66);
 			
-			PdfPCell cell77 = new PdfPCell(new Paragraph("Travel Time"));
+			PdfPCell cell77 = new PdfPCell(new Paragraph("Travel Time (seconds)"));
 			cell77.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell77.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell77);

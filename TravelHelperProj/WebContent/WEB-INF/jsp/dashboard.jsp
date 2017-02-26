@@ -4,7 +4,7 @@
 <!-- Mirrored from demo-limpidthemes.com/Themeforest/html/cruise-demo/light/car-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2016 22:46:00 GMT -->
 <head>
 	
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="bootstrapheader.jsp"></jsp:include>
 
 </head>
 <body class="load-full-screen">

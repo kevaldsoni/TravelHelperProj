@@ -13,6 +13,8 @@ public interface TravelServiceDao {
 	
 	public int fetchDriveIdFromName(String driveName);
 	
+	public int fetchModeIdFromName(String modeName);
+	
 	public int saveFutureScheduledRequest(FutureTravel fTravel);
 	
 	public String retrieveUberAuthenticationToken(String code);

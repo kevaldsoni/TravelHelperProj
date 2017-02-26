@@ -349,6 +349,8 @@ function predicatBy(prop){
 
 function passSelection(elem){
 	var drive = $(elem).attr("id");
+	var modename = $('#travelpref').val();
+	alert(modename);
     alert(drive);
     var search = {}
 	search["userDrive"] = drive;
@@ -356,6 +358,7 @@ function passSelection(elem){
 	search["sourceLongitude"] = sourceLongitude;
 	search["destLatitude"] = destLatitude;
 	search["destLongitude"] = destLongitude;
+	search["modeName"] = modename;
 	
 	for(var i in finalResults){
 		if(drive == finalResults[i].mode){

@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="bootstrapheader.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <body>
 <div class="container">
@@ -56,15 +56,15 @@
 
 <table id="scheduleHistory" class="col-md-12 table-hover table-condensed table-striped table-responsive collapse" style="margin-top: 5px;">
 			<thead>
-			<tr style="color:#2F7AF8;">
-			<th>Record ID</th>
-			<th>Record Timestamp</th>
+			<tr style="background-color:#2F7AF8;color: #fff;">
+			<th>ID</th>
+			<th>Timestamp</th>
 			<th>Drive Selected</th>
          	<th>Destination Reach Time</th>
          	<th>Notification Time</th>
-         	<th>Travel Time Estimated</th>
-         	<th>Start Location</th>
-         	<th>Destination Location</th>
+         	<th>Estimated Travel Time (seconds)</th>
+         	<!-- <th>Start Location</th>
+         	<th>Destination Location</th> -->
 			</thead>
 			<tbody id="travelsearchresults">
 				<c:forEach var="i" items="${scheduleData}">
@@ -74,9 +74,9 @@
 					<td><c:out value="${i.travelDriveSelected}"></c:out></td>
 					<td><c:out value="${i.destinationReachTime}"></c:out></td>
 					<td><c:out value="${i.notificationTime}"></c:out></td>
-					<td><c:out value="${i.traveltimeExpected}"></c:out></td>
-					<td><c:out value="${i.startLatitude}"></c:out>,<c:out value="${i.startLongitude}"></c:out></td>
-					<td><c:out value="${i.endLatitude}"></c:out>,<c:out value="${i.endLongitude}"></c:out></td>
+					<td style="text-align: center;"><c:out value="${i.traveltimeExpected}"></c:out></td>
+					<%-- <td><c:out value="${i.startLatitude}"></c:out>,<c:out value="${i.startLongitude}"></c:out></td>
+					<td><c:out value="${i.endLatitude}"></c:out>,<c:out value="${i.endLongitude}"></c:out></td> --%>
 					</tr>
 				</c:forEach>
 			</tbody>

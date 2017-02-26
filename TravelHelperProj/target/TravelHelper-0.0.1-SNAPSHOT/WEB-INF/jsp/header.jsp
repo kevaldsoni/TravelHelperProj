@@ -51,7 +51,8 @@
 						<a href="#" class="transition-effect">
 							<i class="fa fa-sign-out"></i>Sign Out
 						</a>
-						
+						<%-- <b>Welcome to kevals try to get proj running</b>
+						<sec:authentication property="name"></sec:authentication> --%>
 					</div>
 				</div>
 			</div>
