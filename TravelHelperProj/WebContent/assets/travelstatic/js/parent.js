@@ -78,7 +78,7 @@ function getScheduledTravelTime(drive){
 							  console.log("Waiting");
 							  resolve();
 						 },5000);break;
-		case 'UBER' :  distanceCalculationDriving(travelSearchDetailsJson);
+		case 'UBERX' :  distanceCalculationDriving(travelSearchDetailsJson);
 					  setTimeout(function(){
 						  console.log("Waiting");
 						  resolve();
@@ -174,7 +174,7 @@ function showDetails(results){
 	
 }
 
-function preProcessResults(results){
+/*function preProcessResults(results){
 	results = results.travelData;
 	var pplCount = $("#pplcount").val();
 	var travelpref = $("#travelpref").val();
@@ -224,7 +224,7 @@ function preProcessResults(results){
 		}
 	
 }
-
+*/
 
 function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude){
 	var results = travelSearchDetailsJson.travelData;
@@ -422,13 +422,13 @@ function saveFutureTravelDetails(dataTobeSent){
 
 
 function saveNotificationEndPoint(gcmUrl){
-	
+	alert(gcmUrl);
 	var spData = gcmUrl.split("/");
 	var gcmId = spData[5];
 	console.log(gcmId);
 	$.ajax({
 		type : "POST",
-		url : "/TravelHelper/saveGcmIdForUser",
+		url : "/TravelHelper/savefire",
 		data : "id="+gcmId,
 		timeout : 100000,
 		success : function(data) {

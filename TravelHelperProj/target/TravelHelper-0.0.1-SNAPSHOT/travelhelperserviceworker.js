@@ -13,7 +13,7 @@ self.addEventListener('notificationclick', function(event) {
 	  event.notification.close();
 
 	  event.waitUntil(
-	    clients.openWindow('http://localhost:8080/TravelHelper/schedulehistory')
+	    clients.openWindow('https://developers.google.com/web/')
 	  );
 });
 
@@ -21,8 +21,8 @@ self.addEventListener('notificationclick', function(event) {
 self.addEventListener('push', function(event) {
   console.log('Push message received', event);
   
-  var title = 'Notification from Travel Helper';  
-  var body = 'Time to start your scheduled travel to reach destination on time.';  
+  var title = 'Time to start Travel !!';  
+  var body = 'Travel Helper has something to say. Kindly check.';  
   var icon = 'travelstatic/img/travelhelperpush.png';  
   var tag = 'simple-push-demo-notification-tag';
 

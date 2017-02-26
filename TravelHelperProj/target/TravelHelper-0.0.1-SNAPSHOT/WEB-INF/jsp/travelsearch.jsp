@@ -4,7 +4,7 @@
 <!-- Mirrored from demo-limpidthemes.com/Themeforest/html/cruise-demo/light/car-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2016 22:46:00 GMT -->
 <head>
 	
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
@@ -12,7 +12,7 @@
 	
 	<title>Travel Helper Application</title>
 	<link rel="shortcut icon" href="assets/travelstatic/favicon/favicon.ico" type="image/x-icon">
-    <!-- STYLES -->
+    STYLES
 	<link href="assets/css/animate.min.css" rel="stylesheet">
 	<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
 	<link href="assets/css/owl.carousel.css" rel="stylesheet">
@@ -20,51 +20,20 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
 	<link href="assets/css/style.css" rel="stylesheet" media="screen">
-	<!-- LIGHT -->
+	LIGHT
 	<link rel="stylesheet" type="text/css" href="assets/css/color/blue.css" id="select-style">
 	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	
 	<link href="assets/css/light.css" rel="stylesheet" media="screen">
 	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
-
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'> -->
+	<jsp:include page="bootstrapheader.jsp"></jsp:include>
 </head>
 <body class="load-full-screen">
 
 <!-- BEGIN: SITE-WRAPPER -->
 <div class="site-wrapper">
-	<div class="row header-top">
-		<div class="container clear-padding">
-			<div class="navbar-contact">
-				<div class="col-md-7 col-sm-6 clear-padding">
-					<a href="#" class="transition-effect"><i class="fa fa-phone"></i> (+1)123-456-7890</a>
-					<a href="#" class="transition-effect"><i class="fa fa-envelope-o"></i> support@travelhelper.com</a>
-				</div>
-				<div class="col-md-5 col-sm-6 clear-padding search-box">
-					<div class="col-md-6 col-xs-5 clear-padding">
-						<form >
-							<div class="input-group">
-								<input type="text" name="search" class="form-control" required placeholder="Search">
-								<span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6 col-xs-7 clear-padding user-logged">
-						<a href="/TravelHelper/welcome" class="transition-effect">		
-							Homepage
-						</a>
-						<a href="#" class="transition-effect">
-							<!-- <img src="assets/images/user.jpg" alt="cruise"> -->
-							Hi, Keval
-						</a>
-						<a href="#" class="transition-effect">
-							<i class="fa fa-sign-out"></i>Sign Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div class="clearfix"></div>
 	<!-- BEGIN: SEARCH SECTION -->
 	<div class="row">
@@ -140,52 +109,7 @@
 	</section> 
 <!-- START: FOOTER -->
 <section id="footer">
-	<footer>
-		<div class="row sm-footer">
-			<div class="container clear-padding">
-				<div class="col-md-3 col-sm-6 footer-about-box">
-					<h4>TRAVEL HELPER</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-					<a href="#">READ MORE</a>
-				</div>
-				<div class="col-md-3 col-sm-6 contact-box">
-					<h4>CONTACT US</h4>
-					<p><i class="fa fa-home"></i> Long Beach CA</p>
-					<p><i class="fa fa-envelope-o"></i> email@travelhelper.com</p>
-					<p><i class="fa fa-phone"></i> +1 123-456-7890</p>
-					<p class="social-media">
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-google-plus"></i></a>
-						<a href="#"><i class="fa fa-instagram"></i></a>
-					</p>
-				</div>
-				<div class="clearfix visible-sm-block"></div>
-				
-				<div class="col-md-3 col-sm-6 footer-subscribe">
-					<h4>SUBSCRIBE</h4>
-					<p>Don't miss any update. Subscribe to get new offers.</p>
-					<form >
-						<div class="col-md-10 col-sm-10 col-xs-9 clear-padding">
-							<input type="email" required class="form-control" placeholder="Enter Your Email">
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-3 clear-padding">
-							<button type="submit"><i class="fa fa-paper-plane"></i></button>
-						</div>
-					</form>	
-				</div>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-		<div class="row sm-footer-nav text-center">
-			<p class="copyright">
-				&copy;	2016 TRAVELHELPER ALL RIGHTS RESERVED
-			</p>
-			<div class="go-up">
-				<a href="#"><i class="fa fa-arrow-up"></i></a>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 </section>
 <!-- END: FOOTER -->
 

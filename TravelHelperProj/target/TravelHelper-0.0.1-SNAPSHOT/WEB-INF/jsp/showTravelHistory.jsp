@@ -18,9 +18,9 @@
 </div>
 
 <div class="row">
-<table id="scheduleDataDriveSummary" class="col-md-12 table-bordered table-hover table-condensed table-striped table-responsive" style="margin-top:5px;margin-left:15px;">
+<table id="scheduleDataDriveSummary" class="col-md-7 table-bordered table-hover table-condensed table-striped table-responsive" style="margin-top:5px;margin-left:15px;">
 			<thead>
-			<tr style="color:#2F7AF8;">
+			<tr style="background-color:#2F7AF8;color: #fff;">
 			<th>Drive</th>
 			<th>Count</th>
 			</thead>
@@ -47,7 +47,7 @@
 </form>
 </div>
 </div> -->
-<div class="row" style="margin-top: 5px;">
+<div class="row" style="margin-top:25px;">
 <div class="col-md-3 col-sm-3 col-xs-8">
 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Click for Detailed Schedule History</button>
 </div>

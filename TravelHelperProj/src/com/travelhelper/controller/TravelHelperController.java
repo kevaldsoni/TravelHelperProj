@@ -33,10 +33,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.travelhelper.model.AjaxResponseBody;
 import com.travelhelper.model.FutureTravel;
 import com.travelhelper.model.TravelModeSelected;
 import com.travelhelper.model.UserProfile;
+import com.travelhelper.model.Views;
 import com.travelhelper.service.TravelService;
 import com.travelhelper.service.UserProfileService;
 
@@ -82,6 +84,7 @@ public class TravelHelperController {
 	
 	}
 	
+	@JsonView(Views.Public.class)
 	@RequestMapping(value="/saveGcmIdForUser")
 	public String saveGcmId(ModelMap model,HttpServletRequest request){
 		System.out.println("In TravelHelperController :: method saveGcmId");

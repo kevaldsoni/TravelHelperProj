@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html class="load-full-screen">
 
 <!-- Mirrored from demo-limpidthemes.com/Themeforest/html/cruise-demo/light/car-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2016 22:46:00 GMT -->
@@ -32,43 +34,73 @@
 	<script type ="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/customNotify.js"></script>
 	<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/parent.js"></script>
+	<style type="text/css">
+	
+	.navbar-inverse .navbar-nav > li > a {
+  		color: #fff;
+	}
+	.navbar-inverse .navbar-text {
+  		color: #9d9d9d;
+	}
+	.navbar-inverse .navbar-brand {
+  		color: #fff;
+	}
+	.navbar-inverse .navbar-nav > li > a:hover,
+	.navbar-inverse .navbar-nav > li > a:focus {
+  		color: #9d9d9d;
+  		background-color: transparent;
+	}
+	
+	.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
+		background-color: inherit;
+	}
+			
+	</style>
 </head>
 <body class="load-full-screen">
 
 <!-- BEGIN: SITE-WRAPPER -->
 <div class="site-wrapper">
-	<div class="row header-top">
-		<div class="container clear-padding">
-			<div class="navbar-contact">
-				<div class="col-md-7 col-sm-6 clear-padding">
-					<a href="#" class="transition-effect"><i class="fa fa-phone"></i> (+1)123-456-7890</a>
-					<a href="#" class="transition-effect"><i class="fa fa-envelope-o"></i> support@travelhelper.com</a>
-				</div>
-				<div class="col-md-5 col-sm-6 clear-padding search-box">
-					<div class="col-md-6 col-xs-5 clear-padding">
-						<form >
-							<div class="input-group">
-								<input type="text" name="search" class="form-control" required placeholder="Search">
-								<span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6 col-xs-7 clear-padding user-logged">
-						<a href="/TravelHelper/welcome" class="transition-effect">		
-							Homepage
-						</a>
-						<a href="#" class="transition-effect">
-							<!-- <img src="/TravelHelper/assets/images/user.jpg" alt="cruise"> -->
-							Hi, Keval
-						</a>
-						<a href="#" class="transition-effect">
-							<i class="fa fa-sign-out"></i>Sign Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<nav class="navbar navbar-inverse" style="background-color: #2F7AF8;border: none;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#"><span style="color:#fff;">Travel Helper</span></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/TravelHelper/welcome">Home</a></li>
+        <li><a href="/TravelHelper/travelsearch">Travel Search</a></li>
+        <li><a href="/TravelHelper/assets/pages/firebase/scheduleTravel.jsp">Schedule Travel</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="/TravelHelper/dashboard">Dashboard<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/TravelHelper/travelhistory">Travel Search Dashboard</a></li>
+            <li><a href="/TravelHelper/schedulehistory">Schedule History Dashboard</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<li><a href="#"><span class="glyphicon glyphicon-user" style="margin-right:5px;"></span>Welcome <sec:authentication property="name"></sec:authentication></a></li>
+      	<li><a href="<c:url value="/logout"/> "><span class="glyphicon glyphicon-log-out" style="margin-right:5px;"></span>Logout</a></li>
+      </ul>
+     <%--  <c:url var="logoutUrl" value="j_spring_security_logout"></c:url>
+      <c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>
+      <form action="${logoutUrl}" method="post">
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      <input type="submit" value="Log out">
+	      <ul class="nav navbar-nav navbar-right">
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	      </ul>
+      </input>
+      </form> --%>
+    </div>
+  </div>
+</nav>
 	<div class="clearfix"></div>
 	<!-- BEGIN: SEARCH SECTION -->
 	<div class="row">
@@ -112,7 +144,7 @@
 									<option>WALKING</option>
 									<option>BICYCLING</option>
 									<option>LYFT</option>
-									<option>UBER</option>
+									<option>UBERX</option>
 							</select>
 
 							<label>Select Date</label>
@@ -148,18 +180,23 @@
 <!-- START: FOOTER -->
 <section id="footer">
 	<footer>
-		<div class="row sm-footer">
-			<div class="container clear-padding">
-				<div class="col-md-3 col-sm-6 footer-about-box">
-					<h4>TRAVEL HELPER</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-					<a href="#">READ MORE</a>
+		<div class="row sm-footer" style="padding: 20px;">
+			<div class="container">
+				<div class="col-md-4 col-sm-4 footer-about-box">
+					<h4>Travel Helper</h4>
+					<p>Travel Application can be for deciding on best travel mode and scheduling travel.</p>
 				</div>
-				<div class="col-md-3 col-sm-6 contact-box">
-					<h4>CONTACT US</h4>
+				<div class="col-md-4 col-sm-4 contact-box">
+					<h4>Contact Us</h4>
 					<p><i class="fa fa-home"></i> Long Beach CA</p>
 					<p><i class="fa fa-envelope-o"></i> email@travelhelper.com</p>
 					<p><i class="fa fa-phone"></i> +1 123-456-7890</p>
+				</div>
+				<div class="clearfix visible-sm-block"></div>
+				
+				<div class="col-md-4 col-sm-4 footer-subscribe">
+					<h4>Social Presence</h4>
+					<p>Don't miss any update.</p>
 					<p class="social-media">
 						<a href="#"><i class="fa fa-facebook"></i></a>
 						<a href="#"><i class="fa fa-twitter"></i></a>
@@ -167,26 +204,18 @@
 						<a href="#"><i class="fa fa-instagram"></i></a>
 					</p>
 				</div>
-				<div class="clearfix visible-sm-block"></div>
-				
-				<div class="col-md-3 col-sm-6 footer-subscribe">
-					<h4>SUBSCRIBE</h4>
-					<p>Don't miss any update. Subscribe to get new offers.</p>
-					<form >
-						<div class="col-md-10 col-sm-10 col-xs-9 clear-padding">
-							<input type="email" required class="form-control" placeholder="Enter Your Email">
-						</div>
-						<div class="col-md-2 col-sm-2 col-xs-3 clear-padding">
-							<button type="submit"><i class="fa fa-paper-plane"></i></button>
-						</div>
-					</form>	
-				</div>
 			</div>
 		</div>
-		<div class="clearfix"></div>
+		<!-- <div class="clearfix"></div> -->
 		<div class="row sm-footer-nav text-center">
+			<!-- <p>
+				<a href="#">HOME</a>
+				<a href="#">CARS</a>
+				<a href="#">SERVICE</a>
+				<a href="#">GALLERY</a>
+			</p> -->
 			<p class="copyright">
-				&copy;	2016 TRAVELHELPER ALL RIGHTS RESERVED
+				&copy;	2017 TRAVELHELPER ALL RIGHTS RESERVED
 			</p>
 			<div class="go-up">
 				<a href="#"><i class="fa fa-arrow-up"></i></a>

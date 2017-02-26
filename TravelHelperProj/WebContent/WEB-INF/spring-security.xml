@@ -33,7 +33,7 @@
 		<intercept-url pattern="/dashboard**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/travelhistory**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/schedulehistory**" access="hasRole('ROLE_USER')"></intercept-url>
-		<intercept-url pattern="/saveGcmIdForUser**" access="hasRole('ROLE_USER')"></intercept-url>
+		<!-- <intercept-url pattern="/saveGcmIdForUser**" access="hasRole('ROLE_USER')"></intercept-url> -->
 		<intercept-url pattern="/saveFutureTravel**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/handleTravelHistoryDownload**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/handleScheduleHistoryDownload**" access="hasRole('ROLE_USER')"></intercept-url>

@@ -3,11 +3,11 @@
 		<div class="row sm-footer" style="padding: 20px;">
 			<div class="container">
 				<div class="col-md-4 col-sm-4 footer-about-box">
-					<h4>TRAVEL HELPER</h4>
+					<h4>Travel Helper</h4>
 					<p>Travel Application can be for deciding on best travel mode and scheduling travel.</p>
 				</div>
 				<div class="col-md-4 col-sm-4 contact-box">
-					<h4>CONTACT US</h4>
+					<h4>Contact Us</h4>
 					<p><i class="fa fa-home"></i> Long Beach CA</p>
 					<p><i class="fa fa-envelope-o"></i> email@travelhelper.com</p>
 					<p><i class="fa fa-phone"></i> +1 123-456-7890</p>

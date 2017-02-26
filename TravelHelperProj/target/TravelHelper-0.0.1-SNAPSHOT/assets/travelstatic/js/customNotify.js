@@ -2,7 +2,7 @@
  * 
  */
 
-var GCM_REGISTERATION_ID = "eqWwiw-prf0:APA91bGVfmPC0t3KxuEFjQXH11DxtoK9T7dQQlxD7vRvipAylhTNe2tcFiMIe-hko55hyOgbu1_IwMnuZtJQqviUmKQbRrT6mtSi5CrAonFoCtlZ95sBa9JgWrfQ-bKi80kiENqyCacT";
+var GCM_REGISTERATION_ID = "c0AuKMQFjG8:APA91bGs367F5hnBSLf3UXJ-WatyKoMKdH14LzT1kQyRW_mj3VjHX2wgahgkEB5Hnoes63EolK93VHAHThJ_3HfG7j2k1ZY8r5Y2LpBeJXy3K6nYZ1zANFLxMWFnpa0cW5OH4GpXf-Me";
 
 var sendGCMPush = function (){
 	console.log("GCM Push");

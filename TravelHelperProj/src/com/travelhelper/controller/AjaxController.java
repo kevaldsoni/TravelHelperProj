@@ -243,5 +243,26 @@ public class AjaxController {
 	    	//String clientDeviceID = "ewZeqppUqEI:APA91bHdpNf15Hp239u1jWLuUcYQb0a9QFd8Ok61FvdJZTk56Hw4d1LNO7r6TXJ2-gNZIrbJNzAGAZ7VYGWNZ-OYnnJAauKjd8ejYh-Epuw8PMk6UKmunvn2YYghrPDPV0jvUdjM57Eq";
 	    	
 	 }
+	 
+	 
+	 @JsonView(Views.Public.class)
+	 @RequestMapping(value="/savefire")
+	 public String saveGcmId(ModelMap model,HttpServletRequest request){
+			System.out.println("In TravelHelperController :: method saveGcmId");
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    String name = auth.getName(); 
+		    System.out.println("logged in username : "+name);
+		    int userId = userProfileService.fetchUserIdfromUsername(name);
+		    System.out.println("User id of logged in user :"+userId);
+		    if(userId > 0 ){
+		    	String gcmid = request.getParameter("id");
+				userProfileService.updatelastUsedGcmId(userId);
+				userProfileService.saveGoogleNotificationId(gcmid);
+				model.addAttribute("message","Notification Enabled");
+		    }
+			
+			return "scheduletravel";
+		
+		}
 	
 }
