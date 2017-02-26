@@ -29,6 +29,18 @@
 		<intercept-url pattern="/saveFutureTravelDetails**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/validateUserLogin**" access="hasRole('ROLE_USER')"></intercept-url>
 		<intercept-url pattern="/travelsearch**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/pages**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/dashboard**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/travelhistory**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/schedulehistory**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/saveGcmIdForUser**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/saveFutureTravel**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/handleTravelHistoryDownload**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/handleScheduleHistoryDownload**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/filterschedulehistory**" access="hasRole('ROLE_USER')"></intercept-url>
+		<intercept-url pattern="/filtertravelhistory**" access="hasRole('ROLE_USER')"></intercept-url>
+
+		
 		<form-login login-processing-url="/j_spring_security_check" login-page="/login" default-target-url="/welcome" authentication-failure-url="/loginfailed" 
 		 always-use-default-target="true" username-parameter="j_username" password-parameter="j_password"/>
 		<logout logout-success-url="/welcome" logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID"/>

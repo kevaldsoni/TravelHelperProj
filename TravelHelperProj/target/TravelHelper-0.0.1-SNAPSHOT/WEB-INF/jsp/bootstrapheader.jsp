@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -67,10 +69,18 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      	<li><a href="<c:url value="/logout"/>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
       </ul>
+     <%--  <c:url var="logoutUrl" value="j_spring_security_logout"></c:url>
+      <c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>
+      <form action="${logoutUrl}" method="post">
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      <input type="submit" value="Log out">
+	      <ul class="nav navbar-nav navbar-right">
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	      </ul>
+      </input>
+      </form> --%>
     </div>
   </div>
 </nav>

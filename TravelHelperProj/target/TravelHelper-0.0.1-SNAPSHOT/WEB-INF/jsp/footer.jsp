@@ -1,7 +1,7 @@
 <section id="footer">
 	<footer>
-		<div class="row sm-footer" style="padding: 30px;">
-			<div class="container clear-padding">
+		<div class="row sm-footer" style="padding: 20px;">
+			<div class="container">
 				<div class="col-md-4 col-sm-4 footer-about-box">
 					<h4>TRAVEL HELPER</h4>
 					<p>Travel Application can be for deciding on best travel mode and scheduling travel.</p>
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="clearfix"></div>
+		<!-- <div class="clearfix"></div> -->
 		<div class="row sm-footer-nav text-center">
 			<!-- <p>
 				<a href="#">HOME</a>
@@ -35,7 +35,7 @@
 				<a href="#">GALLERY</a>
 			</p> -->
 			<p class="copyright">
-				&copy;	2016 TRAVELHELPER ALL RIGHTS RESERVED
+				&copy;	2017 TRAVELHELPER ALL RIGHTS RESERVED
 			</p>
 			<div class="go-up">
 				<a href="#"><i class="fa fa-arrow-up"></i></a>

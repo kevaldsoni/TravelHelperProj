@@ -21,9 +21,11 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<bean id="userProfileService" class="com.travelhelper.service.UserProfileServiceImpl"></bean>
+	
 	
 	<bean id="travelService" class="com.travelhelper.service.TravelServiceImpl"></bean>
+	
+	<bean id="userProfileService" class="com.travelhelper.service.UserProfileServiceImpl"></bean>
 	
 	<bean id="userProfileDao" class="com.travelhelper.dao.UserProfileDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />

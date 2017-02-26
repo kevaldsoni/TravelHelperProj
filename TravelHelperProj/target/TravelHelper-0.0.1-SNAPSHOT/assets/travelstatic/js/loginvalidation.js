@@ -89,7 +89,7 @@ $(document).ready(function() {
                 }
             },
         	
-            firstname: {
+            firstName: {
         		
                 validators: {
                     notEmpty: {
@@ -104,7 +104,7 @@ $(document).ready(function() {
                 }
             },
         	
-            lastname: {
+            lastName: {
         		
                 validators: {
                     notEmpty: {
@@ -119,22 +119,8 @@ $(document).ready(function() {
                 }
             },
             
-           email: {
-        		
-                validators: {
-                    notEmpty: {
-                        message: 'The Email is required and cannot be empty'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /\S+@\S+\.\S+/,
-                        message: 'The Email is not valid'
-                    }
-                    
-                }
-            },
-            
-phone: {
+           
+            contactNumber: {
         		
                 validators: {
                     notEmpty: {
@@ -149,7 +135,7 @@ phone: {
                 }
             },
             
-            address1: {
+            addrStreetName: {
         		
                 validators: {
                     notEmpty: {
@@ -158,13 +144,13 @@ phone: {
                     regexp: {
                         enabled: true,
                         regexp: /^[A-Za-z0-9'\.\-\s\,]+$/,
-                        message: 'do not use special characters'
+                        message: 'Special characters allowed are . , - '
                     }
                     
                 }
             },
             
-            address2: {
+            addrAptNo: {
         		
                 validators: {
                     notEmpty: {
@@ -173,13 +159,13 @@ phone: {
                     regexp: {
                         enabled: true,
                         regexp: /^[A-Za-z0-9'\.\-\s\,]+$/,
-                        message: 'do not use special characters'
+                        message: 'Special characters allowed are . , - '
                     }
                     
                 }
             },
             
-city: {
+            addrCity: {
         		
                 validators: {
                     notEmpty: {
@@ -188,13 +174,13 @@ city: {
                     regexp: {
                         enabled: true,
                         regexp: /^[A-z\s]+$/,
-                        message: 'do not use special characters'
+                        message: 'Enter valid city name'
                     }
                     
                 }
             },
             
-zipcode: {
+            addrZip: {
         		
                 validators: {
                     notEmpty: {
@@ -208,7 +194,22 @@ zipcode: {
                     
                 }
             },
-            passwd: {
+            
+            username: {
+        		
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    regexp: {
+                        enabled: true,
+                        regexp: /^[A-Za-z0-9]+$/,
+                        message: 'Special characters not allowed'
+                    }
+                    
+                }
+            },
+            password: {
                 validators: {
                     notEmpty: {
                         message: 'The password is required and cannot be empty'
@@ -232,19 +233,9 @@ zipcode: {
                 	notEmpty: {
                         message: 'The confirm password is required and cannot be empty'
                     },
-                    stringLength: {
-                        enabled: true,
-                        min: 8,
-                        max: 40,
-                        message: 'The password must be more than 8 and less than 40 characters long'
-                    },
-                    regexp: {
-                        enabled: true,
-                        regexp: /^[a-zA-Z0-9\s]+$/,
-                        message: 'The password can only consist of Alphabets and Numbers'
-                    },
+                    
                     identical:{
-                    	field: 'passwd',
+                    	field: 'password',
                         message: 'The password and its confirm are not the same'
                     }
                 }

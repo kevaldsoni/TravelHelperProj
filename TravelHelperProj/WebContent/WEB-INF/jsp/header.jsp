@@ -1,3 +1,6 @@
+
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,6 +51,8 @@
 						<a href="#" class="transition-effect">
 							<i class="fa fa-sign-out"></i>Sign Out
 						</a>
+						<%-- <b>Welcome to kevals try to get proj running</b>
+						<sec:authentication property="name"></sec:authentication> --%>
 					</div>
 				</div>
 			</div>

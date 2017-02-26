@@ -14,19 +14,9 @@
 <div class="site-wrapper">
 	<b>Welcome to kevals try to get proj running</b>
 	<sec:authentication property="name"></sec:authentication>
-<%-- 	<sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
-		<a href="<c:url value="j_spring_security_logout" />" >Logout</a>
-	</sec:authorize> --%>
-	<%-- <sec:authorize access="isAuthenticated()">
-		
-	</sec:authorize> --%>
+
 	
-	<c:url var="logoutUrl" value="j_spring_security_logout"/>
-	<form action="${logoutUrl}" method="post">
- 	<input type="submit" value="Log out" /><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>
-  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-  
-	</form>
+	
 	<!-- BEGIN: SEARCH SECTION -->
 <div class="container" style="padding-top:40px;padding-bottom: 40px;">
     <div class="row">
@@ -55,7 +45,9 @@
                 <div class="panel-heading">
                     <h3 style="text-align: center;"><a href="/TravelHelper/dashboard">Dashboard</a></h3>
                 </div>
-                <div class="panel-body">Presents Historical Analysis of Travel Preferences and Travel Scheduling</div>
+                <div class="panel-body">Presents Historical Analysis of Travel Preferences and Travel Scheduling. View complete travel information. Data can be sorted on date range and
+                 	report can be downloaded for offline use.
+                 </div>
             </div>
         </div>
     </div>
