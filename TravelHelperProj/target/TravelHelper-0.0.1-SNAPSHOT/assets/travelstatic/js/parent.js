@@ -381,7 +381,7 @@ function saveFutureTravelDetails(dataTobeSent){
 		timeout : 100000,
 		success : function(data) {
 			console.log("SUCCESS: ", data);
-			$('#scheduleTravelSubmit').css({"display": "block"});
+			$('#scheduleTravelSubmit').css({"display": "initial"});
 			$('#scheduleprogress').css({"display": "none"});
 			var message = '';
 			if(data.code == '200'){
@@ -415,7 +415,7 @@ function saveFutureTravelDetails(dataTobeSent){
 
 
 function saveNotificationEndPoint(gcmUrl){
-	alert(gcmUrl);
+	
 	var spData = gcmUrl.split("/");
 	var gcmId = spData[5];
 	console.log(gcmId);

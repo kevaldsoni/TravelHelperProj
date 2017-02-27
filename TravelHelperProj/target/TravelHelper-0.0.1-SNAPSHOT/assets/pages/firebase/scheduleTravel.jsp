@@ -89,7 +89,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li><a href="#"><span class="glyphicon glyphicon-user" style="margin-right:5px;"></span>Welcome <sec:authentication property="name"></sec:authentication></a></li>
+      	<li><a href="#"><span class="glyphicon glyphicon-user" style="margin-right:5px;"></span>Hello <sec:authentication property="name"></sec:authentication></a></li>
       	<li><a href="<c:url value="/logout"/> "><span class="glyphicon glyphicon-log-out" style="margin-right:5px;"></span>Logout</a></li>
       </ul>
      <%--  <c:url var="logoutUrl" value="j_spring_security_logout"></c:url>
@@ -108,7 +108,7 @@
 	<div class="clearfix"></div>
 	<!-- BEGIN: SEARCH SECTION -->
 	<div class="row">
-		<div class="container">
+		<div class="container" style="padding-bottom: 27px;">
 			<div class="col-md-8 col-sm-6 text-center">
 				<div>
 					<div class="hotel-tagline text-center">

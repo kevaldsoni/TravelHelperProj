@@ -215,7 +215,7 @@ public class TravelServiceImpl implements TravelService{
 			cell11.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell11);
 			
-			PdfPCell cell22 = new PdfPCell(new Paragraph("Time"));
+			PdfPCell cell22 = new PdfPCell(new Paragraph("Request Time"));
 			cell22.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell22.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell22);
@@ -235,7 +235,7 @@ public class TravelServiceImpl implements TravelService{
 			cell66.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell66);
 			
-			PdfPCell cell77 = new PdfPCell(new Paragraph("Cost"));
+			PdfPCell cell77 = new PdfPCell(new Paragraph("Cost (dollars)"));
 			cell77.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell77.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell77);
@@ -314,7 +314,7 @@ public class TravelServiceImpl implements TravelService{
 			cell11.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell11);
 			
-			PdfPCell cell22 = new PdfPCell(new Paragraph("Time"));
+			PdfPCell cell22 = new PdfPCell(new Paragraph("Request Time"));
 			cell22.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell22.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell22);
