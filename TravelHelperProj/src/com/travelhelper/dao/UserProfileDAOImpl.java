@@ -260,6 +260,33 @@ public class UserProfileDAOImpl implements UserProfileDAO{
 		
 		return clientIds;
 	}
+
+
+	@Override
+	public boolean checkUsernameAlreadyExists(String username) {
+		
+		boolean userExists = false;
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+			Criteria ctr = session.createCriteria(UserProfile.class);
+			ctr.add(Restrictions.eq("username", username));
+			List result = ctr.list();
+			if(result != null && result.size() > 0 ){
+				userExists = true;
+			}
+			tx.commit();
+		}catch(HibernateException e){
+			if(tx != null){
+				tx.rollback();
+				e.printStackTrace();
+			}
+		}finally{
+			session.close();
+		}
+		return userExists;
+	}
 	
 	
 	

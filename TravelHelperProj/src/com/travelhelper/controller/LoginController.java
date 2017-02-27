@@ -12,10 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.travelhelper.configuration.ResourceNotFoundException;
 import com.travelhelper.model.UserProfile;
 import com.travelhelper.service.UserProfileService;
 
@@ -46,7 +49,7 @@ public class LoginController {
 	@RequestMapping("/loginfailed")
 	public String loginerror(ModelMap model) {
 		System.out.println("In /loginfailed method");
-		model.addAttribute("errormessage","true");
+		model.addAttribute("errormessage","Authentication Failed");
 		return "login";
 	}
 	
@@ -64,11 +67,19 @@ public class LoginController {
 	@RequestMapping("/signupform")
 	public String processSignupForm(ModelMap model,UserProfile profile) {
 		System.out.println("First Name : "+profile.getFirstName());
-		int id = userProfileService.createNewUserProfile(profile);
-		if(id > 0){
-			model.addAttribute("successMessage", "Account Created Successfully. Login to search travel drive.");
+		boolean userExists = userProfileService.checkUsernameAlreadyExists(profile.getUsername());
+		if(!userExists){
+			int id = userProfileService.createNewUserProfile(profile);
+			if(id > 0){
+				model.addAttribute("successMessage", "Account Created Successfully. Login to explore travel helper.");
+			}
+		}else{
+				model.addAttribute("errormessage", "Username already used. Kindly sign up with another one.");
 		}
+		
 		return "login";
 	}
+	
+
 	
 }

@@ -76,6 +76,12 @@ public class UserProfileServiceImpl implements UserProfileService{
 		// TODO Auto-generated method stub
 		return userProfileDao.fetchClientIdForNotification(ids);
 	}
+
+	@Override
+	public boolean checkUsernameAlreadyExists(String username) {
+		// TODO Auto-generated method stub
+		return userProfileDao.checkUsernameAlreadyExists(username);
+	}
 	
 	
 }

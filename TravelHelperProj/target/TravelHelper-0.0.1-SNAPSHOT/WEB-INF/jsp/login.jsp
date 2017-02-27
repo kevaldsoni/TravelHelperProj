@@ -63,7 +63,7 @@
                            		if(message!=null && message.length()>0){
 							%>
 							<div class="alert alert-danger">
-  							<strong>Authentication Failed</strong>
+  							<strong>${errormessage}</strong>
 							</div>
 							   <%
 								}else if((String)request.getAttribute("successMessage") != null){
