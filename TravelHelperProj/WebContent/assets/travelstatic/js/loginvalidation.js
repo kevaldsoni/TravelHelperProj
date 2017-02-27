@@ -243,7 +243,58 @@ $(document).ready(function() {
         }
     })
     
-
+    $('#scheduleTravelForm').bootstrapValidator({
+       // container: '#messages',
+    	framework : 'bootstrap',
+    	live: 'enabled',
+    	err: {
+            container: function($field, validator) {
+                return $field.parent().next('.messageContainer');
+            }
+        },
+       
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            
+        	source: {
+        		
+                validators: {
+                    notEmpty: {
+                        message: 'Enter source location'
+                    },
+                    stringLength: {
+                        enabled: true,
+                        min: 5,
+                        max: 200,
+                        message: 'Enter valid source'
+                    },
+                    
+                }
+            },
+        	
+        	
+            destination: {
+        		
+                validators: {
+                    notEmpty: {
+                        message: 'Enter destination location'
+                    },
+                    stringLength: {
+                        enabled: true,
+                        min: 5,
+                        max: 200,
+                        message: 'Enter valid destination'
+                    },
+                    
+                }
+            },
+            
+        }
+    })
 
 });
 

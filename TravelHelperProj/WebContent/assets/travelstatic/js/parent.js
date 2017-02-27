@@ -35,6 +35,43 @@ var fetchInput = function(event){
 
 var handleScehduledTravel = function(event){
 	
+	
+	$('.sourceerrmsg').css({"display": "none"});
+	$('.destinationerrmsg').css({"display": "none"});
+	$('.dateerrmsg').css({"display": "none"});
+	$('.timeerrmsg').css({"display": "none"});
+	
+	var source = $('input[name=source]').val();
+	var destination = $('input[name=destination]').val();
+	var date = $('input[name=date]').val();
+	var time = $('input[name=time]').val();
+	var errFlag = false;
+	if(source=="" || source.length <= 0){
+		$('.sourceerrmsg').css({"display": "block"});
+		 errFlag = true;
+	}
+	
+	if(destination=="" || destination.length <= 0){
+		$('.destinationerrmsg').css({"display": "block"});
+		 errFlag = true;
+	}
+	
+	if(date=="" || date.length <= 0){
+		$('.dateerrmsg').css({"display": "block"});
+		 errFlag = true;
+	}
+	
+	if(time=="" || time.length <= 0){
+		$('.timeerrmsg').css({"display": "block"});
+		 errFlag = true;
+	}
+	
+	if( errFlag){
+		return false;
+	}else{
+		$('#scheduleTravelSubmit').css({"display": "none"});
+		$('#scheduleprogress').css({"display": "initial"});
+	}
 	event.preventDefault();
 	console.log("In scheduled travel");
 	var drive = $(".selectpicker").val();
@@ -174,66 +211,11 @@ function showDetails(results){
 	
 }
 
-/*function preProcessResults(results){
-	results = results.travelData;
-	var pplCount = $("#pplcount").val();
-	var travelpref = $("#travelpref").val();
-	console.log(pplCount+" "+travelpref);
-	for(var i in results){
-		
-		if(results[i].capacity >= pplCount){
-		var data = results[i].duration;
-		if(data != undefined){
-			var isnum = /^[0-9.]+$/.test(data);
-			if(!isnum){
-				if(data.length >1){
-					var durationInfo = data.split(" ");
-					if(durationInfo.length > 2){
-						console.log("duration has hours "+durationInfo);
-						results[i].duration = (durationInfo[0]*60)+durationInfo[2];
-					}else{
-						console.log("duration has minutes "+durationInfo);
-						results[i].duration = durationInfo[0];
-					}
-				}
-			}
-		}else{
-			console.log("Need to populate data");	
-		}
-		var distanceDuration = results[i].distance;
-		if(distanceDuration != undefined){
-			var isnum = /^[0-9.]+$/.test(distanceDuration);
-			if(!isnum){
-				var durationInfo = distanceDuration.split(" ");
-				results[i].distance = durationInfo[0];
-			}
-		}
-	  }else{
-		  console.log("Not enough capacity");
-		  results.splice(i,1);
-	  }
-	}// end for
-	
-		if(travelpref == "Ecomonical"){
-			results.sort(function(a, b) {
-			    return parseInt(a.cost, 10) - parseInt(b.cost, 10);
-			});
-		}
-		for(var i in results){
-			console.log(results[i].cost);
-		}
-	
-}
-*/
+
 
 function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude){
 	var results = travelSearchDetailsJson.travelData;
-	//preProcessResults(results); 
 	
-	/* func start*/
-	/*for(var i in results){
-		console.log("Start :"+results[i].cost);
-	}*/
 	var pplCount = $("#pplcount").val();
 	var travelpref = $("#travelpref").val();
 	console.log(pplCount+" "+travelpref);
@@ -277,10 +259,7 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 		
 	}// end for
 	
-	
-	
-	//results.sort( predicatBy("cost") );
-	//alert(travelpref);
+
 	//Usage
 	if(travelpref == "Economical"){
 		results.sort( predicatBy("cost") );
@@ -313,7 +292,7 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 }
 
 function downloadTravelHistory(){
-	alert("Downloading file");
+	
 
 	$.ajax({
 		type : "POST",
@@ -402,11 +381,25 @@ function saveFutureTravelDetails(dataTobeSent){
 		timeout : 100000,
 		success : function(data) {
 			console.log("SUCCESS: ", data);
+			$('#scheduleTravelSubmit').css({"display": "initial"});
+			$('#scheduleprogress').css({"display": "none"});
+			var message = '';
+			if(data.code == '200'){
+				document.getElementById('scheduleTravelForm').reset();
+				message = 'Travel Schedule Recorded. Time to start travel to reach destination on time is : '+data.msg;
+				
+			}else if(data.code == '201'){
+				message = 'Time has passed to start travel by '+$('#travelDrive').val()+'. To reach destination on time, schedule with another drive.';
+			}else{
+				document.getElementById('scheduleTravelForm').reset();
+				message = 'System encountered error. Please try again.';
+			};
+			$('#confirmationBox').html(message);
 			$('#confirmationBox').css({"display": "block"});
-			document.getElementById('scheduleTravelForm').reset();
+			
 			$(window).scrollTop($('#confirmationBox').position().top);
 			travelSearchDetailsJson.travelData = [];
-			//display(data);
+			
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
@@ -422,7 +415,7 @@ function saveFutureTravelDetails(dataTobeSent){
 
 
 function saveNotificationEndPoint(gcmUrl){
-	alert(gcmUrl);
+	
 	var spData = gcmUrl.split("/");
 	var gcmId = spData[5];
 	console.log(gcmId);

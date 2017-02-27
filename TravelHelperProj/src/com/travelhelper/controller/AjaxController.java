@@ -189,19 +189,9 @@ public class AjaxController {
 	    	String notifyBefore = (String)request.getParameter("preNotificationTime");
 	    	int preNotifyTime = Integer.parseInt(notifyBefore);
 	    	ft.setPreNotificationTime(preNotifyTime);
-	    	// save travel_id in travelservice.java
 	    	
-	    	// This time needs to be calculated properly reachtime - timetakenfordrive - eta 
 	    	String destReachTime = (String)request.getParameter("destReachTime");
-	    	/*String data [] = destReachTime.split(" ");
-	    	if(data != null && data.length > 0){
-	    		
-	    		String date[] = data[0].split("-");
-	    		System.out.println(date[0]+ " "+date[1]+" "+date[2]);
-	    		String time[] = data[1].split(":");
-	    		System.out.println(time[0]+" "+time[1]);
-	    		
-	    	}*/
+	    	
 	    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    	Date destinationTime = df.parse(destReachTime);
 	    	ft.setDestinationReachTime(destinationTime);
@@ -213,19 +203,28 @@ public class AjaxController {
 	    	cal.setTime(destinationTime);
 	    	int totalBackTime = preNotifyTime+travelTimeinMin;
 	    	cal.add(Calendar.MINUTE, -totalBackTime);
-	    	String notifyTime = df.format(cal.getTime());
-	    	ft.setNotificationTime(cal.getTime());
-	    	System.out.println("Time at which notification needs to be sent : "+notifyTime);
-	    	
-	    	int recordId = travelService.saveFutureScheduledRequest(ft);
-				System.out.println("Future Travel Data Saved "+recordId);
+	    	/*String notifyTime = df.format(cal.getTime());
+	    	System.out.println("Time at which notification needs to be sent : "+notifyTime);*/
+	    	Calendar now  = Calendar.getInstance();
+	    	//System.out.println("Now :"+df.format(now.getTime())+" later :"+df.format(cal.getTime())+" "+now.getTimeInMillis()+" "+cal.getTimeInMillis());
+	    	System.out.println(now.getTime().before(cal.getTime()));
+	    	if (now.getTime().before(cal.getTime())){
+	    		ft.setNotificationTime(cal.getTime());
+	    		int recordId = travelService.saveFutureScheduledRequest(ft);
+	    		System.out.println("Future Travel Data Saved "+recordId);
 				result.setCode("200");
-				result.setMsg("");
+				result.setMsg(df.format(cal.getTime()));
 				result.setResult(users);
-			} else {
+	    	}else{
+	    		result.setCode("201");
+				result.setMsg("Time passed");
+				System.out.println("Time passed");
+	    	}
+				
+		} else {
 				result.setCode("204");
 				result.setMsg("No user!");
-			}
+		}
 		return result;
 	}
 	

@@ -75,6 +75,7 @@ function initAutocomplete() {
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/parent.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/metro.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/uberFunctions.js"></script>
+<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/lyftFunctions.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/lyftFunctions.js"></script>    
 <script type="text/javascript">  
 			

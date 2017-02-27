@@ -27,7 +27,7 @@
 	<link href="/TravelHelper/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	
 	<link href="/TravelHelper/assets/css/light.css" rel="stylesheet" media="screen">
-	
+	<!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/> -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
 	<link rel="manifest" href="/TravelHelper/assets/pages/firebase/manifest.json">
 	<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/pushMessaging.js"></script>
@@ -54,7 +54,11 @@
 	.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
 		background-color: inherit;
 	}
-			
+	.scheduledisabled {
+  		opacity: 0.65; 
+  		cursor: not-allowed;
+  		
+	}		
 	</style>
 </head>
 <body class="load-full-screen">
@@ -121,24 +125,25 @@
 							<button class="js-push-button btn-primary btn-md" style="padding:5px;margin-left: 50px;margin-bottom: 20px;">Enable Push Messages</button>
 							<!-- <button class="btn-primary" onclick="sendGCMPush();">Call NOtify</button> -->
 						</div>
-						<div id="confirmationBox" style="display: none;">
-							<div class="alert alert-info">
-  								<strong>Travel Schedule Recorded</strong>
-							</div>
+						
+						<div id="confirmationBox" class="alert alert-info" style="display: none;font-weight: bold;">
 						</div>
+						
 						<form id="scheduleTravelForm" style="display: none;">
 							<label>Pick Up Location</label>
 							<div class="input-group">
 								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
+							<div class="alert alert-danger sourceerrmsg" role="alert" style="display: none;">Enter valid source location</div>
 							<label>Drop Location</label>
 							<div class="input-group">
 								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
+							<div class="alert alert-danger destinationerrmsg" role="alert" style="display: none;">Enter valid destination location</div>
 							<label>Select Drive</label>
-							<select class="selectpicker" name="travel_type">
+							<select class="selectpicker" name="travel_type" id="travelDrive">
 									<option selected="selected">DRIVING</option>
 									<option>TRANSIT</option>
 									<option>WALKING</option>
@@ -146,17 +151,18 @@
 									<option>LYFT</option>
 									<option>UBERX</option>
 							</select>
-
+							
 							<label>Select Date</label>
 					        <div class='input-group'>
 					         <input type="date" class="form-control" name="date" id="scheduleDate">
 					        </div>
-				
+							<div class="alert alert-danger dateerrmsg" role="alert" style="display: none;">Enter valid date</div>
 
 					        <label>Select Time</label>
 					        <div class='input-group'>
 					         <input type="time" class="form-control" name="time" id="scheduleTime">
 					        </div>
+							<div class="alert alert-danger timeerrmsg" role="alert" style="display: none;">Enter valid time</div>
 							
 							<label>Notify Before (minutes)</label>
 							<select class="selectpicker" name="notify_before" id="notifyBefore">
@@ -169,6 +175,7 @@
 							<div class="text-center">
 								<!-- <input type="submit" name="submit" id="submitAddr" class="submitAddr">Search Results</input> -->
 								<button type="submit" id="scheduleTravelSubmit">Schedule</button>
+								<img alt="" src="/TravelHelper/assets/images/loading2.gif" id="scheduleprogress" style="display: none;" ></img>
 							</div>
 						</form>
 					</div>
@@ -238,6 +245,7 @@
 <script src="/TravelHelper/assets/plugins/wow.min.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/plugins/supersized.3.1.3.min.js"></script>
 <script src="/TravelHelper/assets/js/js.js"></script>
+<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script> -->
 <script type="text/javascript">
 function initAutocomplete() {
 	
@@ -255,7 +263,8 @@ function initAutocomplete() {
         async defer></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/metro.js"></script>
 <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/uberFunctions.js"></script>
-<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/lyftFunctions.js"></script>    
+<script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/lyftFunctions.js"></script>
+<!-- <script type="text/javascript" src="/TravelHelper/assets/travelstatic/js/loginvalidation.js"></script>  -->   
 <script type="text/javascript">  
 			
 			jQuery(function($){
