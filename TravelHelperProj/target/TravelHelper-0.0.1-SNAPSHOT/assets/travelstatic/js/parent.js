@@ -23,7 +23,27 @@ $(document).ready(function() {
 
 var fetchInput = function(event){
 	
-	console.log("Fetch input");
+	$('.sourceerrmsg').css({"display": "none"});
+	$('.destinationerrmsg').css({"display": "none"});
+	var source = $('input[name=source]').val();
+	var destination = $('input[name=destination]').val();
+	var errFlag = false;
+	if(source=="" || source.length <= 0){
+		$('.sourceerrmsg').css({"display": "block"});
+		 errFlag = true;
+	}
+	
+	if(destination=="" || destination.length <= 0){
+		$('.destinationerrmsg').css({"display": "block"});
+		 errFlag = true;
+	}
+	if( errFlag){
+		return false;
+	}else{
+		$('#scheduleTravelSubmit').css({"display": "none"});
+		$('#scheduleprogress').css({"display": "initial"});
+	}
+	
 	travelSearchDetailsJson.travelData = [];
 	// Prevent the form from submitting via the browser.
 	event.preventDefault();
@@ -194,8 +214,10 @@ function gatherData(travelSearchDetailsJson){
 	  }).then(function(){
 		  setTimeout(function(){
 			  showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude);
-		  },15000);
-		  		
+		  },25000);
+		  console.log(travelSearchDetailsJson);
+		  $('#scheduleTravelSubmit').css({"display": "initial"});
+		  $('#scheduleprogress').css({"display": "none"});	
 	  });
 }
 

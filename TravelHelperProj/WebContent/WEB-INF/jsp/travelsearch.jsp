@@ -5,6 +5,7 @@
 <head>
 	
 	<jsp:include page="bootstrapheader.jsp"></jsp:include>
+	
 </head>
 <body class="load-full-screen">
 
@@ -33,12 +34,13 @@
 								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
+							<div class="alert alert-danger sourceerrmsg" role="alert" style="display: none;">Enter valid source location</div>
 							<label>Drop Location</label>
 							<div class="input-group">
 								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
-							
+							<div class="alert alert-danger destinationerrmsg" role="alert" style="display: none;">Enter valid destination location</div>
 								<label>Travel Mode</label>
 								<select class="selectpicker" name="money_type" id="travelpref">
 									<option>Economical</option>
@@ -58,6 +60,7 @@
 							<div class="text-center">
 								<!-- <input type="submit" name="submit" id="submitAddr" class="submitAddr">Search Results</input> -->
 								<button type="submit" id="submitAddr">Search Results</button>
+								<img alt="" src="/TravelHelper/assets/images/loading2.gif" id="scheduleprogress" style="display: none;" ></img>
 							</div>
 						</form>
 					</div>
@@ -65,12 +68,18 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- END: SEARCH SECTION -->
  	<section id="traveldatasection" >
+ 		
 		<div class="row work-row">
+			<table id="saveprefmessage" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;visibility: hidden;">
+			<tr><td><b>Select Travel Mode to save the decision</b></td></tr>
+			</table>
 			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;visibility: hidden;">
+			
 			<thead>
-			<tr style="color:#2F7AF8;">
+			<tr style="background-color:#2F7AF8;color: #fff;">
 			<th>Travel Mode</th>
 			<th>Distance (miles)</th>
          	<th>Duration (minutes)</th>
@@ -84,9 +93,30 @@
 			</table>
 		</div>
 	</section> 
-	
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+  	<div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align: center;">Travel decision saved</h4>
+      </div>
+      <!-- <div class="modal-body">
+        <p id="modalText">Travel decision saved</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+	</div>
+	</div>
 <!-- START: FOOTER -->
+	 
 	<jsp:include page="footer.jsp"></jsp:include>
+	
+
 </body>
 
 <!-- Mirrored from demo-limpidthemes.com/Themeforest/html/cruise-demo/light/car-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2016 22:48:43 GMT -->

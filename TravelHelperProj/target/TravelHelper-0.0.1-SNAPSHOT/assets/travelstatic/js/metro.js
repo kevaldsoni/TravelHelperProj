@@ -169,7 +169,7 @@
 		        	  travelSearchDetailsJson.travelData.push({
 		        		  	"mode" : "TRANSIT",
 			    			"distance" : results[i].distance.text,
-			    			"duration" : results[i].duration.text,
+			    			"duration" : parseInt(results[i].duration.text),
 			    			"capacity" : 20,
 			    			"cost" : 0,
 			    			"time_estimate" : 0
@@ -207,7 +207,7 @@
 	        	  travelSearchDetailsJson.travelData.push({
 	        		  	"mode" : "DRIVING",
 		    			"distance" : results[i].distance.text,
-		    			"duration" : results[i].duration.text,
+		    			"duration" : parseInt(results[i].duration.text),
 		    			"capacity" : 4,
 		    			"cost" : 0,
 		    			"time_estimate" : 0
@@ -246,7 +246,7 @@
 	        	  travelSearchDetailsJson.travelData.push({
 	        		  	"mode" : "WALKING",
 		    			"distance" : results[i].distance.text,
-		    			"duration" : results[i].duration.text,
+		    			"duration" : parseInt(results[i].duration.text),
 		    			"cost" : 0,
 		    			"capacity" : 100,
 		    			"time_estimate" : 0
@@ -285,7 +285,7 @@
 	        	  travelSearchDetailsJson.travelData.push({
 	        		  	"mode" : "BICYCLING",
 		    			"distance" : results[i].distance.text,
-		    			"duration" : results[i].duration.text,
+		    			"duration" : parseInt(results[i].duration.text),
 		    			"cost" : 0,
 		    			"capacity" : 1,
 		    			"time_estimate" : 0

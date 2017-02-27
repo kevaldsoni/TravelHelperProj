@@ -285,7 +285,7 @@
 	        	  travelSearchDetailsJson.travelData.push({
 	        		  	"mode" : "BICYCLING",
 		    			"distance" : results[i].distance.text,
-		    			"duration" : results[i].duration.text,
+		    			"duration" : (results[i].duration.text),
 		    			"cost" : 0,
 		    			"capacity" : 1,
 		    			"time_estimate" : 0

@@ -33,12 +33,13 @@
 								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
+							<div class="alert alert-danger sourceerrmsg" role="alert" style="display: none;">Enter valid source location</div>
 							<label>Drop Location</label>
 							<div class="input-group">
 								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
-							
+							<div class="alert alert-danger destinationerrmsg" role="alert" style="display: none;">Enter valid destination location</div>
 								<label>Travel Mode</label>
 								<select class="selectpicker" name="money_type" id="travelpref">
 									<option>Economical</option>
@@ -67,10 +68,13 @@
 	</div>
 	<!-- END: SEARCH SECTION -->
  	<section id="traveldatasection" >
+ 		<div class="row">
+ 			<span style="color:#2F7AF8;">Search Results : Decide best for you</span>
+ 		</div>
 		<div class="row work-row">
 			<table id="location" class="col-md-12 table-bordered table-hover table-condensed table-striped" style="margin-left: 50px;margin-right: 50px;width: 90%;visibility: hidden;">
 			<thead>
-			<tr style="color:#2F7AF8;">
+			<tr style="background-color:#2F7AF8;color: #fff;">
 			<th>Travel Mode</th>
 			<th>Distance (miles)</th>
          	<th>Duration (minutes)</th>

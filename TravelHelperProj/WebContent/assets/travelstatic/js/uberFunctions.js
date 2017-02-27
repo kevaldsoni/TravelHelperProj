@@ -184,8 +184,8 @@ var fetchRideEstimate = function(completeData,latitudeStart,longitudeStart,destL
 					
 					data: JSON.stringify(jsonData),
 					success : function(result){
-						console.log( result.trip.distance_estimate);
-						console.log(result.trip.duration_estimate);
+						//console.log( result.trip.distance_estimate);
+						//console.log(result.trip.duration_estimate);
 						var uberParsedData = travelSearchDetailsJson.travelData;
 						for(var i in uberParsedData){
 							var mode = uberParsedData[i].mode.toLowerCase();

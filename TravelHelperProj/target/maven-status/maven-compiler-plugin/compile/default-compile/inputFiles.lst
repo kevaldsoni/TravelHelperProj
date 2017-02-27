@@ -20,6 +20,7 @@ D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\LyftAuth
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\dao\UserProfileDAO.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\HibernateConfiguration.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\service\TravelServiceImpl.java
+D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\configuration\ResourceNotFoundException.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\model\SearchCriteria.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\dao\UserProfileDAOImpl.java
 D:\EclipseWorkspace\TravelHelperProj\src\com\travelhelper\model\User.java
