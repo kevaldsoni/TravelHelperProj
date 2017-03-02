@@ -84,7 +84,7 @@ public class TravelHelperController {
 	
 	}
 	
-	@JsonView(Views.Public.class)
+	/*@JsonView(Views.Public.class)
 	@RequestMapping(value="/saveGcmIdForUser")
 	public String saveGcmId(ModelMap model,HttpServletRequest request){
 		System.out.println("In TravelHelperController :: method saveGcmId");
@@ -96,13 +96,13 @@ public class TravelHelperController {
 	    if(userId > 0 ){
 	    	String gcmid = request.getParameter("id");
 			userProfileService.updatelastUsedGcmId(userId);
-			userProfileService.saveGoogleNotificationId(gcmid);
+			userProfileService.saveGoogleNotificationId(gcmid,userId);
 			model.addAttribute("message","Notification Enabled");
 	    }
 		
 		return "scheduletravel";
 	
-	}
+	}*/
 	
 	@RequestMapping(value="/saveFutureTravel")
 	public String saveFutureTravel(ModelMap model,HttpServletRequest request){
@@ -115,7 +115,7 @@ public class TravelHelperController {
 	    if(userId > 0 ){
 	    	String gcmid = request.getParameter("id");
 			userProfileService.updatelastUsedGcmId(userId);
-			userProfileService.saveGoogleNotificationId(gcmid);
+			userProfileService.saveGoogleNotificationId(gcmid,userId);
 			model.addAttribute("message","Notification Enabled");
 	    }
 		

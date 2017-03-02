@@ -220,7 +220,7 @@ public class TravelServiceImpl implements TravelService{
 			cell22.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell22);
 			
-			PdfPCell cell33 = new PdfPCell(new Paragraph("Drive"));
+			PdfPCell cell33 = new PdfPCell(new Paragraph("Travel Mode"));
 			cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell33.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell33);
@@ -319,7 +319,7 @@ public class TravelServiceImpl implements TravelService{
 			cell22.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell22);
 			
-			PdfPCell cell33 = new PdfPCell(new Paragraph("Drive"));
+			PdfPCell cell33 = new PdfPCell(new Paragraph("Travel Mode"));
 			cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell33.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell33);

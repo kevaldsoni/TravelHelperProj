@@ -29,26 +29,26 @@
 					<h4 class="text-center">TAKE A DRIVE</h4>
 					<div class="room-check-body">
 						<form id="traveloptions">
-							<label>Pick Up Location</label>
+							<label>Source Location</label>
 							<div class="input-group">
 								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
 							<div class="alert alert-danger sourceerrmsg" role="alert" style="display: none;">Enter valid source location</div>
-							<label>Drop Location</label>
+							<label>Destination Location</label>
 							<div class="input-group">
 								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
 							<div class="alert alert-danger destinationerrmsg" role="alert" style="display: none;">Enter valid destination location</div>
-								<label>Travel Mode</label>
+								<label>Travel Preference</label>
 								<select class="selectpicker" name="money_type" id="travelpref">
 									<option>Economical</option>
 									<option>Fastest</option>
 
 								</select>
 							
-							<label>Traveller Count</label>
+							<label>Traveler Count</label>
 							<select class="selectpicker" id="pplcount" name="travellercount_type">
 									<option>1</option>
 									<option>2</option>

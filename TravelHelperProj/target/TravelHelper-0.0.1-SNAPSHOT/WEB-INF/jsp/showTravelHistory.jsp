@@ -13,7 +13,7 @@
 
 <div class="row"  style="margin-top: 5px;">
 <div class="col-md-2">
-<h4><span class="label label-primary">Drive Summary</span></h4>
+<h4><span class="label label-primary">Travel Preferences</span></h4>
 </div>
 </div>
 
@@ -21,7 +21,7 @@
 <table id="scheduleDataDriveSummary" class="col-md-7 table-bordered table-hover table-condensed table-striped table-responsive" style="margin-top:5px;margin-left:15px;">
 			<thead>
 			<tr style="background-color:#2F7AF8;color: #fff;">
-			<th>Drive</th>
+			<th>Travel Mode</th>
 			<th>Count</th>
 			</thead>
 			<tbody id="travelsearchresults">
@@ -73,8 +73,8 @@
 			<tr style="background-color:#2F7AF8;color: #fff;">
 			<th>ID</th>
 			<th>Request Timestamp</th>
-			<th>Drive Selected</th>
-         	<th>Mode Selected</th>
+			<th>Travel Mode</th>
+         	<th>Preference</th>
          	<th>Distance (miles)</th>
          	<th>Duration (seconds)</th>
          	<th>Cost (dollars)</th>

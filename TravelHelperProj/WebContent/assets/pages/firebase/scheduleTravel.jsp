@@ -130,19 +130,19 @@
 						</div>
 						
 						<form id="scheduleTravelForm" style="display: none;">
-							<label>Pick Up Location</label>
+							<label>Source Location</label>
 							<div class="input-group">
 								<input type="text" name="source" id="autocomplete" class="form-control" placeholder="E.g Long beach" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
 							<div class="alert alert-danger sourceerrmsg" role="alert" style="display: none;">Enter valid source location</div>
-							<label>Drop Location</label>
+							<label>Destination Location</label>
 							<div class="input-group">
 								<input type="text" name="destination" id="autocompleteDest" class="form-control" placeholder="E.g Los angeles" required>
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 							</div>
 							<div class="alert alert-danger destinationerrmsg" role="alert" style="display: none;">Enter valid destination location</div>
-							<label>Select Drive</label>
+							<label>Travel Mode</label>
 							<select class="selectpicker" name="travel_type" id="travelDrive">
 									<option selected="selected">DRIVING</option>
 									<option>TRANSIT</option>
@@ -152,13 +152,13 @@
 									<option>UBERX</option>
 							</select>
 							
-							<label>Select Date</label>
+							<label>Arrival Date</label>
 					        <div class='input-group'>
 					         <input type="date" class="form-control" name="date" id="scheduleDate">
 					        </div>
 							<div class="alert alert-danger dateerrmsg" role="alert" style="display: none;">Enter valid date</div>
 
-					        <label>Select Time</label>
+					        <label>Arrival Time</label>
 					        <div class='input-group'>
 					         <input type="time" class="form-control" name="time" id="scheduleTime">
 					        </div>

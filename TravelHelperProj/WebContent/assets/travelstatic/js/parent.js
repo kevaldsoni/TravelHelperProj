@@ -37,7 +37,7 @@ var fetchInput = function(event){
 		$('.destinationerrmsg').css({"display": "block"});
 		 errFlag = true;
 	}
-	if( false){
+	if(errFlag){
 		return false;
 	}else{
 		$('#submitAddr').css({"display": "none"});

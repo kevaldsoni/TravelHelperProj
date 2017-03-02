@@ -13,7 +13,7 @@ public interface UserProfileService {
 	
 	public int createNewUserProfile(UserProfile profile);
 	
-	public boolean saveGoogleNotificationId(String id);
+	public boolean saveGoogleNotificationId(String id,int userId);
 	
 	public boolean updatelastUsedGcmId(int userId);
 	

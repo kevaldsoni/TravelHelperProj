@@ -46,9 +46,9 @@ public class UserProfileServiceImpl implements UserProfileService{
 	}
 
 	@Override
-	public boolean saveGoogleNotificationId(String id) {
+	public boolean saveGoogleNotificationId(String id,int userId) {
 		// TODO Auto-generated method stub
-		userProfileDao.saveGoogleNotificationId(id);
+		userProfileDao.saveGoogleNotificationId(id,userId);
 		return false;
 	}
 

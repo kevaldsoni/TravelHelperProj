@@ -8,12 +8,12 @@
 <body>
 <div class="container">
 <div class="row">
-	<h3><span class="label label-info">Travel History Dashboard</span></h3>
+	<h3><span class="label label-info">Travel Search Dashboard</span></h3>
 </div>
 
 <div class="row"  style="margin-top: 5px;">
 <div class="col-md-2">
-<h4><span class="label label-primary">Drive Summary</span></h4>
+<h4><span class="label label-primary">Travel Preferences</span></h4>
 </div>
 </div>
 
@@ -21,7 +21,7 @@
 <table id="scheduleDataDriveSummary" class="col-md-7 table-bordered table-hover table-condensed table-striped table-responsive" style="margin-top:5px;margin-left:15px;">
 			<thead>
 			<tr style="background-color:#2F7AF8;color: #fff;">
-			<th>Drive</th>
+			<th>Travel Mode</th>
 			<th>Count</th>
 			</thead>
 			<tbody id="travelsearchresults">
@@ -49,7 +49,7 @@
 </div> -->
 <div class="row" style="margin-top:25px;">
 <div class="col-md-3 col-sm-3 col-xs-8">
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Click for Detailed Schedule History</button>
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Detailed Travel Search History</button>
 </div>
 <div class="col-md-2 col-sm-2 col-xs-2">
 <form enctype="mutipart/form-data" method="post" action="handleTravelHistoryDownload">
@@ -73,8 +73,8 @@
 			<tr style="background-color:#2F7AF8;color: #fff;">
 			<th>ID</th>
 			<th>Request Timestamp</th>
-			<th>Drive Selected</th>
-         	<th>Mode Selected</th>
+			<th>Travel Mode</th>
+         	<th>Preference</th>
          	<th>Distance (miles)</th>
          	<th>Duration (seconds)</th>
          	<th>Cost (dollars)</th>

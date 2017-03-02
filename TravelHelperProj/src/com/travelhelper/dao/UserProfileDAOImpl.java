@@ -94,10 +94,10 @@ public class UserProfileDAOImpl implements UserProfileDAO{
 
 
 	@Override
-	public boolean saveGoogleNotificationId(String id) {
+	public boolean saveGoogleNotificationId(String id,int userId) {
 		// TODO Auto-generated method stub
 		GoogleNotification notification = new GoogleNotification();
-		notification.setUserId(2);
+		notification.setUserId(userId);
 		notification.setGcmRegId(id);
 		notification.setActive(1);
 		Transaction tx = null;
@@ -134,7 +134,7 @@ public class UserProfileDAOImpl implements UserProfileDAO{
 					session.update(pobj);
 				}
 			}else{
-				System.out.println("updateFinalUserRating :: Result not  found");
+				System.out.println("updatelastUsedGcmId :: Result not  found");
 			}
 			tx.commit();
 		}catch(HibernateException e){

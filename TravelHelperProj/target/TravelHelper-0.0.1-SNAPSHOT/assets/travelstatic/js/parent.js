@@ -37,10 +37,10 @@ var fetchInput = function(event){
 		$('.destinationerrmsg').css({"display": "block"});
 		 errFlag = true;
 	}
-	if( errFlag){
+	if(errFlag){
 		return false;
 	}else{
-		$('#scheduleTravelSubmit').css({"display": "none"});
+		$('#submitAddr').css({"display": "none"});
 		$('#scheduleprogress').css({"display": "initial"});
 	}
 	
@@ -49,6 +49,7 @@ var fetchInput = function(event){
 	event.preventDefault();
 	//$.when(gatherData(travelSearchDetailsJson)).then(showDetails(travelSearchDetailsJson));
 	$('#location').css({"visibility": "visible"});
+	$('#saveprefmessage').css({"visibility": "visible"});
 	gatherData(travelSearchDetailsJson);
 	return false;
 }
@@ -216,7 +217,7 @@ function gatherData(travelSearchDetailsJson){
 			  showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude);
 		  },25000);
 		  console.log(travelSearchDetailsJson);
-		  $('#scheduleTravelSubmit').css({"display": "initial"});
+		  $('#submitAddr').css({"display": "initial"});
 		  $('#scheduleprogress').css({"display": "none"});	
 	  });
 }
@@ -252,15 +253,15 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 					var durationInfo = data.split(" ");
 					if(durationInfo.length > 2){
 						console.log("duration has hours "+durationInfo);
-						results[i].duration = (durationInfo[0]*60)+durationInfo[2];
+						results[i].duration = +(durationInfo[0]*60) + +(durationInfo[2]);
 					}else{
 						console.log("duration has minutes "+durationInfo);
-						results[i].duration = durationInfo[0];
+						results[i].duration = parseInt(durationInfo[0],10);
 					}
 				}
 			}
 		}else{
-			console.log("Need to populate data");	
+			//console.log("Need to populate data");	
 		}
 		var distanceDuration = results[i].distance;
 		if(distanceDuration != undefined){
@@ -351,8 +352,8 @@ function predicatBy(prop){
 function passSelection(elem){
 	var drive = $(elem).attr("id");
 	var modename = $('#travelpref').val();
-	alert(modename);
-    alert(drive);
+	/*alert(modename);
+    alert(drive);*/
     var search = {}
 	search["userDrive"] = drive;
 	search["sourceLatitude"] = sourceLatitude;
@@ -380,6 +381,8 @@ function passSelection(elem){
 		success : function(data) {
 			console.log("SUCCESS: ", data);
 			//display(data);
+			
+			$('#myModal').modal('show');
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);

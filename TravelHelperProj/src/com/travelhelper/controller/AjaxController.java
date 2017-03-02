@@ -150,6 +150,10 @@ public class AjaxController {
 	public AjaxResponseBody saveTravelOptionSelected(@RequestBody TravelModeSelected travelData) {
 		System.out.println("In Ajax Controller ::"+travelData.getDrive()+" "+travelData.getModeName());
 		AjaxResponseBody result = new AjaxResponseBody();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+	    int userId = userProfileService.fetchUserIdfromUsername(name);
+	    travelData.setUserId(userId);
 		int id = travelService.saveTravelModeSelected(travelData);
 		if (id > 0) {
 				System.out.println("Travel Data Saved");
@@ -247,16 +251,15 @@ public class AjaxController {
 	 @JsonView(Views.Public.class)
 	 @RequestMapping(value="/savefire")
 	 public String saveGcmId(ModelMap model,HttpServletRequest request){
-			System.out.println("In TravelHelperController :: method saveGcmId");
+			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		    String name = auth.getName(); 
-		    System.out.println("logged in username : "+name);
 		    int userId = userProfileService.fetchUserIdfromUsername(name);
 		    System.out.println("User id of logged in user :"+userId);
 		    if(userId > 0 ){
 		    	String gcmid = request.getParameter("id");
 				userProfileService.updatelastUsedGcmId(userId);
-				userProfileService.saveGoogleNotificationId(gcmid);
+				userProfileService.saveGoogleNotificationId(gcmid,userId);
 				model.addAttribute("message","Notification Enabled");
 		    }
 			

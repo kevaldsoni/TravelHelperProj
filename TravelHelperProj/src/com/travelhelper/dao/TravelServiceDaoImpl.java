@@ -57,7 +57,6 @@ public class TravelServiceDaoImpl implements TravelServiceDao{
 		
 
 		System.out.println("Save Travel Preference Selection in Database : saveUserTravelSelection :"+travelPref.getUserDrive());
-		travelPref.setUserId(2);
 		System.out.println("User id :"+travelPref.getUserId());
 		System.out.println("start x cord :"+travelPref.getSourceLatitude());
 		System.out.println("start y cord :"+travelPref.getSourceLongitude());
