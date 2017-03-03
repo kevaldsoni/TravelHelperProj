@@ -35,7 +35,7 @@
 <section>
 <div class="row" style="margin-top:25px;">
 <div class="col-md-3 col-sm-3 col-xs-8">
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Click for Detailed Schedule History</button>
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Detailed Schedule History</button>
 </div>
 <div class="col-md-2 col-sm-2 col-xs-2">
 <form enctype="mutipart/form-data" method="post" action="handleScheduleHistoryDownload">
@@ -62,7 +62,7 @@
 			<th>Travel Mode</th>
          	<th>Destination Reach Time</th>
          	<th>Notification Time</th>
-         	<th>Estimated Travel Time (seconds)</th>
+         	<th>Estimated Travel Time (minutes)</th>
          	<!-- <th>Start Location</th>
          	<th>Destination Location</th> -->
 			</thead>

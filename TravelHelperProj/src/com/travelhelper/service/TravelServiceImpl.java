@@ -230,7 +230,7 @@ public class TravelServiceImpl implements TravelService{
 			cell55.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell55);
 			
-			PdfPCell cell66 = new PdfPCell(new Paragraph("Duration (seconds)"));
+			PdfPCell cell66 = new PdfPCell(new Paragraph("Duration (minutes)"));
 			cell66.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell66.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell66);
@@ -334,7 +334,7 @@ public class TravelServiceImpl implements TravelService{
 			cell66.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell66);
 			
-			PdfPCell cell77 = new PdfPCell(new Paragraph("Travel Time (seconds)"));
+			PdfPCell cell77 = new PdfPCell(new Paragraph("Travel Time (minutes)"));
 			cell77.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell77.setBackgroundColor(new BaseColor(Color.lightGray));
 			table.addCell(cell77);

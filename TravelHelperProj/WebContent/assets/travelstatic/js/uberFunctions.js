@@ -9,11 +9,13 @@ var latitudeEnd;
 var longitudeEnd;
 
 
+//var accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsicHJvZmlsZSJdLCJzdWIiOiIzODliMzM5YS0wY2JjLTQzYzktYjQyYS0xNTFiMmVhM2FjMjEiLCJpc3MiOiJ1YmVyLXVzMSIsImp0aSI6IjM5NGFjM2YwLWRjNWQtNDg4Ni1hYjQ3LTllMTQyNmRmMzM3YiIsImV4cCI6MTQ4ODc4MDgzMiwiaWF0IjoxNDg2MTg4ODMxLCJ1YWN0IjoiZnB3Zmw4RkhSRmV5NHBFNGY1REc5MkhzN2RsSzBrIiwibmJmIjoxNDg2MTg4NzQxLCJhdWQiOiJLcXRrelo3WUh3OG42UEo5NkNBMHdNSk5iZGVFTy1tbSJ9.ZRK0SIpsIAERtcEoMjMz694-5I5s6J4lha8-91LNmU9RGPb5h_EZAUXqSEBkKrFIMhzQl2m64FmCA7Cg5dqXXUT7fnzuaEP6lm7hADBgvjW8LTPdS8Te-J7md2r2HNYA3WruCAVlPH3xUHPIOUA5LgdA6lIpA9EJJKig8OF2BWrKx28IPrqwYmFhdYYPiAF-wVsJ-gJwUjRpCdCFZ2Xzmtz6o0CxitY20bdB4pwZdqj2R3woQdaOw4rDBj1kprmTlzjYEjw7aT_SVM-6RQ7lVfdhmgA69RomU08-ZblNHISZQ4xWXi3FCYVp4Hdqdggp_VzMrrVFe-jDixxrh6sNvw";
 var accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsicHJvZmlsZSJdLCJzdWIiOiIzODliMzM5YS0wY2JjLTQzYzktYjQyYS0xNTFiMmVhM2FjMjEiLCJpc3MiOiJ1YmVyLXVzMSIsImp0aSI6IjM5NGFjM2YwLWRjNWQtNDg4Ni1hYjQ3LTllMTQyNmRmMzM3YiIsImV4cCI6MTQ4ODc4MDgzMiwiaWF0IjoxNDg2MTg4ODMxLCJ1YWN0IjoiZnB3Zmw4RkhSRmV5NHBFNGY1REc5MkhzN2RsSzBrIiwibmJmIjoxNDg2MTg4NzQxLCJhdWQiOiJLcXRrelo3WUh3OG42UEo5NkNBMHdNSk5iZGVFTy1tbSJ9.ZRK0SIpsIAERtcEoMjMz694-5I5s6J4lha8-91LNmU9RGPb5h_EZAUXqSEBkKrFIMhzQl2m64FmCA7Cg5dqXXUT7fnzuaEP6lm7hADBgvjW8LTPdS8Te-J7md2r2HNYA3WruCAVlPH3xUHPIOUA5LgdA6lIpA9EJJKig8OF2BWrKx28IPrqwYmFhdYYPiAF-wVsJ-gJwUjRpCdCFZ2Xzmtz6o0CxitY20bdB4pwZdqj2R3woQdaOw4rDBj1kprmTlzjYEjw7aT_SVM-6RQ7lVfdhmgA69RomU08-ZblNHISZQ4xWXi3FCYVp4Hdqdggp_VzMrrVFe-jDixxrh6sNvw";
 
 var fetchUberDetails = function (latitudeStart,longitudeStart,destLatitude,destLongitude,travelSearchDetailsJson){
 		//getAccessToken();
-	fetchUberProductDetails(latitudeStart,longitudeStart).then(fetchUberEstimatedPrice(latitudeStart,longitudeStart,destLatitude,destLongitude)).then(pushFinalUberData);
+		fetchUberProductDetails(latitudeStart,longitudeStart,destLatitude,destLongitude,travelSearchDetailsJson).then(fetchUberEstimatedPrice(latitudeStart,longitudeStart,destLatitude,destLongitude)).then(pushFinalUberData);
+	//fetchUberProductDetails(latitudeStart,longitudeStart,destLatitude,destLongitude,travelSearchDetailsJson);
 }
 var pushFinalUberData = function(){
 	console.log("in b");
@@ -28,12 +30,10 @@ var pushFinalUberData = function(){
 
 var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude,destLongitude,travelSearchDetailsJson){
 	return new Promise(function(resolve,reject){
+	
 	$.ajax({
 		type: "GET",
-		url : "https://api.uber.com/v1.2/products",
-		headers : {
-			Authorization : "Token" + "qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN"
-		},
+		url : "https://sandbox-api.uber.com/v1.2/products",
 		data: {
 			server_token : 'qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN',
 			latitude: latitudeStart,
@@ -49,7 +49,7 @@ var fetchUberProductDetails = function(latitudeStart,longitudeStart,destLatitude
 	    			"product_id" : products[i].product_id,
 	    			"capacity" : products[i].capacity
 	    		});
-	    		fetchRideEstimate(products[i].product_id,latitudeStart,longitudeStart,destLatitude,destLongitude);
+	    		//fetchRideEstimate(products[i].product_id,latitudeStart,longitudeStart,destLatitude,destLongitude);
 	    		
 	    	}
 	    	/*var data = uberDetailsJson.uberDet;
@@ -72,11 +72,11 @@ var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 	return new Promise(function(resolve,reject){
 	//console.log(latitudeStart+" "+longitudeStart+" "+endlatitude+" "+endlongitude);
 	var priceurl = "https://api.uber.com/v1.2/estimates/price";
-	var sandBoxUrl = "https://sandbox-api.uber.com/v1/estimates/price";
+	var sandBoxUrl = "https://sandbox-api.uber.com/v1.2/estimates/price";
 	$.ajax({
 		type: "GET",
 		//url : "https://api.uber.com/v1/estimates/price",
-		url : priceurl,
+		url : sandBoxUrl,
 		headers : {
 			Authorization : "Token" + "qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN"
 		},
@@ -120,37 +120,39 @@ var fetchUberEstimatedPrice = function(latitudeStart,longitudeStart,endlatitude,
 }
 
 
+
 var fetchUberTimeEstimate = function(completeData,latitudeStart,longitudeStart){
 	return new Promise(function(resolve,reject){
 	var count = 0;
-	for(var i in completeData){
-		var productId = completeData[i].product_id;
-		if(productId != undefined){
+	
 			var estimate = ""
 			$.ajax({
 				type: "GET",
-				url : "https://api.uber.com/v1.2/estimates/time",
-				headers : {
+				url : "https://sandbox-api.uber.com/v1.2/estimates/time",
+				/*headers : {
 					Authorization : "Token" + "qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN"
-				},
+				},*/
 				data: {
 					server_token : 'qJxh0ZpirokeFfw-atLSxecxs83OuYgzDYcGHBkN',
 					start_latitude: latitudeStart,
 					start_longitude: longitudeStart,
-					product_id:productId	
 				},
 				success : function(result){
 					var data = result.times;
 					var uberParsedData = travelSearchDetailsJson.travelData;
 					for(var i in data){
-						var driveType = data[i].display_name;
+						var productId = data[i].product_id;
 						estimate = data[i].estimate;
 						for(var i in uberParsedData){
-							if(driveType == uberParsedData[i].mode){
-								travelSearchDetailsJson.travelData[i].time_estimate = (estimate/60.0);
-							}
+							var initialProdId = uberParsedData[i].product_id;
+								if(initialProdId != undefined){
+									if(productId == initialProdId){
+										travelSearchDetailsJson.travelData[i].time_estimate = (+estimate / +60.0);
+									}
+								}
 						}
-						showTravelDetails(travelSearchDetailsJson); 
+						
+						//showTravelDetails(travelSearchDetailsJson); 
 					}
 					
 				},
@@ -158,8 +160,7 @@ var fetchUberTimeEstimate = function(completeData,latitudeStart,longitudeStart){
 					console.log(response);
 				}	
 			});	
-		}
-		}
+		
 		
 	});
 }
@@ -167,7 +168,7 @@ var fetchUberTimeEstimate = function(completeData,latitudeStart,longitudeStart){
 var fetchRideEstimate = function(completeData,latitudeStart,longitudeStart,destLatitude,destLongitude){
 	
 	return new Promise(function(resolve,reject){
-		
+		//alert("uber ride estimate");
 		for(var i in completeData){
 			var productId = completeData[i].product_id;
 			if(productId != undefined){

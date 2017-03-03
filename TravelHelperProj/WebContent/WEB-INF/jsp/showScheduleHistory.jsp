@@ -62,7 +62,7 @@
 			<th>Travel Mode</th>
          	<th>Destination Reach Time</th>
          	<th>Notification Time</th>
-         	<th>Estimated Travel Time (seconds)</th>
+         	<th>Estimated Travel Time (minutes)</th>
          	<!-- <th>Start Location</th>
          	<th>Destination Location</th> -->
 			</thead>

@@ -76,7 +76,7 @@
 			<th>Travel Mode</th>
          	<th>Preference</th>
          	<th>Distance (miles)</th>
-         	<th>Duration (seconds)</th>
+         	<th>Duration (minutes)</th>
          	<th>Cost (dollars)</th>
          	<!-- <th>Start Location</th>
          	<th>Destination Location</th> -->

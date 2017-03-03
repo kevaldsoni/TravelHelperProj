@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 <div class="row">
-	<h3><span class="label label-info">Travel History Dashboard</span></h3>
+	<h3><span class="label label-info">Travel Search Dashboard</span></h3>
 </div>
 
 <div class="row"  style="margin-top: 5px;">
@@ -49,7 +49,7 @@
 </div> -->
 <div class="row" style="margin-top:25px;">
 <div class="col-md-3 col-sm-3 col-xs-8">
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Click for Detailed Schedule History</button>
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleHistory">Detailed Travel Search History</button>
 </div>
 <div class="col-md-2 col-sm-2 col-xs-2">
 <form enctype="mutipart/form-data" method="post" action="handleTravelHistoryDownload">
@@ -76,7 +76,7 @@
 			<th>Travel Mode</th>
          	<th>Preference</th>
          	<th>Distance (miles)</th>
-         	<th>Duration (seconds)</th>
+         	<th>Duration (minutes)</th>
          	<th>Cost (dollars)</th>
          	<!-- <th>Start Location</th>
          	<th>Destination Location</th> -->

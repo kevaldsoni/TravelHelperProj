@@ -37,7 +37,7 @@ var fetchInput = function(event){
 		$('.destinationerrmsg').css({"display": "block"});
 		 errFlag = true;
 	}
-	if(errFlag){
+	if(false){
 		return false;
 	}else{
 		$('#submitAddr').css({"display": "none"});
@@ -201,21 +201,25 @@ function gatherData(travelSearchDetailsJson){
 	             fetchlyftEstimatedPrice(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson),
 	             fetchLyftTimeEstimate(sourceLatitude,sourceLongitude,travelSearchDetailsJson),
 	             //fetchUberDetails(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson),
-	             fetchUberProductDetails(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson),
-	             fetchUberEstimatedPrice(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson)
+	            fetchUberProductDetails(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson),
+	           // fetchUberEstimatedPrice(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson)
 	            
 	  ]).then(function(){
-	      var completeData = travelSearchDetailsJson.travelData;
-	      fetchRideEstimate(completeData,sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson);
-	  
-	  }).then(function(){
 		      var completeData = travelSearchDetailsJson.travelData;
 			  fetchUberTimeEstimate(completeData,sourceLatitude,sourceLongitude,travelSearchDetailsJson);
 		  
 	  }).then(function(){
+	      var completeData = travelSearchDetailsJson.travelData;
+	      fetchUberEstimatedPrice(sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson);
+	  
+	  }).then(function(){
+	      var completeData = travelSearchDetailsJson.travelData;
+		  fetchRideEstimate(completeData,sourceLatitude,sourceLongitude,destLatitude,destLongitude,travelSearchDetailsJson);
+		  
+	  }).then(function(){
 		  setTimeout(function(){
 			  showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitude,destLatitude,destLongitude);
-		  },25000);
+		  },2500);
 		  console.log(travelSearchDetailsJson);
 		  $('#submitAddr').css({"display": "initial"});
 		  $('#scheduleprogress').css({"display": "none"});	
@@ -280,6 +284,15 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 			results[i].cost =Math.round( +(results[i].distance) * 0.54 );
 		}
 		
+		if(results[i].mode == 'TRANSIT'){
+			results[i].cost = Math.round( +(results[i].distance) * 0.09 );
+		}
+		
+		if(results[i].mode == 'WAV'){
+			results[i].time_estimate = 0;
+		}
+		
+		
 	}// end for
 	
 
@@ -302,7 +315,7 @@ function showTravelDetails(travelSearchDetailsJson,sourceLatitude,sourceLongitud
 		results[i].sourceLongitude=sourceLongitude;
 		results[i].destLatitude=destLatitude;
 		results[i].destLongitude=destLongitude;
-		trHTML += '<tr scope="row" class="info" id='+results[i].mode+' onclick="passSelection(this);">'+ 
+		trHTML += '<tr scope="row" class="info" style="cursor:pointer" id='+results[i].mode+' onclick="passSelection(this);">'+ 
 		'<td>'+ results[i].mode+ '</td><td>' + results[i].distance + '</td><td>' + results[i].duration + '</td><td>' + results[i].time_estimate + 
 		'</td><td>'+ results[i].cost + '</td><td>' + results[i].capacity + '</td></tr>';
 		
