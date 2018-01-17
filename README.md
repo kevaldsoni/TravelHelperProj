@@ -4,4 +4,4 @@ Travel Helper web application provides single interface of information gathered 
 
 Application is developed using Java, Spring Framework, Hibernate, Bootstrap, Integration with REST API of Uber, Lyft, Google Maps and Firebase. 
 
-Proquest Publication : https://search.proquest.com/openview/b6116450c38166c90ec6a914e602f23d/1?pq-origsite=gscholar&cbl=18750&diss=y
+Project Dissertation : https://search.proquest.com/openview/b6116450c38166c90ec6a914e602f23d/1?pq-origsite=gscholar&cbl=18750&diss=y
